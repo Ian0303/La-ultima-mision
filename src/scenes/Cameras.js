@@ -6,9 +6,10 @@ export default class Cameras extends Phaser.Scene {
       super("cameras");
       this.camerasV = [];
       
+      
 
-      /* cuando se abra la escena cameras el player debe ser seteado inamovible
-      de esta manera se parasán las camaras con las mismas flechas de movimiento
+      /* cuando se abra la escena cameras el jugador usará los numeros para la seleccion de
+      las distintas camaras
       cameras = array de arrays [[,,,,,], [,,,,,], [,,,,,]]
       el cambio de camras  se podria hacer con una maquina de estados
       usa swich para los diferente casos.
@@ -17,12 +18,11 @@ export default class Cameras extends Phaser.Scene {
     }
 
      create() {
-
-      this.add.image(200, 400, "closeCameras")
+       this.add.image(320, 240, "camera1")
+      this.add.image(320, 450, "closeCameras")
       .setScale(0.7)
-      .setInteractive()  .on("pointerdown", () => this.scene.switch("game"));
-
-      this.add.image(320, 240, "camera1")
+      .setInteractive().on("pointerdown", () => this.scene.switch("game"));
+      
       console.log("si")
 
     } 
