@@ -24,6 +24,7 @@ export default class Preload extends Phaser.Scene {
         this.load.image("closeCameras", "assets/background/closeCameras.jpg");
         this.load.image("iEnergy", "assets/background/iEnergy.png");
         this.load.image("iFolder", "assets/background/iFolder.png");
+        this.load.image("IUcam", "assets/background/IUcam.png");
 
         this.load.spritesheet("player", "assets/sprites/astronautasheet.png", {
             frameWidth: 125,

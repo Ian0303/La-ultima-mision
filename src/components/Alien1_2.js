@@ -12,10 +12,6 @@ super(scene, x, y, texture, activo);
 }
 
 
-
-
-
-
 /* moverAlien(room) {
     if (this.active === true) {
         this.newRooom = Phaser.Math.Between(1, 5)
