@@ -27,7 +27,7 @@ export default class Cameras extends Phaser.Scene {
     }
 
      create() {
-    
+
       this.camera = this.add.image(320, 240, "camera1");
       this.add.image(320, 450, "closeCameras").setScale(0.7)
       .setInteractive().on("pointerdown", () => this.scene.switch("game"));
@@ -38,6 +38,7 @@ export default class Cameras extends Phaser.Scene {
       this.camera3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
 
 
+
       /* this.input.keyboard.on("keydown_ONE", () => {
         this.camera = this.add.image(320, 240, "camera1")
         });
@@ -46,6 +47,9 @@ export default class Cameras extends Phaser.Scene {
           console.log("hola")
         }); */
 
+ /* 
+      Las camaras deben cambiar al presionar los numeros de la parte superior en el teclado, 1,2,3,4 y 5 
+      */
 }
 
     update() {
@@ -58,4 +62,4 @@ export default class Cameras extends Phaser.Scene {
       }
     } 
   
-}
+  }
