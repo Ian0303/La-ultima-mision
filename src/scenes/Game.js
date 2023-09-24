@@ -20,6 +20,7 @@ export default class Game extends Phaser.Scene {
       .on("pointerdown", () => this.scene.launch("cameras"));
     this.add.image(320, 240, "room");
     console.log("si");
+    console.log(Phaser.Input.Keyboard.KeyCodes);
 
     this.player = new Player(this, 300, 280, "player");
 

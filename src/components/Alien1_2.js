@@ -1,14 +1,16 @@
 import Phaser from 'phaser'
 
-export default class Player extends Phaser.GameObjects.Sprite
+export default class Alien1 extends Phaser.GameObjects.Sprite
 {
 room;
 
+active;
 
-constructor(scene, x, y, texture, activo){
-super(scene, x, y, texture, activo);
+
+constructor(scene, x, y, texture, active){
+super(scene, x, y, texture, active);
     this.newRoom = undefined;
-    this.active = true
+    
 }
 
 

@@ -13,25 +13,49 @@ export default class Cameras extends Phaser.Scene {
       cameras = array de arrays [[,,,,,], [,,,,,], [,,,,,]]
       el cambio de camras  se podria hacer con una maquina de estados
       usa swich para los diferente casos.
+
+      romm
+        1 = pasillo izquierdo
+        2 = pasillo derecho
+        3 = un lugar
+        4 = otro lugar
+        5 = otro lugar diferente
+
+
       */
       // this.cursors = scene.input.keyboard.createCursorKeys();
     }
 
      create() {
-       this.add.image(320, 240, "camera1")
-      this.add.image(320, 450, "closeCameras")
-      .setScale(0.7)
+    
+      this.camera = this.add.image(320, 240, "camera1");
+      this.add.image(320, 450, "closeCameras").setScale(0.7)
       .setInteractive().on("pointerdown", () => this.scene.switch("game"));
+      console.log("si");
       
-      console.log("si")
+      this.camera1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+      this.camera2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+      this.camera3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
 
-    } 
 
+      /* this.input.keyboard.on("keydown_ONE", () => {
+        this.camera = this.add.image(320, 240, "camera1")
+        });
+        this.input.keyboard.on("keydown_THREE", () => {
+          this.camera = this.add.image(320, 240, "camera3")
+          console.log("hola")
+        }); */
 
+}
 
-    /* update() {
-      if (this.input.keyboard.on('keydown-ONE', listener )) {
-        this.add.image(320, 240, "camera1")
+    update() {
+      if (this.camera1.isDown) {
+        this.camera = this.add.image(320, 240, "camera1")
+      } else if (this.camera2.isDown) {
+        this.camera = this.add.image(320, 240, "camera2")
+      } else if (this.camera3.isDown) {
+        this.camera = this.add.image(320, 240, "camera3") 
       }
-    } */
+    } 
+  
 }
