@@ -5,10 +5,14 @@ export default class Game extends Phaser.Scene {
   constructor() {
     super("game");
     this.player = null;
+    this.night = 1;
+    this.dead = false
   }
 
-  init() {
+  init(data) {
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.night = data.night || 1;
+    this.dead = data.dead || false;
   }
 
   create() {
@@ -20,14 +24,29 @@ export default class Game extends Phaser.Scene {
       .on("pointerdown", () => this.scene.launch("cameras"));
     this.add.image(320, 240, "room");
     console.log("si");
-    console.log(Phaser.Input.Keyboard.KeyCodes);
 
     this.player = new Player(this, 300, 280, "player");
 
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
+
+    this.timer = 60;
+    
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.onSecond,
+      callbackScope: this,
+      loop: true,
+    });
   }
 
   update() {
     this.player.update();
+  }
+
+  onSecond() {
+    this.timer -= 1;
+    if (this.timer === 0 && this.dead === false) {
+      this.scene.switch("menu");
+    }
   }
 }
