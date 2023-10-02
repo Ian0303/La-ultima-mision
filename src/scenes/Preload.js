@@ -7,6 +7,12 @@ export default class Preload extends Phaser.Scene {
 
   preload() {
     this.load.image("bMenu", "assets/background/bmenu.jpg");
+
+    this.load.image("bMenu1", "assets/background/bmenu1.jpg");
+    this.load.image("bMenu2", "assets/background/bmenu1_2.jpg");
+    this.load.image("bMenu3", "assets/background/bmenu2.jpg");
+    this.load.image("bMenu4", "assets/background/bmenu2_2.jpg");
+
     this.load.image("room", "assets/background/bhabitacion.jpg");
     this.load.image("camera1", "assets/background/bcamera1.jpg");
     this.load.image("camera2", "assets/background/bcamera2.jpg");
@@ -28,6 +34,8 @@ export default class Preload extends Phaser.Scene {
       frameWidth: 125,
       frameHeight: 280,
     });
+
+
   }
 
   create() {

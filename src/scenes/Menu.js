@@ -7,9 +7,25 @@ export default class Menu extends Phaser.Scene {
 
     create(){
 
-        this.add.image(300, 240, "bMenu")
-        ;
+    const backgrounds = ['bMenu1', 'bMenu2', 'bMenu3', 'bMenu4'];
+    let currentIndex = 0;
 
+    const background1 = this.add.image(300, 240, backgrounds[currentIndex]);
+
+    // Define una función para cambiar el fondo en orden
+    const changeBackground = () => {
+      currentIndex = (currentIndex + 1) % backgrounds.length;
+      background1.setTexture(backgrounds[currentIndex]);
+
+      // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
+      setTimeout(changeBackground, 500); // Cambia cada 5 segundos (5000 milisegundos)
+    };
+
+    // Inicia el cambio de fondo
+    changeBackground();
+
+      
+      
         this.nameText = this.add.text(70, 100, "La Ultima Misión",{
             fontSize: "20px",
             frontFamily: "Console",
@@ -30,8 +46,29 @@ export default class Menu extends Phaser.Scene {
             fill: "#FFFFFF",
           });
 
-    }
+
+          
+
+          /* this.timer = 10
+          this.time.addEvent({
+            delay: 5,
+            callback: this.oneSecond,
+            callbackScope: this,
+            loop: true,
+          });  */
+          
+           /* setTimeout(() => {//coltdown
+           this.load = true;
+           }, 100);
+          */
+
+           /* crear una variable con imagen de fondo y usando la funcion setTimeout 
+           le asigne otra imagen, debe estar en el update
+           */
+
+
+           // Configura el fondo inicial
     
 
-
+    }
 }
