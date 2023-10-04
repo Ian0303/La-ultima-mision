@@ -7,11 +7,17 @@ export default class Preload extends Phaser.Scene {
 
   preload() {
     this.load.image("bMenu", "assets/background/bmenu.jpg");
-    this.load.image("room", "assets/background/bhabitacion.jpg");
-    this.load.image("camera1", "assets/background/bcamera1.jpg");
-    this.load.image("camera2", "assets/background/bcamera2.jpg");
-    this.load.image("camera3", "assets/background/bcamera3.jpg");
 
+    this.load.image("bMenu1", "assets/background/bmenu1.jpg");
+    this.load.image("bMenu2", "assets/background/bmenu1_2.jpg");
+    this.load.image("bMenu3", "assets/background/bmenu2.jpg");
+    this.load.image("bMenu4", "assets/background/bmenu2_2.jpg");
+
+    this.load.image("room", "assets/background/bhabitacion.jpg");
+    this.load.image("camera1", "assets/background/Camera1.jpg");
+    this.load.image("camera2", "assets/background/camara2.jpg");
+    this.load.image("camera3", "assets/background/camara3.jpg");
+ 
     this.load.image("doorButton", "assets/background/doorButton.png");
     this.load.image("lightButton", "assets/background/lightButton.png");
     this.load.image("leftDoorLight", "assets/background/leftDoorLight.png");
@@ -21,13 +27,20 @@ export default class Preload extends Phaser.Scene {
     this.load.image("closeCameras", "assets/background/closeCameras.jpg");
     this.load.image("iEnergy", "assets/background/iEnergy.png");
     this.load.image("iFolder", "assets/background/iFolder.png");
-    this.load.image("IUcam", "assets/background/IUcam.png");
+    this.load.image("IUcam", "assets/background/IUCamara.png");
+    this.load.image("alien1", "assets/background/alien1.png");
+    this.load.image("alien2", "assets/background/alien1_2.png");
+    this.load.image("alien3", "assets/background/alien1_3.png");
 
+
+  
     this.load.image("bonnie", "assets/sprites/bonnie.png");
     this.load.spritesheet("player", "assets/sprites/astronautasheet.png", {
       frameWidth: 125,
       frameHeight: 280,
     });
+
+
   }
 
   create() {
