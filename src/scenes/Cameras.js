@@ -9,11 +9,11 @@ export default class Cameras extends Phaser.Scene {
     this.cameraV2 = [""];
     this.cameraV3 = [""];
 
-    //3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
-    //funcion
-    //camara 1 todos los personajes
-    //cunado sepa en que array este muestre el sprite
-    //animación
+    // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
+    // funcion
+    // camara 1 todos los personajes
+    // cunado sepa en que array este muestre el sprite
+    // animación
     //
 
     /* cuando se abra la escena cameras el jugador usará los numeros para la seleccion de
@@ -55,8 +55,8 @@ export default class Cameras extends Phaser.Scene {
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
     /* 
-         Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
-         */
+    Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
+    */
 
     this.Alien1 = new Alien1(this);
   }
@@ -69,7 +69,11 @@ export default class Cameras extends Phaser.Scene {
     } else if (this.camera3.isDown) {
       this.camera = this.add.image(320, 240, "camera3");
     } else if (this.back.isDown) {
-      this.scene.launch("game");
+      this.scene.bringToTop("game");
     }
   }
+
+
+
+
 }
