@@ -59,6 +59,9 @@ export default class Cameras extends Phaser.Scene {
     */
 
     this.Alien1 = new Alien1(this);
+    // let P = [ room:[]]
+
+
   }
 
   update() {

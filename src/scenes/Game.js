@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import Player from "../components/Player";
 
 export default class Game extends Phaser.Scene {
+  enemies = [];
+
   constructor() {
     super("game");
     this.player = null;
