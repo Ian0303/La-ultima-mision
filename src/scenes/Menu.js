@@ -37,7 +37,7 @@ export default class Menu extends Phaser.Scene {
             frontFamily: "Console",
       
             fill: "#FFFFFF",
-          }).setInteractive()  .on("pointerdown", () => this.scene.start("game"));
+          }).setInteractive()  .on("pointerdown", () => this.scene.start("controles"));
           
           this.continueText = this.add.text(70, 350, "Continuar", {
             fontSize: "20px",
@@ -46,7 +46,9 @@ export default class Menu extends Phaser.Scene {
             fill: "#FFFFFF",
           });
 
-
+          this.add.image(113, 450, "Arg").setScale(0.5)
+          this.add.image(175, 450, "Bra").setScale(0.5)
+          this.add.image(50, 450, "Est").setScale(0.5);
           
 
           /* this.timer = 10
