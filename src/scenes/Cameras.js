@@ -1,5 +1,6 @@
 import Phaser from "phaser";
-import Alien1 from "../components/Alien1";
+// import Alien1 from "../components/Alien1";
+// import events from "./EventCenter";
 
 export default class Cameras extends Phaser.Scene {
   constructor() {
@@ -8,7 +9,7 @@ export default class Cameras extends Phaser.Scene {
     this.cameraV1 = [""];
     this.cameraV2 = [""];
     this.cameraV3 = [""];
-
+    
     // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
     // funcion
     // camara 1 todos los personajes
@@ -58,8 +59,7 @@ export default class Cameras extends Phaser.Scene {
     Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
     */
 
-    this.Alien1 = new Alien1(this);
-    // let P = [ room:[]]
+    
 
 
   }

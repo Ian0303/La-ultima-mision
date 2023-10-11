@@ -39,10 +39,21 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
+
+    this.time.addEvent({
+      delay: 5000,
+      callback: this.moverAlien,
+      callbackScope: this,
+      loop: true,
+    });
+
+     // launch UI scene
+     this.scene.launch("ui");
   }
 
   update() {
     this.player.update();
+    
   }
 
   onSecond() {
