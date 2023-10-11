@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+/*  import Phaser from "phaser";
 
 export default class Alien1 extends Phaser.GameObjects.Sprite {
   room;
@@ -10,7 +10,7 @@ export default class Alien1 extends Phaser.GameObjects.Sprite {
     this.init();
     this.scene = scene;
     
-    // this.newRoom = 6;
+     this.newRoom = 6;
     
   }
 
@@ -20,12 +20,12 @@ export default class Alien1 extends Phaser.GameObjects.Sprite {
     // this.bonnie.visible = false;
   }
 
-  // create() {
-    // const rooms = ["room1","room2","room3","room4","room5","room6"];
+   create() {
+     const rooms = ["room1","room2","room3","room4","room5","room6"];
     
-    // this.Alien1 = new Alien1(this);
+     this.Alien1 = new Alien1(this);
     
-  // }
+   }
 
   // imagenes
   // funcion de añadir arrays
@@ -33,13 +33,13 @@ export default class Alien1 extends Phaser.GameObjects.Sprite {
   // funcion para corroborar ubicacion
   // visivle e invisibles
 
- /*   moverAlien(newRoom, rooms) {
+    moverAlien(newRoom, rooms) {
     if (this.active === true) {
         const randomIndex = Math.floor(Math.random() * rooms.length);
         const newRoom = rooms[randomIndex];
         this.room = this.newRoom;         
         }
 
-    } */
+    } 
 } 
-
+ */
