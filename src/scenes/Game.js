@@ -1,12 +1,15 @@
 import Phaser from "phaser";
 import Player from "../components/Player";
+import Alien1 from "../components/Alien1";
 
 export default class Game extends Phaser.Scene {
+  enemies = [];
+
   constructor() {
     super("game");
     this.player = null;
     this.night = 1;
-    this.dead = false
+    this.dead = false;
   }
 
   init(data) {
@@ -27,13 +30,15 @@ export default class Game extends Phaser.Scene {
 
     this.player = new Player(this, 300, 280, "player");
 
+    this.alien1 = new Alien1(this);
+
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
 
-    this.timer = 60;
-    
+    this.timer = 20;
+
     this.time.addEvent({
-      delay: 1000,
-      callback: this.onSecond,
+      delay: 20000,
+      callback: this.moveAlien,
       callbackScope: this,
       loop: true,
     });
@@ -43,10 +48,7 @@ export default class Game extends Phaser.Scene {
     this.player.update();
   }
 
-  onSecond() {
-    this.timer -= 1;
-    if (this.timer === 0 && this.dead === false) {
-      this.scene.switch("menu");
-    }
+  moveAlien() {
+    this.alien1.move();
   }
 }
