@@ -23,28 +23,34 @@ export default class Menu extends Phaser.Scene {
     // Inicia el cambio de fondo
     changeBackground();
 
-    this.nameText = this.add.text(70, 100, "La Ultima Misión", {
-      fontSize: "20px",
-      frontFamily: "Console",
 
-      fill: "#FFFFFF",
-    });
-    this.newGameText = this.add
-      .text(70, 300, "Nueva Partida", {
-        fontSize: "20px",
-        frontFamily: "Console",
+      
+      
+        this.nameText = this.add.text(70, 100, "La Ultima Misión",{
+            fontSize: "20px",
+            frontFamily: "Console",
+      
+            fill: "#FFFFFF",
+        })
+        this.newGameText = this.add.text(70, 300, "Nueva Partida", {
+            fontSize: "20px",
+            frontFamily: "Console",
+      
+            fill: "#FFFFFF",
+          }).setInteractive()  .on("pointerdown", () => this.scene.start("controles"));
+          
+          this.continueText = this.add.text(70, 350, "Continuar", {
+            fontSize: "20px",
+            frontFamily: "Console",
+      
+            fill: "#FFFFFF",
+          });
 
-        fill: "#FFFFFF",
-      })
-      .setInteractive()
-      .on("pointerdown", () => this.scene.start("game"));
+          this.add.image(113, 450, "Arg").setScale(0.5)
+          this.add.image(175, 450, "Bra").setScale(0.5)
+          this.add.image(50, 450, "Est").setScale(0.5);
+          
 
-    this.continueText = this.add.text(70, 350, "Continuar", {
-      fontSize: "20px",
-      frontFamily: "Console",
-
-      fill: "#FFFFFF",
-    });
 
     /* this.timer = 10
           this.time.addEvent({
