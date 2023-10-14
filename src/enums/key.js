@@ -1,5 +1,5 @@
 const Menu = {
-    Title: 'La Ultima Misión',
+    Title: 'La Última Misión',
     Play: 'Nueva Partida',
     Continue: "Continuar",
 }
