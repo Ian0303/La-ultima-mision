@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Player from "../components/Player";
 import Alien1 from "../components/Alien1";
+import events from "./EventCenter";
 
 export default class Game extends Phaser.Scene {
   enemies = [];
@@ -19,6 +20,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    const scene = this;
     this.add
       .image(320, 450, "openCameras")
       .setDepth(1)
@@ -30,29 +32,29 @@ export default class Game extends Phaser.Scene {
 
     this.player = new Player(this, 300, 280, "player");
 
-    this.alien1 = new Alien1(this);
+    this.enemies.push(new Alien1());
 
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
 
     this.timer = 20;
 
     this.time.addEvent({
-      delay: 20000,
+      delay: 2000,
       callback: this.moveAlien,
       callbackScope: this,
       loop: true,
     });
 
-     // launch UI scene
-     this.scene.launch("ui");
+    // launch UI scene
+    this.scene.launch("ui");
   }
 
   update() {
     this.player.update();
-    
   }
 
   moveAlien() {
-    this.alien1.move();
+    this.enemies.forEach((e) => e.move());
+    events.emit("aliens-moved", this.enemies);
   }
 }
