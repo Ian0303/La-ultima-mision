@@ -28,7 +28,7 @@ export default class UI extends Phaser.Scene {
     });
 
     // add listener to the event
-    events.on("movimiento-alien-event", this.colliderEvent, this);
+    // events.on("movimiento-alien-event", this.moveAlien, this);
   }
 
   colliderEvent(data) {
