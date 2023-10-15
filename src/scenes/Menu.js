@@ -1,9 +1,8 @@
 import Phaser from "phaser";
-import { EN_US, ES_AR, PT_BR } from '../enums/languages';
+import { EN_US, ES_AR, PT_BR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
 import key from "../enums/key";
-
 
 export default class Menu extends Phaser.Scene {
   #textSpanish;
@@ -14,25 +13,18 @@ export default class Menu extends Phaser.Scene {
 
   #textPortuguese;
 
- 
-
   #wasChangedLanguage = TODO;
 
-    constructor() {
-      super("menu")
-      const { Title, Play, Continue } = key.Menu;
-    this.Title = Title;
-    this.Play = Play;
-    this.Continue = Continue;
-    }
+  constructor() {
+    super("menu");
+  }
 
-    init({ language }) {
-      this.language = language;
-    }
+  init({ language }) {
+    this.language = language;
+  }
 
-  create(){
-
-    const backgrounds = ['bMenu1', 'bMenu2', 'bMenu3', 'bMenu4'];
+  create() {
+    const backgrounds = ["bMenu1", "bMenu2", "bMenu3", "bMenu4"];
     let currentIndex = 0;
 
     const background1 = this.add.image(300, 240, backgrounds[currentIndex]);
@@ -49,45 +41,51 @@ export default class Menu extends Phaser.Scene {
     // Inicia el cambio de fondo
     changeBackground();
 
+    this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
+      fontSize: "20px",
+      frontFamily: "Console",
+      color: "#FFFFFF",
+    });
+    this.Play = this.add
+      .text(50, 300, getPhrase(key.Menu.Play), {
+        fontSize: "20px",
+        frontFamily: "Console",
+        color: "#FFFFFF",
+      })
+      .setInteractive()
+      .on("pointerdown", () => this.scene.start("controles"));
 
-        this.Title = this.add
-        .text(50,100, getPhrase(this.Title), {
-          fontSize: "20px",
-          frontFamily: "Console",
-          color: "#FFFFFF",
-        })
-        this.Play = this.add
-        .text(50,300, getPhrase(this.Play), {
-          fontSize: "20px",
-          frontFamily: "Console",
-          color: "#FFFFFF",
-        }).setInteractive().on("pointerdown", () => this.scene.start("controles"));
-          
-        this.Continue = this.add
-        .text(50,350, getPhrase(this.Continue), {
-          fontSize: "20px",
-          frontFamily: "Console",
-          color: "#FFFFFF",
-        })
-        
+    this.Continue = this.add.text(50, 350, getPhrase(key.Menu.Continue), {
+      fontSize: "20px",
+      frontFamily: "Console",
+      color: "#FFFFFF",
+    });
 
-          this.add.image(113, 450, "Arg").setScale(0.5).setInteractive()
-          .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-            this.getTranslations(ES_AR);
-          });
-          
+    this.add
+      .image(113, 450, "Arg")
+      .setScale(0.5)
+      .setInteractive()
+      .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
+        this.getTranslations(ES_AR);
+      });
 
-          this.add.image(175, 450, "Bra").setScale(0.5).setInteractive()
-          .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-            this.getTranslations(PT_BR);
-          });
+    this.add
+      .image(175, 450, "Bra")
+      .setScale(0.5)
+      .setInteractive()
+      .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
+        this.getTranslations(PT_BR);
+      });
 
-          this.add.image(50, 450, "Est").setScale(0.5).setInteractive()
-          .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-            this.getTranslations(EN_US);
-          });
-        
-          /* this.timer = 10
+    this.add
+      .image(50, 450, "Est")
+      .setScale(0.5)
+      .setInteractive()
+      .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
+        this.getTranslations(EN_US);
+      });
+
+    /* this.timer = 10
           this.time.addEvent({
             delay: 5,
             callback: this.oneSecond,
@@ -104,16 +102,15 @@ export default class Menu extends Phaser.Scene {
            le asigne otra imagen, debe estar en el update
            */
 
-
-           // Configura el fondo inicial
+    // Configura el fondo inicial
   }
 
   update() {
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
-      this.Title.setText(getPhrase(this.Title));
-      this.Play.setText(getPhrase(this.Play));
-      this.Continue.setText(getPhrase(this.Continue));
+      this.Title.setText(getPhrase(key.Menu.Title));
+      this.Play.setText(getPhrase(key.Menu.Play));
+      this.Continue.setText(getPhrase(key.Menu.Continue));
     }
   }
 
@@ -128,4 +125,3 @@ export default class Menu extends Phaser.Scene {
     await getTranslations(language, this.updateWasChangedLanguage);
   }
 }
-
