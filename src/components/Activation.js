@@ -1,4 +1,4 @@
-import Alien1 from "./Alien1";
+//import Alien1 from "./Alien1";
 
 /* {
     1:[Alien1]
