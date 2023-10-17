@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+/*  import Phaser from "phaser";
 
 export default class Alien1 extends Phaser.GameObjects.Sprite {
   room;
@@ -7,29 +7,39 @@ export default class Alien1 extends Phaser.GameObjects.Sprite {
 
   constructor(scene, x, y, texture, active) {
     super(scene, x, y, texture, active);
-    this.newRoom = undefined;
     this.init();
     this.scene = scene;
+    
+     this.newRoom = 6;
+    
   }
+
   init() {
     console.log("AAAAA");
     this.bonnie = this.setTexture("bonnie").setPosition(320, 450);
-    //this.bonnie.visible = false;
+    // this.bonnie.visible = false;
   }
-  //imagenes
-  //funcion de añadir arrays
-  //funcion de eliminar sprite del arrays
-  //funcion para corroborar ubicacion
-  //visivle e invisibles
 
-  /* moverAlien(room) {
+   create() {
+     const rooms = ["room1","room2","room3","room4","room5","room6"];
+    
+     this.Alien1 = new Alien1(this);
+    
+   }
+
+  // imagenes
+  // funcion de añadir arrays
+  // funcion de eliminar sprite del arrays
+  // funcion para corroborar ubicacion
+  // visivle e invisibles
+
+    moverAlien(newRoom, rooms) {
     if (this.active === true) {
-        this.newRooom = Phaser.Math.Between(1, 5)
-        this.room = this.newRoom 
-        if (this.room === 1) {
-            
+        const randomIndex = Math.floor(Math.random() * rooms.length);
+        const newRoom = rooms[randomIndex];
+        this.room = this.newRoom;         
         }
 
-    }
-} */
-}
+    } 
+} 
+ */

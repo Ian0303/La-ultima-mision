@@ -35,11 +35,12 @@ export default class Menu extends Phaser.Scene {
       background1.setTexture(backgrounds[currentIndex]);
 
       // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
-      setTimeout(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
+      this.setChangeBackground = setTimeout(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
     };
 
     // Inicia el cambio de fondo
     changeBackground();
+
 
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
       fontSize: "20px",
@@ -103,6 +104,7 @@ export default class Menu extends Phaser.Scene {
            */
 
     // Configura el fondo inicial
+
   }
 
   update() {

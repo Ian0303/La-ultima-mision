@@ -1,5 +1,6 @@
 import Phaser from "phaser";
-import Alien1 from "../components/Alien1";
+// import Alien1 from "../components/Alien1";
+import events from "./EventCenter";
 
 export default class Cameras extends Phaser.Scene {
   constructor() {
@@ -8,6 +9,8 @@ export default class Cameras extends Phaser.Scene {
     this.cameraV1 = [""];
     this.cameraV2 = [""];
     this.cameraV3 = [""];
+
+    this.enemiesTexture = ["bonnie"];
 
     // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
     // funcion
@@ -58,10 +61,26 @@ export default class Cameras extends Phaser.Scene {
     Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
     */
 
-    this.Alien1 = new Alien1(this);
-    // let P = [ room:[]]
+    events.on("aliens-moved", this.moveAlien, this);
+  }
 
+  moveAlien(enemies) {
+    // borrar sprites enemigos
+    let allSprites = this.children.list.filter((x) => {
+      if (this.enemiesTexture.includes(x.texture.key)) {
+        console.log("es sprite", x.texture.key);
+        return true;
+      }
+      return false;
+    });
+    console.log("para borrar", allSprites);
+    allSprites.forEach((x) => x.destroy(true));
 
+    // mostrar los enemigos
+    enemies.forEach((e) => {
+      console.log(e);
+      e.addToScene(this);
+    });
   }
 
   update() {
@@ -75,8 +94,4 @@ export default class Cameras extends Phaser.Scene {
       this.scene.bringToTop("game");
     }
   }
-
-
-
-
 }
