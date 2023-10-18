@@ -54,7 +54,7 @@ export default class Game extends Phaser.Scene {
 
   update() { // update(time, deltaTime)
     this.player.update();
-    this.enemies.forEach(e => {
+    /* this.enemies.forEach(e => {
       if (e.room === 5) {
         e.x = 200
         e.y = 200
@@ -63,7 +63,7 @@ export default class Game extends Phaser.Scene {
         // añidir contador, si el contador el llega a 5 gameOver = true 
 
       }
-    }) ;
+    }) ; */
     if (this.camerasS.isDown) {
       this.camera = this.scene.bringToTop("cameras");
     } 
