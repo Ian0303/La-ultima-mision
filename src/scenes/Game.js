@@ -26,7 +26,7 @@ export default class Game extends Phaser.Scene {
       .setDepth(1)
       .setScale(0.7)
       .setInteractive()
-      .on("pointerdown", () => this.scene.launch("cameras"));
+      .on("pointerdown", () => this.scene.bringToTop("cameras"));
     this.add.image(320, 240, "room");
     console.log("si");
 
@@ -49,12 +49,26 @@ export default class Game extends Phaser.Scene {
     this.scene.launch("ui");
   }
 
-  update() {
+  update() { //update(time, deltaTime)
     this.player.update();
+    this.enemies.forEach(e => {
+      if (e.room == 5) {
+        e.x = 200
+        e.y = 200
+        e.addToScene(this)
+
+        //añidir contador, si el contador el llega a 5 gameOver = true 
+
+      }
+    }) ;
   }
 
   moveAlien() {
     this.enemies.forEach((e) => e.move());
     events.emit("aliens-moved", this.enemies);
   }
+
+
+  //contadorWin
+  
 }
