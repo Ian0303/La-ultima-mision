@@ -5,12 +5,8 @@ import events from "./EventCenter";
 export default class Cameras extends Phaser.Scene {
   constructor() {
     super("cameras");
-    this.camerasV = [];
-    this.cameraV1 = [""];
-    this.cameraV2 = [""];
-    this.cameraV3 = [""];
-
-    this.enemiesTexture = ["bonnie"];
+    
+    this.enemiesTexture = ["alien1"];
 
     // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
     // funcion
@@ -55,7 +51,8 @@ export default class Cameras extends Phaser.Scene {
     this.camera3 = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.THREE
     );
-    this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+    this.back = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.DOWN);
 
     /* 
     Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
@@ -66,7 +63,7 @@ export default class Cameras extends Phaser.Scene {
 
   moveAlien(enemies) {
     // borrar sprites enemigos
-    let allSprites = this.children.list.filter((x) => {
+    const allSprites = this.children.list.filter((x) => {
       if (this.enemiesTexture.includes(x.texture.key)) {
         console.log("es sprite", x.texture.key);
         return true;

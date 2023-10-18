@@ -20,13 +20,12 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    const scene = this;
+    // const scene = this;
     this.add
       .image(320, 450, "openCameras")
       .setDepth(1)
       .setScale(0.7)
-      .setInteractive()
-      .on("pointerdown", () => this.scene.bringToTop("cameras"));
+            
     this.add.image(320, 240, "room");
     console.log("si");
 
@@ -47,20 +46,27 @@ export default class Game extends Phaser.Scene {
 
     // launch UI scene
     this.scene.launch("ui");
+
+    this.camerasS = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.UP
+    );
   }
 
-  update() { //update(time, deltaTime)
+  update() { // update(time, deltaTime)
     this.player.update();
     this.enemies.forEach(e => {
-      if (e.room == 5) {
+      if (e.room === 5) {
         e.x = 200
         e.y = 200
         e.addToScene(this)
 
-        //añidir contador, si el contador el llega a 5 gameOver = true 
+        // añidir contador, si el contador el llega a 5 gameOver = true 
 
       }
     }) ;
+    if (this.camerasS.isDown) {
+      this.camera = this.scene.bringToTop("cameras");
+    } 
   }
 
   moveAlien() {
@@ -69,6 +75,6 @@ export default class Game extends Phaser.Scene {
   }
 
 
-  //contadorWin
+  // contadorWin
   
 }
