@@ -20,7 +20,7 @@ const config = {
       height: 600,
     },
     max: {
-      width: 1600,
+      width: 2000,
       height: 1200,
     },
   },
