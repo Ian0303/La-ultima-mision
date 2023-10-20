@@ -19,7 +19,7 @@ export default class UI extends Phaser.Scene {
     super("ui");
   }
 
-  create() {
+  /* create() {
     this.colliderCount = 0;
     // add text with count collider and date
     this.text = this.add.text(10, 10, `Collider count: ${this.colliderCount}`, {
@@ -28,7 +28,7 @@ export default class UI extends Phaser.Scene {
     });
 
     // add listener to the event
-    events.on("collider-event", this.colliderEvent, this);
+    // events.on("movimiento-alien-event", this.moveAlien, this);
   }
 
   colliderEvent(data) {
@@ -38,6 +38,6 @@ export default class UI extends Phaser.Scene {
     this.colliderCount += 1;
     this.text.setText(
       `Collider count: ${this.colliderCount} / Last: ${data.fecha}`
-    );
-  }
+    ); 
+  }*/
 }

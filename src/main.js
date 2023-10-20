@@ -6,6 +6,7 @@ import Preload from "./scenes/Preload";
 import Camaras from "./scenes/Cameras";
 import Menu from "./scenes/Menu";
 import Game from "./scenes/Game";
+import Controles from "./scenes/Controles";
 
 const config = {
   type: Phaser.AUTO,
@@ -19,7 +20,7 @@ const config = {
       height: 600,
     },
     max: {
-      width: 1600,
+      width: 2000,
       height: 1200,
     },
   },
@@ -30,7 +31,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, HelloWorldScene, UI,Camaras, Menu, Game],
+  scene: [Preload, HelloWorldScene, UI, Menu, Game, Camaras,Controles],
 };
 
 export default new Phaser.Game(config);
