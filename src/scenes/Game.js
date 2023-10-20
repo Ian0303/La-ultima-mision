@@ -11,6 +11,7 @@ export default class Game extends Phaser.Scene {
     this.player = null;
     this.night = 1;
     this.dead = false;
+    this.pased = false;
   }
 
   init(data) {
@@ -72,6 +73,18 @@ export default class Game extends Phaser.Scene {
   moveAlien() {
     this.enemies.forEach((e) => e.move());
     events.emit("aliens-moved", this.enemies);
+  }
+
+  pasedNight() {
+    if (this.pased === true) {
+      this.scene.bringToTop("passedNight")
+    }
+  }
+
+  gameOver() {
+    if (this.dead === true) {
+      this.scene.bringToTop("gameOver")
+    }
   }
 
 
