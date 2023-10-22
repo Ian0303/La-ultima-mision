@@ -94,7 +94,7 @@ export default class Cameras extends Phaser.Scene {
   // nueva variable que le saque el numero a "camera1" y asi cambie de camara
   // no estoy segura de como funcion al presionar teclas, en peor de los casos, la "vieja confiable" ifs anidados.
 
-  update() {
+/*   update() {
 
     switch (true) {
       case this.camera1.isDown:
@@ -124,10 +124,10 @@ export default class Cameras extends Phaser.Scene {
 
 
        default:
-       /*  this.miCamara.setScroll(960, 720);
-        console.log("camara1"); */ 
+         this.miCamara.setScroll(960, 720);
+        console.log("camara1"); 
         break; 
-    }
+    } 
 
     /* if (this.camera1.isDown) {
       this.camera = this.add.image(320, 240, "camera1");
@@ -137,6 +137,6 @@ export default class Cameras extends Phaser.Scene {
       this.camera = this.add.image(320, 240, "camera3");
     } else if (this.back.isDown) {
       this.scene.bringToTop("game");
-    } */
-  }
+    } 
+  } */
 }

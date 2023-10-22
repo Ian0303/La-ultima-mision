@@ -99,11 +99,14 @@ export default class Game extends Phaser.Scene {
     this.rightShield = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.D
     );
+    this.leftLightOn = this.add.image(-120, 230, "leftDoorLight").setVisible(false)
+  this.rightLightOn = this.add.image(750, 230, "rightDoorLight").setVisible(false)
 
   }
 
   update() { // update(time, deltaTime)
     this.player.update();
+    
     /* this.enemies.forEach(e => {
       if (e.room === 5 || e.room === 4) {
         e.x = 200
@@ -122,21 +125,20 @@ export default class Game extends Phaser.Scene {
       this.camera = this.scene.bringToTop("cameras");
     }
 
-    if (this.leftLigth.isDown) {
-      this.add.image(-260, 200, "leftDoorLight")
-      console.log("luz derecha")
-    } else if (this.rightLigth.isDown) {
-      this.add.image(900, 200, "rightDoorLight")
-      console.log("luz izquierda")
+    if (this.leftLigth.isDown ) {
+      this.leftLightOn.setVisible(true)
+      setTimeout(() => {
+      this.leftLightOn.setVisible(false) 
+      }, 1500);
+    }else if (this.rightLigth.isDown) {
+      this.rightLightOn.setVisible(true)
+      setTimeout(() => {
+      this.rightLightOn.setVisible(false) 
+      }, 1500);
+  
     }
 
-    if (this.leftShield.isDown) {
-      this.add.image(-260, 200, "leftShield")
-      console.log("escudo derecho")
-    } else if (this.rightShield.isDown) {
-      this.add.image(900, 200, "rightShield")
-      console.log("escudo izquierdo")
-    }
+
   }
 
   moveAlien() {

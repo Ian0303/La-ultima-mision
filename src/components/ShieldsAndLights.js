@@ -21,6 +21,8 @@ create(){
     Phaser.Input.Keyboard.KeyCodes.D
   );
 
+  this.leftLightOn = this.add.image(-260, 200, "leftDoorLight")
+  this.rightLightOn = this.add.image(900, 200, "rightDoorLight")
   events.on("shields-ligths", this.update, this);
 }
 
@@ -28,9 +30,15 @@ update() {
 
   
   if (this.leftLigth.isDown ) {
-    this.add.image(-260, 200, "leftDoorLight")
+    this.leftLightOn.setVisible(true)
+    setTimeout(() => {
+    this.leftLightOn.setVisible(false) 
+    }, 3000);
   }else if (this.rightLigth.isDown) {
-    this.add.image(900, 200, "rightDoorLight")
+    this.rightLightOn.setVisible(true)
+    setTimeout(() => {
+    this.rightLightOn.setVisible(false) 
+    }, 3000);
 
   }
 
