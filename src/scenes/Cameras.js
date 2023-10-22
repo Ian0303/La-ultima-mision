@@ -123,10 +123,10 @@ export default class Cameras extends Phaser.Scene {
         break;
 
 
-      default:
-        this.miCamara.setScroll(960, 720);
-        console.log("camara1");
-        break;
+       default:
+       /*  this.miCamara.setScroll(960, 720);
+        console.log("camara1"); */ 
+        break; 
     }
 
     /* if (this.camera1.isDown) {

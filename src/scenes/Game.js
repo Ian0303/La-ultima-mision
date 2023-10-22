@@ -22,12 +22,32 @@ export default class Game extends Phaser.Scene {
 
   create() {
     // const scene = this;
-    this.add
-      .image(320, 450, "openCameras")
-      .setDepth(1)
-      .setScale(0.7)
-            
+    /*  this.add
+       .image(320, 450, "openCameras")
+       
+       .setScale(0.7) */
+
     this.add.image(320, 240, "room");
+
+
+    this.add
+      .image(-60, 250, "doorButton")
+      .setScale(1)
+
+    this.add
+      .image(700, 250, "doorButton")
+      .setScale(1)
+
+    this.add
+      .image(-60, 200, "lightButton")
+      .setScale(1)
+
+    this.add
+      .image(700, 200, "lightButton")
+      .setScale(1)
+
+
+
     console.log("si");
 
     this.player = new Player(this, 300, 280, "player");
@@ -45,6 +65,14 @@ export default class Game extends Phaser.Scene {
       loop: true,
     });
 
+    /* this.time.addEvent({
+      delay: 300000,
+      callback: this.pasedNight,
+      callbackScope: this,
+      loop: true,
+    }); */
+
+
     // launch UI scene
     this.scene.launch("ui");
 
@@ -52,13 +80,25 @@ export default class Game extends Phaser.Scene {
       Phaser.Input.Keyboard.KeyCodes.UP
     );
 
-/* this.timer = 10
-          this.time.addEvent({
-            delay: 5,
-            callback: this.oneSecond,
-            callbackScope: this,
-            loop: true,
-          });  */
+    /* this.timer = 10
+              this.time.addEvent({
+                delay: 5,
+                callback: this.oneSecond,
+                callbackScope: this,
+                loop: true,
+              });  */
+    this.leftLigth = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.Q
+    );
+    this.rightLigth = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.E
+    );
+    this.leftShield = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.A
+    );
+    this.rightShield = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.D
+    );
 
   }
 
@@ -80,7 +120,23 @@ export default class Game extends Phaser.Scene {
     }) ; */
     if (this.camerasS.isDown) {
       this.camera = this.scene.bringToTop("cameras");
-    } 
+    }
+
+    if (this.leftLigth.isDown) {
+      this.add.image(-260, 200, "leftDoorLight")
+      console.log("luz derecha")
+    } else if (this.rightLigth.isDown) {
+      this.add.image(900, 200, "rightDoorLight")
+      console.log("luz izquierda")
+    }
+
+    if (this.leftShield.isDown) {
+      this.add.image(-260, 200, "leftShield")
+      console.log("escudo derecho")
+    } else if (this.rightShield.isDown) {
+      this.add.image(900, 200, "rightShield")
+      console.log("escudo izquierdo")
+    }
   }
 
   moveAlien() {
@@ -102,5 +158,5 @@ export default class Game extends Phaser.Scene {
 
 
   // contadorWin
-  
+
 }

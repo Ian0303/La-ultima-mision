@@ -23,7 +23,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   update() {
     if (this.cursors.left.isDown) {
-      console.log("izquierda");
       this.body.setVelocityX(-this.velocity);
       this.anims.play("left", true);
     } else if (this.cursors.right.isDown) {
