@@ -26,7 +26,9 @@ export default class Game extends Phaser.Scene {
       .image(320, 450, "openCameras")
       .setDepth(1)
       .setScale(0.7)
-            
+      .setInteractive()
+      .on("pointerdown", () => this.scene.bringToTop("cameras"));
+
     this.add.image(320, 240, "room");
     console.log("si");
 
@@ -47,22 +49,23 @@ export default class Game extends Phaser.Scene {
 
     // launch UI scene
     this.scene.launch("ui");
+    this.scene.launch("cameras");
 
-    this.camerasS = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.UP
-    );
+    // this.camerasS = this.input.keyboard.addKey(
+    //   Phaser.Input.Keyboard.KeyCodes.UP
+    // );
 
-/* this.timer = 10
+    /* this.timer = 10
           this.time.addEvent({
             delay: 5,
             callback: this.oneSecond,
             callbackScope: this,
             loop: true,
           });  */
-
   }
 
-  update() { // update(time, deltaTime)
+  update() {
+    // update(time, deltaTime)
     this.player.update();
     /* this.enemies.forEach(e => {
       if (e.room === 5 || e.room === 4) {
@@ -78,9 +81,9 @@ export default class Game extends Phaser.Scene {
 
       }
     }) ; */
-    if (this.camerasS.isDown) {
-      this.camera = this.scene.bringToTop("cameras");
-    } 
+    // if (this.camerasS.isDown) {
+    //   this.camera = this.scene.bringToTop("cameras");
+    // }
   }
 
   moveAlien() {
@@ -90,17 +93,15 @@ export default class Game extends Phaser.Scene {
 
   pasedNight() {
     if (this.passed === true) {
-      this.scene.bringToTop("passedNight")
+      this.scene.bringToTop("passedNight");
     }
   }
 
   gameOver() {
     if (this.dead === true) {
-      this.scene.bringToTop("gameOver")
+      this.scene.bringToTop("gameOver");
     }
   }
 
-
   // contadorWin
-  
 }
