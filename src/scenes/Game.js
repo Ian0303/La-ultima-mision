@@ -30,24 +30,21 @@ export default class Game extends Phaser.Scene {
     this.add.image(320, 240, "room");
 
 
-    this.add
+    this.dbutton1 = this.add
       .image(-60, 250, "doorButton")
       .setScale(1)
 
-    this.add
+    this.dbutton2 = this.add
       .image(700, 250, "doorButton")
       .setScale(1)
 
-    this.add
+    this.lbutton1 = this.add
       .image(-60, 200, "lightButton")
       .setScale(1)
 
-    this.add
+    this.lbutton2 = this.add
       .image(700, 200, "lightButton")
       .setScale(1)
-
-
-
     console.log("si");
 
     this.player = new Player(this, 300, 280, "player");
@@ -80,6 +77,8 @@ export default class Game extends Phaser.Scene {
       Phaser.Input.Keyboard.KeyCodes.UP
     );
 
+    this.physics.add.overlap(this.player, this.dbutton1, this.leftbutton);
+
     /* this.timer = 10
               this.time.addEvent({
                 delay: 5,
@@ -87,26 +86,29 @@ export default class Game extends Phaser.Scene {
                 callbackScope: this,
                 loop: true,
               });  */
+
     this.leftLigth = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.Q
+    );
+
+    this.leftShield = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.A
     );
     this.rightLigth = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.E
     );
-    this.leftShield = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.A
-    );
+
     this.rightShield = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.D
     );
     this.leftLightOn = this.add.image(-120, 230, "leftDoorLight").setVisible(false)
-  this.rightLightOn = this.add.image(750, 230, "rightDoorLight").setVisible(false)
+    this.rightLightOn = this.add.image(750, 230, "rightDoorLight").setVisible(false)
 
   }
 
   update() { // update(time, deltaTime)
     this.player.update();
-    
+
     /* this.enemies.forEach(e => {
       if (e.room === 5 || e.room === 4) {
         e.x = 200
@@ -125,17 +127,17 @@ export default class Game extends Phaser.Scene {
       this.camera = this.scene.bringToTop("cameras");
     }
 
-    if (this.leftLigth.isDown ) {
+    if (this.leftLigth.isDown) {
       this.leftLightOn.setVisible(true)
       setTimeout(() => {
-      this.leftLightOn.setVisible(false) 
+        this.leftLightOn.setVisible(false)
       }, 1500);
-    }else if (this.rightLigth.isDown) {
+    } else if (this.rightLigth.isDown) {
       this.rightLightOn.setVisible(true)
       setTimeout(() => {
-      this.rightLightOn.setVisible(false) 
+        this.rightLightOn.setVisible(false)
       }, 1500);
-  
+
     }
 
 
@@ -156,6 +158,17 @@ export default class Game extends Phaser.Scene {
     if (this.dead === true) {
       this.scene.bringToTop("gameOver")
     }
+  }
+
+  leftbutton() {
+    this.leftLigth = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.Q
+    );
+
+    this.leftShield = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.A
+    );
+
   }
 
 
