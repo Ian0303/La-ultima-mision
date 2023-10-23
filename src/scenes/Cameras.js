@@ -36,11 +36,7 @@ export default class Cameras extends Phaser.Scene {
   create() {
     this.camera = this.add.image(320, 240, "allCameras");
     this.miCamara = this.cameras.add(960, 720, 640, 480);
-    this.add
-      .image(320, 450, "closeCameras")
-      .setScale(0.7)
-      .setInteractive()
-      .on("pointerdown", () => this.scene.switch("game"));
+
     console.log("si");
 
     this.camera1 = this.input.keyboard.addKey(
@@ -98,34 +94,33 @@ export default class Cameras extends Phaser.Scene {
 
     switch (true) {
       case this.camera1.isDown:
-        this.miCamara.setScroll(960, 720);
+        this.miCamara.setScroll(320, 480);
         console.log("camara1");
         break;
       case this.camera2.isDown:
-        this.miCamara.setScroll(320, 720);
+        this.miCamara.setScroll(960, 480);
         console.log("camara2");
         break;
       case this.camera3.isDown:
-        this.miCamara.setScroll(1600, 720);
+        this.miCamara.setScroll(1600, 480);
         console.log("camara3");
         break;
       case this.camera4.isDown:
-        this.miCamara.setScroll(320, 240);
+        this.miCamara.setScroll(320, 960);
         console.log("camara4");
         break;
       case this.camera5.isDown:
-        this.miCamara.setScroll(960, 240);
+        this.miCamara.setScroll(1600, 960);
         console.log("camara5");
         break;
       case this.camera6.isDown:
-        this.miCamara.setScroll(1600, 240);
+        this.miCamara.setScroll(960, 960);
         console.log("camara6");
         break;
 
 
       default:
-        this.miCamara.setScroll(960, 720);
-        console.log("camara1");
+        
         break;
     }
 
