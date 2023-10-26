@@ -22,12 +22,8 @@ export default class Game extends Phaser.Scene {
 
   create() {
     // const scene = this;
-    this.add
-      .image(320, 450, "openCameras")
-      .setDepth(1)
-      .setScale(0.7)
-      .setInteractive()
-      .on("pointerdown", () => this.scene.bringToTop("cameras"));
+    this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+     
 
     this.add.image(320, 240, "room");
     console.log("si");
@@ -67,6 +63,13 @@ export default class Game extends Phaser.Scene {
   update() {
     // update(time, deltaTime)
     this.player.update();
+
+    if (this.camerasV.isDown) {
+      this.scene.bringToTop("cameras");
+    } 
+   /*  if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)) {
+      this.scene.bringToTop("cameras");
+    } */
     /* this.enemies.forEach(e => {
       if (e.room === 5 || e.room === 4) {
         e.x = 200

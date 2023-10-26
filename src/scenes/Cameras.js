@@ -13,7 +13,6 @@ export default class Cameras extends Phaser.Scene {
     // camara 1 todos los personajes
     // cunado sepa en que array este muestre el sprite
     // animación
-    //
 
     /* cuando se abra la escena cameras el jugador usará los numeros para la seleccion de
     las distintas camaras
@@ -28,47 +27,26 @@ export default class Cameras extends Phaser.Scene {
       4 = otro lugar
       5 = otro lugar diferente
 
-
     */
-    // this.cursors = scene.input.keyboard.createCursorKeys();
   }
 
   create() {
-    //this.cameras.main.setBounds(0, 0, 1920, 960);
+    // this.cameras.main.setBounds(0, 0, 1920, 960);
 
     this.camera = this.add.image(960, 480, "allCameras");
-    // this.miCamara = this.cameras.add(960, 720, 640, 480);
 
-    //this.cameras.main.setZoom(4);
-    //this.cameras.main.centerOn(0, 0);
+    // this.cameras.main.setZoom(4);
+    // this.cameras.main.centerOn(0, 0);
 
     this.addKeyEvents();
 
     console.log("si");
 
-    // this.camera1 = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.ONE
-    // );
-    // this.camera2 = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.TWO
-    // );
-    // this.camera3 = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.THREE
-    // );
-    // this.camera4 = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.FOUR
-    // );
-    // this.camera5 = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.FIVE
-    // );
-    // this.camera6 = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.SIX
-    // );
-    // this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+    
+    this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
-    // this.aCameras = [this.camera1, this.camera2, this.camera3, this.camera4, this.camera5, this.camera6]
-    /* 
-    Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
+    /*
+    Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4, 5 Y 6
     */
 
     events.on("aliens-moved", this.moveAlien, this);
@@ -101,8 +79,17 @@ export default class Cameras extends Phaser.Scene {
           console.log("room 6");
           this.cameras.main.centerOn(960, 720);
           break;
+
+          case Phaser.Input.Keyboard.KeyCodes.DOWN:
+            this.scene.bringToTop("game")
+          break;
+          case Phaser.Input.Keyboard.KeyCodes.UP:
+            this.scene.bringToTop("cameras")
+          break;
+
         default:
-          console.log("otra key", event.keyCode);
+          this.cameras.main.centerOn(320, 240);
+          // console.log("otra key", event.keyCode);
           break;
       }
       // console.log([
@@ -170,8 +157,9 @@ export default class Cameras extends Phaser.Scene {
       this.camera = this.add.image(320, 240, "camera2");
     } else if (this.camera3.isDown) {
       this.camera = this.add.image(320, 240, "camera3");
-    } else if (this.back.isDown) {
+    } else */
+    if (this.back.isDown) {
       this.scene.bringToTop("game");
-    } */
+    } 
   }
 }
