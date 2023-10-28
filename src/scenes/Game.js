@@ -12,6 +12,8 @@ export default class Game extends Phaser.Scene {
     this.night = 1;
     this.dead = false;
     this.passed = false;
+    this.atack = 0;
+   
   }
 
   init(data) {
@@ -34,7 +36,12 @@ export default class Game extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
 
-    this.timer = 20;
+    this.time.addEvent({
+      delay:480000,
+      callback: this.endTimer,
+      callbackScope: this,
+      loop: false,
+    })
 
     this.time.addEvent({
       delay: 2000,
@@ -47,9 +54,6 @@ export default class Game extends Phaser.Scene {
     this.scene.launch("ui");
     this.scene.launch("cameras");
 
-    // this.camerasS = this.input.keyboard.addKey(
-    //   Phaser.Input.Keyboard.KeyCodes.UP
-    // );
 
     /* this.timer = 10
           this.time.addEvent({
@@ -67,26 +71,21 @@ export default class Game extends Phaser.Scene {
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras");
     } 
-   /*  if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)) {
-      this.scene.bringToTop("cameras");
-    } */
-    /* this.enemies.forEach(e => {
-      if (e.room === 5 || e.room === 4) {
-        e.x = 200
-        e.y = 200
+   
+      this.enemies.forEach(e => {
+      if (e.room === 4) {
+        this.add.image( 200, 200, "rightDoorLight")
         e.addToScene(this)
         e.setVisible(false)
-        if (contador === 8) {
-          gameOver = true
+        if (this.atack === 8) {
+          this.dead = true
         }
 
-        // añidir contador, si el contador el llega a 5 gameOver = true 
+        // añidir contador, si el contador el llega a 8 gameOver = true 
 
       }
-    }) ; */
-    // if (this.camerasS.isDown) {
-    //   this.camera = this.scene.bringToTop("cameras");
-    // }
+    }) ;
+
   }
 
   moveAlien() {
@@ -106,5 +105,11 @@ export default class Game extends Phaser.Scene {
     }
   }
 
-  // contadorWin
+  endTimer() {
+    if (this.dead) {
+      this.scene.start("pasedNight");
+    } else {
+      this.scene.start("gameOver");
+    }
+  }
 }

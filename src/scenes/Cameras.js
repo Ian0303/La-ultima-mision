@@ -80,10 +80,10 @@ export default class Cameras extends Phaser.Scene {
           this.cameras.main.centerOn(960, 720);
           break;
 
-          case Phaser.Input.Keyboard.KeyCodes.DOWN:
+          case Phaser.Input.Keyboard.KeyCodes.UP:
             this.scene.bringToTop("game")
           break;
-          case Phaser.Input.Keyboard.KeyCodes.UP:
+          case Phaser.Input.Keyboard.KeyCodes.DOWN:
             this.scene.bringToTop("cameras")
           break;
 
@@ -123,41 +123,7 @@ export default class Cameras extends Phaser.Scene {
   // no estoy segura de como funcion al presionar teclas, en peor de los casos, la "vieja confiable" ifs anidados.
 
   update() {
-    // switch (true) {
-    //   case this.camera1.isDown:
-    //     this.miCamara.setScroll(320, 480);
-    //     console.log("camara1");
-    //     break;
-    //   case this.camera2.isDown:
-    //     this.miCamara.setScroll(960, 480);
-    //     console.log("camara2");
-    //     break;
-    //   case this.camera3.isDown:
-    //     this.miCamara.setScroll(1600, 480);
-    //     console.log("camara3");
-    //     break;
-    //   case this.camera4.isDown:
-    //     this.miCamara.setScroll(320, 960);
-    //     console.log("camara4");
-    //     break;
-    //   case this.camera5.isDown:
-    //     this.miCamara.setScroll(1600, 960);
-    //     console.log("camara5");
-    //     break;
-    //   case this.camera6.isDown:
-    //     this.miCamara.setScroll(960, 960);
-    //     console.log("camara6");
-    //     break;
-    //   default:
-    //     break;
-    // }
-    /* if (this.camera1.isDown) {
-      this.camera = this.add.image(320, 240, "camera1");
-    } else if (this.camera2.isDown) {
-      this.camera = this.add.image(320, 240, "camera2");
-    } else if (this.camera3.isDown) {
-      this.camera = this.add.image(320, 240, "camera3");
-    } else */
+    
     if (this.back.isDown) {
       this.scene.bringToTop("game");
     } 
