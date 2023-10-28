@@ -8,6 +8,8 @@ import Menu from "./scenes/Menu";
 import Game from "./scenes/Game";
 import Controles from "./scenes/Controles";
 
+import FirebasePlugin from "./plugins/FirebasePlugin";
+
 const config = {
   type: Phaser.AUTO,
   width: 640,
