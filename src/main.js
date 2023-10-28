@@ -32,6 +32,16 @@ const config = {
     },
   },
   scene: [Preload, HelloWorldScene, UI, Menu, Camaras, Game, Controles],
+  plugins: {
+    global: [
+      {
+        key: "FirebasePlugin",
+        plugin: FirebasePlugin,
+        start: true,
+        mapping: "firebase",
+      },
+    ],
+  },
 };
 
 export default new Phaser.Game(config);
