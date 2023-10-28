@@ -31,7 +31,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, HelloWorldScene, UI, Menu, Game, Camaras,Controles],
+  scene: [Preload, HelloWorldScene, UI, Menu, Camaras, Game, Controles],
 };
 
 export default new Phaser.Game(config);
