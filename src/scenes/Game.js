@@ -13,6 +13,7 @@ export default class Game extends Phaser.Scene {
     this.dead = false;
     this.passed = false;
     this.atack = false;
+    this.shiels = false;
    
   }
 
@@ -79,7 +80,7 @@ export default class Game extends Phaser.Scene {
         setTimeout(() => {
           this.atack = true
         }, 8000);
-        if (this.atack) {
+        if (this.atack && this.shiels) {
           this.dead = true
         }
 
