@@ -18,29 +18,37 @@ export default class Alien1 {
       .setName(this.texture)
       .setVisible(true);
 
-    /* switch (this.room) {
+    switch (this.room) {
       case 1:
-        this.sprite.image(320, 240, this.texture)
+        this.x = 320
+        this.y = 240
         break;
       case 2:
-        this.sprite.image(960, 240, this.texture)
+        this.x = 960
+        this.y = 240
         break;
       case 3:
-        this.sprite.image(1600, 240, this.texture)
+        this.x = 1600
+        this.y = 240
         break;
       case 4:
-        this.sprite.image(320, 720, this.texture)
+        this.x = 320
+        this.y = 720
         break;
       case 5:
-        this.sprite.image(1600, 720, this.texture)
+        this.x = 1600
+        this.y = 720
         break;
       case 6:
-        this.sprite.image(960, 720, this.texture)
+        this.x = 960
+        this.y = 720
         break;
 
       default:
+        this.x = 320
+        this.y = 240
         break;
-    } */
+    }
   }
 
   move() {
@@ -49,6 +57,8 @@ export default class Alien1 {
     console.log(this.room);
   }
 }
+
+
 // if(tiempo de moversemoverse)
 //* se mueve* */
 

@@ -12,7 +12,7 @@ export default class Game extends Phaser.Scene {
     this.night = 1;
     this.dead = false;
     this.passed = false;
-    this.atack = 0;
+    this.atack = false;
    
   }
 
@@ -74,10 +74,12 @@ export default class Game extends Phaser.Scene {
    
       this.enemies.forEach(e => {
       if (e.room === 4) {
-        this.add.image( 200, 200, "rightDoorLight")
-        e.addToScene(this)
-        e.setVisible(false)
-        if (this.atack === 8) {
+        this.add.image( 200, 200, "leftDoorAlien")
+        .setVisible(false)
+        setTimeout(() => {
+          this.atack = true
+        }, 5000);
+        if (this.atack) {
           this.dead = true
         }
 
