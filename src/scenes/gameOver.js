@@ -13,7 +13,7 @@ export default class GameOver extends Phaser.Scene {
       }
 
 create() {
-    this.add.image( 640, 480,"jumpscream1")
+    this.add.image( 640, 480,"gameOver")
 
 }
 

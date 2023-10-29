@@ -44,7 +44,7 @@ export default class Game extends Phaser.Scene {
     })
 
     this.time.addEvent({
-      delay: 2000,
+      delay: 8000,
       callback: this.moveAlien,
       callbackScope: this,
       loop: true,
@@ -78,7 +78,7 @@ export default class Game extends Phaser.Scene {
         .setVisible(false)
         setTimeout(() => {
           this.atack = true
-        }, 5000);
+        }, 8000);
         if (this.atack) {
           this.dead = true
         }
