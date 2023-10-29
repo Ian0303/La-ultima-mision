@@ -82,6 +82,7 @@ export default class Cameras extends Phaser.Scene {
 
           case Phaser.Input.Keyboard.KeyCodes.UP:
             this.scene.bringToTop("game")
+            this.scene.setVisible(false)
           break;
           case Phaser.Input.Keyboard.KeyCodes.DOWN:
             this.scene.bringToTop("cameras")

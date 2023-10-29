@@ -53,7 +53,7 @@ export default class Game extends Phaser.Scene {
 
     // launch UI scene
     this.scene.launch("ui");
-    this.scene.launch("cameras");
+    this.scene.launch("cameras").setVisible(false);
 
 
     /* this.timer = 10
@@ -70,7 +70,7 @@ export default class Game extends Phaser.Scene {
     this.player.update();
 
     if (this.camerasV.isDown) {
-      this.scene.bringToTop("cameras");
+      this.scene.bringToTop("cameras").setVisible(true);
     } 
    
       this.enemies.forEach(e => {
