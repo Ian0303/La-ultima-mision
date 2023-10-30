@@ -5,7 +5,6 @@ import events from "./EventCenter";
 
 export default class Game extends Phaser.Scene {
   enemies = [];
-
   constructor() {
     super("game");
     this.player = null;
@@ -18,6 +17,7 @@ export default class Game extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.night = data.night || 1;
     this.dead = data.dead || false;
+  
   }
 
   create() {
@@ -123,11 +123,15 @@ export default class Game extends Phaser.Scene {
 
       }
     }) ; */
+    
+    this.distance = 100
+   
+
     if (this.camerasS.isDown) {
       this.camera = this.scene.bringToTop("cameras");
     }
 
-    if (this.leftLigth.isDown ) {
+    if (this.leftShield.isDown)  {
       this.leftLightOn.setVisible(true)
       setTimeout(() => {
       this.leftLightOn.setVisible(false) 
@@ -139,7 +143,7 @@ export default class Game extends Phaser.Scene {
       }, 1500);
   
     }
-    if (this.leftShield.isDown ) {
+    if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
       setTimeout(() => {
       this.leftShieldOn.setVisible(false) 
@@ -150,7 +154,7 @@ export default class Game extends Phaser.Scene {
       this.rightShieldOn.setVisible(false) 
       }, 1500);
   
-    }
+    } 
 
 
   }
