@@ -100,7 +100,9 @@ export default class Game extends Phaser.Scene {
       Phaser.Input.Keyboard.KeyCodes.D
     );
     this.leftLightOn = this.add.image(-120, 230, "leftDoorLight").setVisible(false)
-  this.rightLightOn = this.add.image(750, 230, "rightDoorLight").setVisible(false)
+    this.leftShieldOn = this.add.image(-120, 230, "shield_doorleft").setVisible(false)
+    this.rightLightOn = this.add.image(750, 230, "rightDoorLight").setVisible(false)
+    this.rightShieldOn = this.add.image(750, 230, "shield_doorright").setVisible(false)
 
   }
 
@@ -134,6 +136,18 @@ export default class Game extends Phaser.Scene {
       this.rightLightOn.setVisible(true)
       setTimeout(() => {
       this.rightLightOn.setVisible(false) 
+      }, 1500);
+  
+    }
+    if (this.leftShield.isDown ) {
+      this.leftShieldOn.setVisible(true)
+      setTimeout(() => {
+      this.leftShieldOn.setVisible(false) 
+      }, 1500);
+    }else if (this.rightShield.isDown) {
+      this.rightShieldOn.setVisible(true)
+      setTimeout(() => {
+      this.rightShieldOn.setVisible(false) 
       }, 1500);
   
     }
