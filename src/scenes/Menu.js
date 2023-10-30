@@ -54,7 +54,7 @@ export default class Menu extends Phaser.Scene {
         color: "#FFFFFF",
       })
       .setInteractive()
-      .on("pointerdown", () => this.scene.start("controles"));
+      .on("pointerdown", () => this.scene.start("login"));
 
     this.Continue = this.add.text(50, 350, getPhrase(key.Menu.Continue), {
       fontSize: "20px",

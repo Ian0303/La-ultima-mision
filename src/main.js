@@ -9,6 +9,8 @@ import Game from "./scenes/Game";
 import Controles from "./scenes/Controles";
 
 import FirebasePlugin from "./plugins/FirebasePlugin";
+import Login from "./scenes/Login";
+import Scores from "./scenes/Scores";
 
 const config = {
   type: Phaser.AUTO,
@@ -33,7 +35,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, HelloWorldScene, UI, Menu, Camaras, Game, Controles],
+  scene: [Preload, HelloWorldScene, UI, Menu, Camaras, Game, Controles, Login, Scores],
   plugins: {
     global: [
       {

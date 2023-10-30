@@ -23,6 +23,15 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+
+     // agregar un texto en la esquna superior izquierda con el nombre del usuario
+     const user = this.firebase.getUser();
+     this.add.text(10, 10, user.displayName || user.uid);
+ 
+     // agregar un texto en la esquna superior derecha con el puntaje del usuario
+     this.score = 0;
+     this.textScore = this.add.text(600, 10, `Score: ${this.score}`);
+
     // const scene = this;
     this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
      
@@ -80,13 +89,30 @@ export default class Game extends Phaser.Scene {
         if (this.atack === 8) {
           this.dead = true
         }
-
         // añidir contador, si el contador el llega a 8 gameOver = true 
-
       }
     }) ;
+    
+   /*  const user = this.firebase.getUser();
+    this.firebase.saveGameData(user.uid, {
+      score: this.score,
+      time: this.timeInSeconds,
+    });
 
-  }
+    // si el puntaje es mayor al puntaje mas alto, agregarlo a la lista de high scores
+    this.firebase.getHighScores().then((highScores) => {
+      const highScore = highScores[0] || { score: 0 };
+      if (this.score > highScore.score) {
+        this.firebase
+          .addHighScore(user.displayName || user.uid, this.score)
+          .then(() => {
+            this.scene.start("scores");
+          });
+      } else {
+        this.scene.start("scores");
+      }
+    });*/
+  } 
 
   moveAlien() {
     this.enemies.forEach((e) => e.move());
