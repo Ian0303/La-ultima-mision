@@ -5,6 +5,7 @@ import events from "./EventCenter";
 
 export default class Game extends Phaser.Scene {
   enemies = [];
+
   constructor() {
     super("game");
     this.player = null;
@@ -131,7 +132,7 @@ export default class Game extends Phaser.Scene {
       this.camera = this.scene.bringToTop("cameras");
     }
 
-    if (this.leftShield.isDown)  {
+    if (this.leftLigth.isDown)  {
       this.leftLightOn.setVisible(true)
       setTimeout(() => {
       this.leftLightOn.setVisible(false) 
