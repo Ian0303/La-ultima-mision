@@ -26,6 +26,10 @@ export default class Game extends Phaser.Scene {
 
      // agregar un texto en la esquna superior izquierda con el nombre del usuario
      const user = this.firebase.getUser();
+    this.firebase.saveGameData(user.uid, {
+      night: 101,
+      time: new Date(),
+    });
      this.add.text(10, 10, user.displayName || user.uid);
  
      // agregar un texto en la esquna superior derecha con el puntaje del usuario
@@ -93,25 +97,9 @@ export default class Game extends Phaser.Scene {
       }
     }) ;
     
-   /*  const user = this.firebase.getUser();
-    this.firebase.saveGameData(user.uid, {
-      score: this.score,
-      time: this.timeInSeconds,
-    });
+  
 
-    // si el puntaje es mayor al puntaje mas alto, agregarlo a la lista de high scores
-    this.firebase.getHighScores().then((highScores) => {
-      const highScore = highScores[0] || { score: 0 };
-      if (this.score > highScore.score) {
-        this.firebase
-          .addHighScore(user.displayName || user.uid, this.score)
-          .then(() => {
-            this.scene.start("scores");
-          });
-      } else {
-        this.scene.start("scores");
-      }
-    });*/
+
   } 
 
   moveAlien() {
