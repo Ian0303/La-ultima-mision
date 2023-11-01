@@ -42,7 +42,7 @@ export default class Cameras extends Phaser.Scene {
 
     console.log("si");
 
-    
+
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
     /*
@@ -80,10 +80,10 @@ export default class Cameras extends Phaser.Scene {
           this.cameras.main.centerOn(960, 720);
           break;
 
-          case Phaser.Input.Keyboard.KeyCodes.UP:
-            this.scene.bringToTop("game")
+        case Phaser.Input.Keyboard.KeyCodes.UP:
+          this.scene.bringToTop("game")
           break;
-          
+
 
         default:
           this.cameras.main.centerOn(320, 240);
@@ -121,7 +121,7 @@ export default class Cameras extends Phaser.Scene {
   // no estoy segura de como funcion al presionar teclas, en peor de los casos, la "vieja confiable" ifs anidados.
 
   update() {
-    
-     
+
+
   }
 }

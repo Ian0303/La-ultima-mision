@@ -1,12 +1,13 @@
 import Phaser from "phaser";
 
-import HelloWorldScene from "./scenes/HelloWorldScene";
 import UI from "./scenes/UI";
 import Preload from "./scenes/Preload";
 import Camaras from "./scenes/Cameras";
 import Menu from "./scenes/Menu";
 import Game from "./scenes/Game";
 import Controles from "./scenes/Controles";
+import GameOver from "./scenes/gameOver";
+import PassedNight from "./scenes/passedNight";
 
 const config = {
   type: Phaser.AUTO,
@@ -31,7 +32,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, HelloWorldScene, UI, Menu, Camaras, Game, Controles],
+  scene: [Preload,UI, Menu, Camaras, Game, Controles,GameOver, PassedNight],
 };
 
 export default new Phaser.Game(config);
