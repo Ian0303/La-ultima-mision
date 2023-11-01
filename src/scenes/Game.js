@@ -28,21 +28,21 @@ export default class Game extends Phaser.Scene {
 
   create() {
     this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-    this.add.image(320, 240, "room");
+    this.add.image(320, 220, "room");
     this.add
-      .image(-60, 250, "doorButton")
+      .image(-140, 250, "doorButton")
       .setScale(1)
 
     this.add
-      .image(700, 250, "doorButton")
+      .image(790, 250, "doorButton")
       .setScale(1)
 
     this.add
-      .image(-60, 200, "lightButton")
+      .image(-140, 200, "lightButton")
       .setScale(1)
 
     this.add
-      .image(700, 200, "lightButton")
+      .image(790, 200, "lightButton")
       .setScale(1)
     console.log("si");
 
@@ -100,10 +100,10 @@ export default class Game extends Phaser.Scene {
     this.rightShield = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.D
     );
-    this.leftLightOn = this.add.image(-120, 230, "leftDoorLight").setVisible(false)
-    this.leftShieldOn = this.add.image(-120, 230, "shield_doorleft").setVisible(false)
-    this.rightLightOn = this.add.image(750, 230, "rightDoorLight").setVisible(false)
-    this.rightShieldOn = this.add.image(750, 230, "shield_doorright").setVisible(false)
+    this.leftLightOn = this.add.image(-200, 230, "leftDoorLight").setVisible(false)
+    this.leftShieldOn = this.add.image(-200, 230, "shield_doorleft").setVisible(false)
+    this.rightLightOn = this.add.image(850, 230, "rightDoorLight").setVisible(false)
+    this.rightShieldOn = this.add.image(850, 230, "shield_doorright").setVisible(false)
 
   }
 

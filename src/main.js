@@ -11,13 +11,13 @@ import PassedNight from "./scenes/passedNight";
 
 const config = {
   type: Phaser.AUTO,
-  width: 640,
+  width: 740,
   height: 480,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     min: {
-      width: 640,
+      width: -200,
       height: 480,
     },
     max: {

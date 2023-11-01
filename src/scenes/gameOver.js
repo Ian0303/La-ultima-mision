@@ -11,7 +11,12 @@ export default class GameOver extends Phaser.Scene {
         this.dead = data.dead || false;
       }
 create() {
-    this.add.image( 300, 320,"gameOverI")
+    this.add.text(300, 300, "Derrota", {
+        fontSize: "40px",
+        frontFamily: "Console",
+        color: "#00BFFF",
+      });
+    this.add.image( 300, 270,"gameOverI")
     setTimeout(() => {
         this.scene.start("menu")
       }, 10000);
