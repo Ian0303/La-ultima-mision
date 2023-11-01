@@ -16,7 +16,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds(true);
 
     this.setTexture(texture);
-    this.velocity = 500;
+    this.velocity = 250;
 
     this.cursors = scene.input.keyboard.createCursorKeys();
   }
