@@ -53,7 +53,7 @@ export default class Game extends Phaser.Scene {
 
     // launch UI scene
     this.scene.launch("ui");
-    this.scene.launch("cameras").setVisible(false);
+    this.scene.launch("cameras");
 
 
     /* this.timer = 10
@@ -70,8 +70,7 @@ export default class Game extends Phaser.Scene {
     this.player.update();
 
     if (this.camerasV.isDown) {
-      this.scene.bringToTop("cameras").setVisible(true);
-    } 
+      this.scene.bringToTop("cameras")
    
       this.enemies.forEach(e => {
       if (e.room === 4) {
@@ -90,7 +89,7 @@ export default class Game extends Phaser.Scene {
     }) ;
 
   }
-
+}
   moveAlien() {
     this.enemies.forEach((e) => e.move());
     events.emit("aliens-moved", this.enemies);
@@ -115,4 +114,5 @@ export default class Game extends Phaser.Scene {
       this.scene.start("gameOver");
     }
   }
+
 }

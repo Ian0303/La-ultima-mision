@@ -82,11 +82,8 @@ export default class Cameras extends Phaser.Scene {
 
           case Phaser.Input.Keyboard.KeyCodes.UP:
             this.scene.bringToTop("game")
-            this.scene.setVisible(false)
           break;
-          case Phaser.Input.Keyboard.KeyCodes.DOWN:
-            this.scene.bringToTop("cameras")
-          break;
+          
 
         default:
           this.cameras.main.centerOn(320, 240);
@@ -125,8 +122,6 @@ export default class Cameras extends Phaser.Scene {
 
   update() {
     
-    if (this.back.isDown) {
-      this.scene.bringToTop("game");
-    } 
+     
   }
 }
