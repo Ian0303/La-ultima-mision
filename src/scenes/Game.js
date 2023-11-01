@@ -100,10 +100,10 @@ export default class Game extends Phaser.Scene {
     this.rightShield = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.D
     );
-    this.leftLightOn = this.add.image(-200, 230, "leftDoorLight").setVisible(false)
-    this.leftShieldOn = this.add.image(-200, 230, "shield_doorleft").setVisible(false)
-    this.rightLightOn = this.add.image(850, 230, "rightDoorLight").setVisible(false)
-    this.rightShieldOn = this.add.image(850, 230, "shield_doorright").setVisible(false)
+    this.leftLightOn = this.add.image(-225, 230, "leftDoorLight").setVisible(false)
+    this.leftShieldOn = this.add.image(-225, 230, "shield_doorleft").setVisible(false)
+    this.rightLightOn = this.add.image(870, 230, "rightDoorLight").setVisible(false)
+    this.rightShieldOn = this.add.image(870, 230, "shield_doorright").setVisible(false)
 
   }
 
