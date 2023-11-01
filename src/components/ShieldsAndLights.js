@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+/* import Phaser from "phaser";
 // import Player from "./Player";
 import events from "../scenes/EventCenter";
 
@@ -49,4 +49,4 @@ update() {
 
   }
 }
-}
+} */
