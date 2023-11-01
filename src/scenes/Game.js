@@ -21,6 +21,8 @@ export default class Game extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.night = data.night || 1;
     this.dead = data.dead || false;
+    this.leftShieldActive = false;
+    this.rightShieldActive = false
   
   }
 
@@ -119,35 +121,38 @@ export default class Game extends Phaser.Scene {
 
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras")
-   
+   }
       this.enemies.forEach(e => {
       if (e.room === 4) {
         this.add.image( 200, 200, "leftDoorAlien")
         .setVisible(false)
         setTimeout(() => {
           this.atack = true
-        }, 8000);
-        if (this.atack && this.leftShieldActive) {
+        }, 7000);
+        if (this.atack && !this.leftShieldActive) {
           this.dead = true
+          this.atack = false
         }
       }
-      }) ;   
+      }) ;
+         
       this.enemies.forEach(e => {
         if (e.room === 5) {
-          this.add.image( 200, 200, "leftDoorAlien")
+          this.add.image( 200, 200, "rigthDoorAlien")
           .setVisible(false)
           setTimeout(() => {
             this.atack = true
-          }, 8000);
-          if (this.atack && this.rightShieldActive) {
+          }, 7000);
+          if (this.atack && !this.rightShieldActive) {
             this.dead = true
+            this.atack = false
           }
 
         // añidir contador, si el contador el llega a 8 gameOver = true 
 
       }
     }) ; 
-  }
+  
   
 
     if (this.leftLigth.isDown)  {
@@ -183,9 +188,11 @@ export default class Game extends Phaser.Scene {
 
     if (this.dead === true) {
       this.scene.bringToTop("gameOver");
+      console.log("game over")
     }
   
 }
+
   moveAlien() {
     this.enemies.forEach((e) => e.move());
     events.emit("aliens-moved", this.enemies);
