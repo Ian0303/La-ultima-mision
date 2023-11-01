@@ -34,7 +34,7 @@ export default class Preload extends Phaser.Scene {
     // this.load.image("openCameras", "assets/background/openCameras.jpg");
     // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
 
-    this.load.image("gameOverI", "assets/background/gameover.png");
+    this.load.image("gameOverI", "assets/background/derrota.jpg");
     this.load.image("black", "assets/background/black.png");
 
 
@@ -66,8 +66,8 @@ export default class Preload extends Phaser.Scene {
   create() {
     this.anims.create({
       key: "turn",
-      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 2 }),
-      frameRate: 1,
+      frames: this.anims.generateFrameNumbers("player", { start: 2, end: 3 }),
+      frameRate: 5,
       repeat: -1,
     });
 
