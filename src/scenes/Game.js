@@ -125,7 +125,7 @@ export default class Game extends Phaser.Scene {
       }
     }) ; */
     
-    this.distance = 100
+    this.distance = 10
    
 
     if (this.camerasS.isDown) {
@@ -146,13 +146,17 @@ export default class Game extends Phaser.Scene {
     }
     if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
+      this.leftShieldActive = true
       setTimeout(() => {
-      this.leftShieldOn.setVisible(false) 
+      this.leftShieldOn.setVisible(false)
+      this.leftShieldActive = false
       }, 1500);
     }else if (this.rightShield.isDown) {
       this.rightShieldOn.setVisible(true)
+      this.rightShieldActive = true
       setTimeout(() => {
-      this.rightShieldOn.setVisible(false) 
+      this.rightShieldOn.setVisible(false)
+      this.rightShieldActive = false
       }, 1500);
   
     } 
