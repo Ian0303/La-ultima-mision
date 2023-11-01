@@ -13,7 +13,6 @@ export default class Cameras extends Phaser.Scene {
     // camara 1 todos los personajes
     // cunado sepa en que array este muestre el sprite
     // animación
-    //
 
     /* cuando se abra la escena cameras el jugador usará los numeros para la seleccion de
     las distintas camaras
@@ -28,48 +27,78 @@ export default class Cameras extends Phaser.Scene {
       4 = otro lugar
       5 = otro lugar diferente
 
-
     */
-    // this.cursors = scene.input.keyboard.createCursorKeys();
   }
 
   create() {
-    this.camera = this.add.image(320, 240, "allCameras");
-    this.miCamara = this.cameras.add(960, 720, 640, 480);
-    this.add
-      .image(320, 450, "closeCameras")
-      .setScale(0.7)
-      .setInteractive()
-      .on("pointerdown", () => this.scene.switch("game"));
+    // this.cameras.main.setBounds(0, 0, 1920, 960);
+
+    this.camera = this.add.image(960, 480, "allCameras");
+
+    // this.cameras.main.setZoom(4);
+    // this.cameras.main.centerOn(0, 0);
+
+    this.addKeyEvents();
+
     console.log("si");
 
-    this.camera1 = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.ONE
-    );
-    this.camera2 = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.TWO
-    );
-    this.camera3 = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.THREE
-    );
-    this.camera4 = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.FOUR
-    );
-    this.camera5 = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.FIVE
-    );
-    this.camera6 = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SIX
-    );
-    this.back = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.DOWN);
+    
+    this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
-    // this.aCameras = [this.camera1, this.camera2, this.camera3, this.camera4, this.camera5, this.camera6]
-    /* 
-    Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4 y 5 
+    /*
+    Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4, 5 Y 6
     */
 
     events.on("aliens-moved", this.moveAlien, this);
+  }
+
+  addKeyEvents() {
+    this.input.keyboard.on("keydown", (event) => {
+      switch (event.keyCode) {
+        case Phaser.Input.Keyboard.KeyCodes.ONE:
+          console.log("room 1");
+          this.cameras.main.centerOn(320, 240);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.TWO:
+          console.log("room 2");
+          this.cameras.main.centerOn(960, 240);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.THREE:
+          console.log("room 3");
+          this.cameras.main.centerOn(1600, 240);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.FOUR:
+          console.log("room 4");
+          this.cameras.main.centerOn(320, 720);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.FIVE:
+          console.log("room 5");
+          this.cameras.main.centerOn(1600, 720);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.SIX:
+          console.log("room 6");
+          this.cameras.main.centerOn(960, 720);
+          break;
+
+          case Phaser.Input.Keyboard.KeyCodes.UP:
+            this.scene.bringToTop("game")
+            this.scene.setVisible(false)
+          break;
+          case Phaser.Input.Keyboard.KeyCodes.DOWN:
+            this.scene.bringToTop("cameras")
+          break;
+
+        default:
+          this.cameras.main.centerOn(320, 240);
+          // console.log("otra key", event.keyCode);
+          break;
+      }
+      // console.log([
+      //   "to move",
+      //   "x: " + this.cameras.main.scrollX,
+      //   "y: " + this.cameras.main.scrollY,
+      // ]);
+    });
   }
 
   moveAlien(enemies) {
@@ -94,49 +123,10 @@ export default class Cameras extends Phaser.Scene {
   // nueva variable que le saque el numero a "camera1" y asi cambie de camara
   // no estoy segura de como funcion al presionar teclas, en peor de los casos, la "vieja confiable" ifs anidados.
 
-/*   update() {
-
-    switch (true) {
-      case this.camera1.isDown:
-        this.miCamara.setScroll(960, 720);
-        console.log("camara1");
-        break;
-      case this.camera2.isDown:
-        this.miCamara.setScroll(320, 720);
-        console.log("camara2");
-        break;
-      case this.camera3.isDown:
-        this.miCamara.setScroll(1600, 720);
-        console.log("camara3");
-        break;
-      case this.camera4.isDown:
-        this.miCamara.setScroll(320, 240);
-        console.log("camara4");
-        break;
-      case this.camera5.isDown:
-        this.miCamara.setScroll(960, 240);
-        console.log("camara5");
-        break;
-      case this.camera6.isDown:
-        this.miCamara.setScroll(1600, 240);
-        console.log("camara6");
-        break;
-
-
-       default:
-         this.miCamara.setScroll(960, 720);
-        console.log("camara1"); 
-        break; 
-    } 
-
-    /* if (this.camera1.isDown) {
-      this.camera = this.add.image(320, 240, "camera1");
-    } else if (this.camera2.isDown) {
-      this.camera = this.add.image(320, 240, "camera2");
-    } else if (this.camera3.isDown) {
-      this.camera = this.add.image(320, 240, "camera3");
-    } else if (this.back.isDown) {
+  update() {
+    
+    if (this.back.isDown) {
       this.scene.bringToTop("game");
     } 
-  } */
+  }
 }

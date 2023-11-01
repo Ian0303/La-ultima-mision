@@ -14,9 +14,9 @@ export default class Preload extends Phaser.Scene {
     this.load.image("bMenu4", "assets/background/bmenu2_2.jpg");
 
     this.load.image("room", "assets/background/room.jpg");
-    this.load.image("camera1", "assets/background/Camera1.jpg");
-    this.load.image("camera2", "assets/background/camara2.jpg");
-    this.load.image("camera3", "assets/background/camara3.jpg");
+    // .load.image("camera1", "assets/background/Camera1.jpg");
+    // this.load.image("camera2", "assets/background/camara2.jpg");
+    // this.load.image("camera3", "assets/background/camara3.jpg");
     this.load.image("allCameras", "assets/background/allCameras.png");
  
     this.load.image("doorButton", "assets/background/doorButton.png");
@@ -26,14 +26,20 @@ export default class Preload extends Phaser.Scene {
     this.load.image("shield_doorleft", "assets/background/shield_doorleft.png");
     this.load.image("shield_doorright", "assets/background/shield_doorright.png");
 
+    this.load.image("rightDoorAlien", "assets/background/rightDoorAlien.jpg");
+    this.load.image("leftDoorAlien", "assets/background/leftDoorAlien.jpg");
+    this.load.image("shieldDoorLeft", "assets/background/shieldDoorLeft.png");
+    this.load.image("shieldDoorRight", "assets/background/shieldDoorRight.png");
+
+    // this.load.image("openCameras", "assets/background/openCameras.jpg");
+    // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
+
+    this.load.image("gameOverI", "assets/background/gameOver.png");
+    this.load.image("black", "assets/background/black.png");
 
 
-
-    this.load.image("openCameras", "assets/background/openCameras.jpg");
-    this.load.image("closeCameras", "assets/background/closeCameras.jpg");
-
-    this.load.image("Flecha", "assets/background/Flecha.jpg");
-
+    this.load.image("Flecha", "assets/background/flecha.png");
+    
     this.load.image("iEnergy", "assets/background/iEnergy.png");
     this.load.image("iFolder", "assets/background/iFolder.png");
     this.load.image("IUcam", "assets/background/UICamera.png");

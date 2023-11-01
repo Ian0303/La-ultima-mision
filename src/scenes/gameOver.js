@@ -2,6 +2,9 @@ import Phaser from "phaser";
 
 
 export default class GameOver extends Phaser.Scene {
+    constructor() {
+        super("gameOver")
+    }
  
     init(data) {
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -10,7 +13,7 @@ export default class GameOver extends Phaser.Scene {
       }
 
 create() {
-    this.add.image( 640, 480,"jumpscream1")
+    this.add.image( 640, 480,"gameOver")
 
 }
 

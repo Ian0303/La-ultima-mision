@@ -12,6 +12,9 @@ export default class Game extends Phaser.Scene {
     this.night = 1;
     this.dead = false;
     this.passed = false;
+    this.atack = false;
+    this.shiels = false;
+   
   }
 
   init(data) {
@@ -23,10 +26,8 @@ export default class Game extends Phaser.Scene {
 
   create() {
     // const scene = this;
-    /*  this.add
-       .image(320, 450, "openCameras")
-       
-       .setScale(0.7) */
+    this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+     
 
     this.add.image(320, 240, "room");
 
@@ -57,10 +58,15 @@ export default class Game extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
 
-    this.timer = 20;
+    this.time.addEvent({
+      delay:480000,
+      callback: this.endTimer,
+      callbackScope: this,
+      loop: false,
+    })
 
     this.time.addEvent({
-      delay: 2000,
+      delay: 8000,
       callback: this.moveAlien,
       callbackScope: this,
       loop: true,
@@ -76,10 +82,8 @@ export default class Game extends Phaser.Scene {
 
     // launch UI scene
     this.scene.launch("ui");
+    this.scene.launch("cameras").setVisible(false);
 
-    this.camerasS = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.UP
-    );
 
     /* this.timer = 10
               this.time.addEvent({
@@ -107,30 +111,34 @@ export default class Game extends Phaser.Scene {
 
   }
 
-  update() { // update(time, deltaTime)
+  update() {
+    // update(time, deltaTime)
     this.player.update();
-    
-    /* this.enemies.forEach(e => {
-      if (e.room === 5 || e.room === 4) {
-        e.x = 200
-        e.y = 200
-        e.addToScene(this)
-        e.setVisible(false)
-        if (contador === 8) {
-          gameOver = true
+
+    if (this.camerasV.isDown) {
+      this.scene.bringToTop("cameras").setVisible(true);
+    } 
+   
+      this.enemies.forEach(e => {
+      if (e.room === 4) {
+        this.add.image( 200, 200, "leftDoorAlien")
+        .setVisible(false)
+        setTimeout(() => {
+          this.atack = true
+        }, 8000);
+        if (this.atack && this.shiels) {
+          this.dead = true
         }
 
-        // añidir contador, si el contador el llega a 5 gameOver = true 
+        // añidir contador, si el contador el llega a 8 gameOver = true 
 
       }
-    }) ; */
+    }) ; 
     
     this.distance = 10
    
 
-    if (this.camerasS.isDown) {
-      this.camera = this.scene.bringToTop("cameras");
-    }
+   
 
     if (this.leftLigth.isDown)  {
       this.leftLightOn.setVisible(true)
@@ -171,17 +179,21 @@ export default class Game extends Phaser.Scene {
 
   pasedNight() {
     if (this.passed === true) {
-      this.scene.bringToTop("passedNight")
+      this.scene.bringToTop("passedNight");
     }
   }
 
   gameOver() {
     if (this.dead === true) {
-      this.scene.bringToTop("gameOver")
+      this.scene.bringToTop("gameOver");
     }
   }
 
-
-  // contadorWin
-
+  endTimer() {
+    if (this.dead) {
+      this.scene.start("pasedNight");
+    } else {
+      this.scene.start("gameOver");
+    }
+  }
 }
