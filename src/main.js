@@ -1,12 +1,13 @@
 import Phaser from "phaser";
 
-import HelloWorldScene from "./scenes/HelloWorldScene";
 import UI from "./scenes/UI";
 import Preload from "./scenes/Preload";
 import Camaras from "./scenes/Cameras";
 import Menu from "./scenes/Menu";
 import Game from "./scenes/Game";
 import Controles from "./scenes/Controles";
+import GameOver from "./scenes/gameOver";
+import PassedNight from "./scenes/passedNight";
 
 const config = {
   type: Phaser.AUTO,
@@ -16,8 +17,8 @@ const config = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     min: {
-      width: 800,
-      height: 600,
+      width: 640,
+      height: 480,
     },
     max: {
       width: 2000,
@@ -31,7 +32,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, HelloWorldScene, UI, Menu, Game, Camaras,Controles],
+  scene: [Preload,UI, Menu, Camaras, Game, Controles,GameOver, PassedNight],
 };
 
 export default new Phaser.Game(config);

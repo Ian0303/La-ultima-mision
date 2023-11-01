@@ -16,14 +16,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds(true);
 
     this.setTexture(texture);
-    this.velocity = 500;
+    this.velocity = 250;
 
     this.cursors = scene.input.keyboard.createCursorKeys();
   }
 
   update() {
     if (this.cursors.left.isDown) {
-      console.log("izquierda");
       this.body.setVelocityX(-this.velocity);
       this.anims.play("left", true);
     } else if (this.cursors.right.isDown) {

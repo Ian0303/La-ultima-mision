@@ -40,8 +40,6 @@ export default class Menu extends Phaser.Scene {
 
     // Inicia el cambio de fondo
     changeBackground();
-
-
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
       fontSize: "20px",
       frontFamily: "Console",
@@ -104,7 +102,7 @@ export default class Menu extends Phaser.Scene {
            */
 
     // Configura el fondo inicial
-
+    this.scene.bringToTop(this);
   }
 
   update() {
