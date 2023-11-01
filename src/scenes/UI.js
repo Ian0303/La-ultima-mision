@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import events from "./EventCenter";
+// import events from "./EventCenter";
 
 // Manejador de eventos centralizados para comunicacion de componentes
 
@@ -20,6 +20,7 @@ export default class UI extends Phaser.Scene {
   }
 
   /* create() {
+    
     this.colliderCount = 0;
     // add text with count collider and date
     this.text = this.add.text(10, 10, `Collider count: ${this.colliderCount}`, {
@@ -27,10 +28,10 @@ export default class UI extends Phaser.Scene {
       fill: "#00ff00",
     });
 
-    // add listener to the event
-    // events.on("movimiento-alien-event", this.moveAlien, this);
-  }
-
+     //add listener to the event
+     //events.on("movimiento-alien-event", this.moveAlien, this);
+  } */
+/*
   colliderEvent(data) {
     console.log("collider-event", data);
 
@@ -39,5 +40,5 @@ export default class UI extends Phaser.Scene {
     this.text.setText(
       `Collider count: ${this.colliderCount} / Last: ${data.fecha}`
     ); 
-  }*/
+  } */
 }
