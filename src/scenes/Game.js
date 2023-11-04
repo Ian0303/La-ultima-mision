@@ -49,7 +49,7 @@ export default class Game extends Phaser.Scene {
     this.player = new Player(this, 300, 280, "player");
 
     this.enemies.push(new Alien1());
-
+   
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
 
     this.distance = 10
@@ -77,9 +77,8 @@ export default class Game extends Phaser.Scene {
 
 
     // launch UI scene
-    this.scene.launch("ui");
     this.scene.launch("cameras");
-
+    this.scene.launch("ui");
 
     /* this.timer = 10
               this.time.addEvent({
@@ -100,8 +99,8 @@ export default class Game extends Phaser.Scene {
     this.rightShield = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.D
     );
-    this.leftLightOn = this.add.image(-225, 230, "leftDoorLight").setVisible(false)
-    this.leftShieldOn = this.add.image(-225, 230, "shield_doorleft").setVisible(false)
+    this.leftLightOn = this.add.image(-230, 230, "leftDoorLight").setVisible(false)
+    this.leftShieldOn = this.add.image(-230, 230, "shield_doorleft").setVisible(false)
     this.rightLightOn = this.add.image(870, 230, "rightDoorLight").setVisible(false)
     this.rightShieldOn = this.add.image(870, 230, "shield_doorright").setVisible(false)
 

@@ -19,9 +19,12 @@ export default class UI extends Phaser.Scene {
     super("ui");
   }
 
-  /* create() {
+ /*   create() {
+    this.ui = this.add.image(960, 480, "ui");
+   }
+ */
     
-    this.colliderCount = 0;
+    /*this.colliderCount = 0;
     // add text with count collider and date
     this.text = this.add.text(10, 10, `Collider count: ${this.colliderCount}`, {
       font: "16px Courier",

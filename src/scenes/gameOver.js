@@ -16,7 +16,7 @@ create() {
         frontFamily: "Console",
         color: "#00BFFF",
       });
-    this.add.image( 300, 270,"gameOverI")
+    this.add.image( 400, 250,"gameOverI")
     setTimeout(() => {
         this.scene.start("menu")
       }, 10000);

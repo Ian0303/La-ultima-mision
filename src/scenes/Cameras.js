@@ -50,6 +50,8 @@ export default class Cameras extends Phaser.Scene {
     */
 
     events.on("aliens-moved", this.moveAlien, this);
+    this.ui = this.add.image(960, 480, "ui");
+
   }
 
   addKeyEvents() {
@@ -120,8 +122,6 @@ export default class Cameras extends Phaser.Scene {
   // nueva variable que le saque el numero a "camera1" y asi cambie de camara
   // no estoy segura de como funcion al presionar teclas, en peor de los casos, la "vieja confiable" ifs anidados.
 
-  update() {
-
-
-  }
+ /*  update() {
+  } */
 }

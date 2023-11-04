@@ -13,11 +13,13 @@ export default class Preload extends Phaser.Scene {
     this.load.image("bMenu3", "assets/background/bmenu2.jpg");
     this.load.image("bMenu4", "assets/background/bmenu2_2.jpg");
 
-    this.load.image("room", "assets/background/bhabitacion.jpg");
+    this.load.image("room", "assets/background/habitacion1.jpg");
     // .load.image("camera1", "assets/background/Camera1.jpg");
     // this.load.image("camera2", "assets/background/camara2.jpg");
     // this.load.image("camera3", "assets/background/camara3.jpg");
-    this.load.image("allCameras", "assets/background/allCameras.png");
+    this.load.image("allCameras", "assets/background/AllCameras.png");
+    this.load.image("ui", "assets/background/UI.png");
+
  
     this.load.image("doorButton", "assets/background/doorButton.png");
     this.load.image("lightButton", "assets/background/lightButton.png");
