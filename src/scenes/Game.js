@@ -112,6 +112,7 @@ export default class Game extends Phaser.Scene {
 
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras")
+      
    }
       this.enemies.forEach(e => {
       if (e.room === 4) {

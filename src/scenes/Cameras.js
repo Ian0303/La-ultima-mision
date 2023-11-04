@@ -34,7 +34,12 @@ export default class Cameras extends Phaser.Scene {
     // this.cameras.main.setBounds(0, 0, 1920, 960);
 
     this.camera = this.add.image(960, 480, "allCameras");
-
+    this.ui = this.add.image(320, 240, "ui");
+    this.ui = this.add.image(960, 240, "ui");
+    this.ui = this.add.image(1600, 240, "ui");
+    this.ui = this.add.image(320, 720, "ui");
+    this.ui = this.add.image(960, 720, "ui");
+    this.ui = this.add.image(1600, 720, "ui");
     // this.cameras.main.setZoom(4);
     // this.cameras.main.centerOn(0, 0);
 
@@ -50,7 +55,7 @@ export default class Cameras extends Phaser.Scene {
     */
 
     events.on("aliens-moved", this.moveAlien, this);
-    this.ui = this.add.image(960, 480, "ui");
+    
 
   }
 
