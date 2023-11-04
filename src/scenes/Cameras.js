@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 // import Alien1 from "../components/Alien1";
 import events from "./EventCenter";
+import movement from "../components/movement";
+import Alien1 from "../components/Alien1";
 
 export default class Cameras extends Phaser.Scene {
   constructor() {
@@ -32,7 +34,6 @@ export default class Cameras extends Phaser.Scene {
 
   create() {
     // this.cameras.main.setBounds(0, 0, 1920, 960);
-
     this.camera = this.add.image(960, 480, "allCameras");
     this.ui = this.add.image(320, 240, "ui");
     this.ui = this.add.image(960, 240, "ui");
@@ -56,7 +57,6 @@ export default class Cameras extends Phaser.Scene {
 
     events.on("aliens-moved", this.moveAlien, this);
     
-
   }
 
   addKeyEvents() {
@@ -64,11 +64,11 @@ export default class Cameras extends Phaser.Scene {
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           console.log("room 1");
-          this.cameras.main.centerOn(320, 240);
+          this.cameras.main.centerOn(960, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:
           console.log("room 2");
-          this.cameras.main.centerOn(960, 240);
+          this.cameras.main.centerOn(320, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.THREE:
           console.log("room 3");
@@ -87,13 +87,13 @@ export default class Cameras extends Phaser.Scene {
           this.cameras.main.centerOn(960, 720);
           break;
 
-        case Phaser.Input.Keyboard.KeyCodes.UP:
+        case Phaser.Input.Keyboard.KeyCodes.DOWN:
           this.scene.bringToTop("game")
           break;
 
 
         default:
-          this.cameras.main.centerOn(320, 240);
+          this.cameras.main.centerOn(960, 240);
           // console.log("otra key", event.keyCode);
           break;
       }

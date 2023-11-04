@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import movement from "./movement";
 
 export default class Alien1 {
-  constructor(x = 300, y = 300) {
+  constructor(x = 960, y = 240) {
     this.x = x;
     this.y = y;
     this.room = 0;
@@ -19,35 +19,34 @@ export default class Alien1 {
       .setVisible(true);
 
     switch (this.room) {
+      case 0:
+        this.x = 960
+        this.y = 240
+        break;
       case 1:
         this.x = 320
         this.y = 240
         break;
       case 2:
-        this.x = 960
+        this.x = 1600
         this.y = 240
         break;
       case 3:
-        this.x = 1600
-        this.y = 240
+        this.x = 320
+        this.y = 720
         break;
       case 4:
-        this.x = 320
+        this.x = 1600
         this.y = 720
         break;
       case 5:
-        this.x = 1600
-        this.y = 720
-        break;
-      case 6:
         this.x = 960
         this.y = 720
         break;
-
-      default:
-        this.x = 320
-        this.y = 240
-        break;
+       /* default:
+        this.x = -100
+        this.y = -100
+        break;  */
     }
   }
 
