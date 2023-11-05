@@ -5,6 +5,7 @@ import events from "./EventCenter";
 
 export default class Game extends Phaser.Scene {
   enemies = [];
+
   constructor() {
     super("game");
     this.player = null;
@@ -14,6 +15,7 @@ export default class Game extends Phaser.Scene {
     this.atack = false;
     this.shiels = false;
   }
+
   init(data) {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.night = data.night || 1;
@@ -24,6 +26,7 @@ export default class Game extends Phaser.Scene {
     this.shieldCost = 3
     this.lightCost = 2
   }
+
   create() {
     this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.add.image(320, 220, "room");
@@ -57,7 +60,7 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     })
-    this.energyT = this.add.text(450, 50, this.energy + "%", {
+    this.energyT = this.add.text(450, 50, `${this.energy  }%`, {
       font: 'bold 30px Console',
       color: "#008080",
     });
@@ -88,6 +91,7 @@ export default class Game extends Phaser.Scene {
     this.rightLightOn = this.add.image(322, 222, "rightDoorLight").setVisible(false)
     this.rightShieldOn = this.add.image(322, 222, "shield_doorright").setVisible(false)
   }
+
   update() {
     // update(time, deltaTime)
     this.player.update();
@@ -160,8 +164,7 @@ export default class Game extends Phaser.Scene {
         this.leftShieldOn.setVisible(false)
         this.leftShieldActive = false
       }, 4000);
-    } else {
-      if (this.rightShield.isDown) {
+    } else if (this.rightShield.isDown) {
         this.rightShieldOn.setVisible(true)
         this.rightShieldActive = true
         setTimeout(() => {
@@ -169,16 +172,21 @@ export default class Game extends Phaser.Scene {
           this.rightShieldActive = false
         }, 4000);
       }
-    }
-    
-    
+
+
     if (this.leftLigth.isDown || this.rightLigth.isDown) {
-      this.energy = this.energy - this.lightCost
-      this.energyT.setText(this.energy + "%");
+      setTimeout(() => {
+        this.energy -= this.lightCost
+        this.energyT.setText(`${this.energy  }%`);
+      }, 500);
+
     }
     if (this.leftShield.isDown || this.rightShield.isDown) {
-      this.energy = this.energy - this.shieldCost
-      this.energyT.setText(this.energy + "%");
+      setTimeout(() => {
+        this.energy -= this.shieldCost
+        this.energyT.setText(`${this.energy  }%`);
+      }, 500);
+
     }
 
     this.scene.bringToTop("gameOver");
@@ -190,10 +198,12 @@ export default class Game extends Phaser.Scene {
       this.scene.start("gameOver");
     }
   }
+
   moveAlien() {
     this.enemies.forEach((e) => e.move());
     events.emit("aliens-moved", this.enemies);
   }
+
   endTimer() {
     if (!this.dead) {
       this.scene.remove("cameras")
