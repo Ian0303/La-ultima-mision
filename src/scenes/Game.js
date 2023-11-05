@@ -13,7 +13,7 @@ export default class Game extends Phaser.Scene {
     this.dead = false;
     this.passed = false;
     this.atack = false;
-    this.shiels = false;
+    this.shields = false;
   }
 
   init(data) {
@@ -21,22 +21,35 @@ export default class Game extends Phaser.Scene {
     this.night = data.night || 1;
     this.dead = false;
     this.leftShieldActive = false;
-    this.rightShieldActive = false
-    this.energy = 100
-    this.shieldCost = 3
-    this.lightCost = 2
+    this.rightShieldActive = false;
+    this.leftLightActive = false;
+    this.rightLightActive = false;
+    this.energy = 100;
+    this.shieldCost = 3;
+    this.lightCost = 2;
   }
 
   create() {
     console.log("si");
     this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.add.image(320, 220, "room");
-
+    this.add
+      .image(-10, 250, "doorButton")
+      .setScale(1)
+    this.add
+      .image(610, 250, "doorButton")
+      .setScale(1)
+    this.add
+      .image(-10, 200, "lightButton")
+      .setScale(1)
+    this.add
+      .image(610, 200, "lightButton")
+      .setScale(1)
     this.player = new Player(this, 300, 280, "player");
     this.enemies.push(new Alien1());
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     // this.distance = 10
-
+    this.keyPress = false
     this.time.addEvent({
       delay: 120000,
       callback: this.endTimer,
@@ -82,18 +95,6 @@ export default class Game extends Phaser.Scene {
     this.rightShieldOn = this.add.image(322, 222, "shield_doorright").setVisible(false)
     // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy");
-    this.add
-      .image(-10, 250, "doorButton")
-      .setScale(1)
-    this.add
-      .image(610, 250, "doorButton")
-      .setScale(1)
-    this.add
-      .image(-10, 200, "lightButton")
-      .setScale(1)
-    this.add
-      .image(610, 200, "lightButton")
-      .setScale(1)
   }
 
   update() {
@@ -104,13 +105,29 @@ export default class Game extends Phaser.Scene {
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras")
     }
+    // activación de escudos para evitar morir por el Alien
+    if (this.leftShield.isDown) {
+      this.leftShieldOn.setVisible(true)
+      this.leftShieldActive = true
+      setTimeout(() => {
+        this.leftShieldOn.setVisible(false)
+        this.leftShieldActive = false
+      }, 7000);
+    } else if (this.rightShield.isDown) {
+      this.rightShieldOn.setVisible(true)
+      this.rightShieldActive = true
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false)
+        this.rightShieldActive = false
+      }, 4000);
+    }
     // ataque del Alien, asesinato del jugador
     this.enemies.forEach(e => {
-      if (e.room === 4 && this.leftShieldActive === false) {
-        this.leftDoorAlien = this.add.image(322, 222, "leftDoorAlien")
+      if (e.room === 4 && this.rightShieldActive === false) {
+        this.rightDoorAlien = this.add.image(322, 222, "rightDoorAlien")
           .setVisible(false)
         setTimeout(() => {
-          this.atack = true
+          this.atack = true;
         }, 7000);
         if (this.rightShieldActive === false && this.atack === true) {
           this.dead = true;
@@ -164,40 +181,75 @@ export default class Game extends Phaser.Scene {
         }, 4000);
       }
     });
-    // activación de escudos para evitar morir por el Alien
-    if (this.leftShield.isDown) {
-      this.leftShieldOn.setVisible(true)
-      this.leftShieldActive = true
-      setTimeout(() => {
-        this.leftShieldOn.setVisible(false)
-        this.leftShieldActive = false
-      }, 4000);
-    } else if (this.rightShield.isDown) {
-      this.rightShieldOn.setVisible(true)
-      this.rightShieldActive = true
-      setTimeout(() => {
-        this.rightShieldOn.setVisible(false)
-        this.rightShieldActive = false
-      }, 4000);
-    }
-    // consumo de energia de las luces
-    if (this.leftLigth.isDown || this.rightLigth.isDown) {
-      setTimeout(() => {
+
+    /*  this.leftShield.on('down', function () {
+      this.leftShieldActive = true;
+    }, this);
+    this.leftShield.on('up', function () {
+      if (this.leftShieldActive) {
+        this.leftShieldOn.setVisible(true)
+        this.leftShieldActive = true
+        setTimeout(() => {
+          this.leftShieldOn.setVisible(false)
+          this.leftShieldActive = false
+        }, 7000);
+      }
+    }, this);  */
+
+    // consumo de energia de las luces y escudos
+
+    /*   this.leftShield.on('down', function () {
+       this.leftShieldActive = true;
+     }, this);
+     this.leftShield.on('up', function () {
+       if (this.leftShieldActive) {
+         console.log('Tecla Q presionada y luego soltada');
+         this.energy -= this.lightCost
+         this.energyT.setText(`${this.energy}%`);
+       }
+       this.leftShieldActive = false;
+     }, this); */
+
+    this.rightShield.on('down', function () {
+      this.rightShieldActive = true;
+    }, this);
+    this.rightShield.on('up', function () {
+      if (this.rightShieldActive) {
+        console.log('Tecla Q presionada y luego soltada');
         this.energy -= this.lightCost
         this.energyT.setText(`${this.energy}%`);
-      }, 500);
-    }
-    // consumo de energia de los escudos
-    if (this.leftShield.isDown || this.rightShield.isDown) {
-      setTimeout(() => {
-        this.energy -= this.shieldCost
-        this.energyT.setText(`${this.energy}%`);
-      }, 500);
+      }
+      this.rightShieldActive = false;
+    }, this);
 
-    }
+    this.leftLigth.on('down', function () {
+      this.leftLightActive = true;
+    }, this);
+    this.leftLigth.on('up', function () {
+      if (this.leftLightActive) {
+        console.log('Tecla Q presionada y luego soltada');
+        this.energy -= this.lightCost
+        this.energyT.setText(`${this.energy}%`);
+      }
+      this.leftLightActive = false;
+    }, this);
+
+    this.rightLigth.on('down', function () {
+      this.rightLightActive = true;
+    }, this);
+    this.rightLigth.on('up', function () {
+      if (this.rightLightActive) {
+        console.log('Tecla Q presionada y luego soltada');
+        this.energy -= this.lightCost
+        this.energyT.setText(`${this.energy}%`);
+      }
+      this.rightLightActive = false;
+    }, this);
+
+    // consumo de energia de los escudos
     // game over
     // this.scene.bringToTop("gameOver");
-    if (this.dead === true && !this.leftShieldActive || this.dead === true && !this.rightShieldActive) {
+    if (this.dead === true && this.leftShieldActive === false || this.dead === true && this.rightShieldActive === false) {
       console.log("game over")
     }
     if (this.dead) {
