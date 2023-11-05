@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 // import Alien1 from "../components/Alien1";
 import events from "./EventCenter";
-import movement from "../components/movement";
-import Alien1 from "../components/Alien1";
+// import movement from "../components/movement";
+// import Alien1 from "../components/Alien1";
 
 export default class Cameras extends Phaser.Scene {
   constructor() {
@@ -18,21 +18,21 @@ export default class Cameras extends Phaser.Scene {
 
     /* cuando se abra la escena cameras el jugador usará los numeros para la seleccion de
     las distintas camaras
-    cameras = array de arrays [[,,,,,], [,,,,,], [,,,,,]]
-    el cambio de camras  se podria hacer con una maquina de estados
-    usa swich para los diferente casos.
+    el cambio de camras  se podria hacer un swich para los diferente casos.
 
-    romm
-      1 = pasillo izquierdo
-      2 = pasillo derecho
-      3 = un lugar
-      4 = otro lugar
-      5 = otro lugar diferente
+    rooms
+      1 = puerta de entrada
+      2 = un lugar
+      3 = otro lugar
+      4 = pasillo izquierdo
+      5 = pasillo derecho
+      6 = laboratorios centrales
 
     */
   }
 
   create() {
+    console.log("si");
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
     this.ui = this.add.image(320, 240, "ui");
@@ -45,20 +45,11 @@ export default class Cameras extends Phaser.Scene {
     // this.cameras.main.centerOn(0, 0);
 
     this.addKeyEvents();
-
-    console.log("si");
-
-
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-
-    /*
-    Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1,2,3, 4, 5 Y 6
-    */
-
     events.on("aliens-moved", this.moveAlien, this);
-    
   }
 
+  // Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1, 2, 3, 4, 5 Y 6
   addKeyEvents() {
     this.input.keyboard.on("keydown", (event) => {
       switch (event.keyCode) {
@@ -86,12 +77,9 @@ export default class Cameras extends Phaser.Scene {
           console.log("room 6");
           this.cameras.main.centerOn(960, 720);
           break;
-
         case Phaser.Input.Keyboard.KeyCodes.DOWN:
           this.scene.bringToTop("game")
           break;
-
-
         default:
           this.cameras.main.centerOn(960, 240);
           // console.log("otra key", event.keyCode);
@@ -124,9 +112,6 @@ export default class Cameras extends Phaser.Scene {
     });
   }
 
-  // nueva variable que le saque el numero a "camera1" y asi cambie de camara
-  // no estoy segura de como funcion al presionar teclas, en peor de los casos, la "vieja confiable" ifs anidados.
-
- /*  update() {
-  } */
+  /*  update() {
+   } */
 }

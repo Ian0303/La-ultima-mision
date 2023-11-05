@@ -28,8 +28,59 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    console.log("si");
     this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.add.image(320, 220, "room");
+
+    this.player = new Player(this, 300, 280, "player");
+    this.enemies.push(new Alien1());
+    this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
+    // this.distance = 10
+
+    this.time.addEvent({
+      delay: 120000,
+      callback: this.endTimer,
+      callbackScope: this,
+      loop: false,
+    })
+    this.time.addEvent({
+      delay: 8000,
+      callback: this.moveAlien,
+      callbackScope: this,
+      loop: true,
+    })
+    this.energyT = this.add.text(450, 50, `${this.energy}%`, {
+      font: 'bold 30px Console',
+      color: "#008080",
+    });
+    /* this.time.addEvent({
+      delay: 300000,
+      callback: this.pasedNight,
+      callbackScope: this,
+      loop: true, SEÑALES
+    }); */
+    // launch de cameras y UI scene
+    this.scene.launch("cameras");
+    this.scene.launch("ui");
+    // escucha de las teclas de escudos y luces
+    this.leftLigth = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.Q
+    );
+    this.rightLigth = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.E
+    );
+    this.leftShield = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.A
+    );
+    this.rightShield = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.D
+    );
+    // imagenes de las luces y escudos
+    this.leftLightOn = this.add.image(322, 222, "leftDoorLight").setVisible(false)
+    this.leftShieldOn = this.add.image(322, 222, "shield_doorleft").setVisible(false)
+    this.rightLightOn = this.add.image(322, 222, "rightDoorLight").setVisible(false)
+    this.rightShieldOn = this.add.image(322, 222, "shield_doorright").setVisible(false)
+    // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy");
     this.add
       .image(-10, 250, "doorButton")
@@ -43,61 +94,17 @@ export default class Game extends Phaser.Scene {
     this.add
       .image(610, 200, "lightButton")
       .setScale(1)
-    console.log("si");
-    this.player = new Player(this, 300, 280, "player");
-    this.enemies.push(new Alien1());
-    this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
-    this.distance = 10
-    this.time.addEvent({
-      delay: 120000,
-      callback: this.endTimer,
-      callbackScope: this,
-      loop: false,
-    })
-    this.time.addEvent({
-      delay: 8000,
-      callback: this.moveAlien,
-      callbackScope: this,
-      loop: true,
-    })
-    this.energyT = this.add.text(450, 50, `${this.energy  }%`, {
-      font: 'bold 30px Console',
-      color: "#008080",
-    });
-    /* this.time.addEvent({
-      delay: 300000,
-      callback: this.pasedNight,
-      callbackScope: this,
-      loop: true, SEÑALES
-    }); */
-    // launch UI scene
-    this.scene.launch("cameras");
-    this.scene.launch("ui");
-
-    this.leftLigth = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.Q
-    );
-    this.rightLigth = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.E
-    );
-    this.leftShield = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.A
-    );
-    this.rightShield = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.D
-    );
-    this.leftLightOn = this.add.image(322, 222, "leftDoorLight").setVisible(false)
-    this.leftShieldOn = this.add.image(322, 222, "shield_doorleft").setVisible(false)
-    this.rightLightOn = this.add.image(322, 222, "rightDoorLight").setVisible(false)
-    this.rightShieldOn = this.add.image(322, 222, "shield_doorright").setVisible(false)
   }
 
   update() {
-    // update(time, deltaTime)
+    // update(time, deltaTime) (tienpo transcurrido entre la activación de un evento)
+
     this.player.update();
+    // apertura de la escena de las cámaras
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras")
     }
+    // ataque del Alien, asesinato del jugador
     this.enemies.forEach(e => {
       if (e.room === 4 && this.leftShieldActive === false) {
         this.leftDoorAlien = this.add.image(322, 222, "leftDoorAlien")
@@ -128,9 +135,9 @@ export default class Game extends Phaser.Scene {
         else {
           this.dead = false;
         }
-        // añidir contador, si el contador el llega a 8 gameOver = true 
       }
     });
+    // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
     this.enemies.forEach(e => {
       if (e.room === 4 && this.leftLigth.isDown) {
         this.leftDoorAlien.setVisible(true)
@@ -157,6 +164,7 @@ export default class Game extends Phaser.Scene {
         }, 4000);
       }
     });
+    // activación de escudos para evitar morir por el Alien
     if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
       this.leftShieldActive = true
@@ -165,31 +173,30 @@ export default class Game extends Phaser.Scene {
         this.leftShieldActive = false
       }, 4000);
     } else if (this.rightShield.isDown) {
-        this.rightShieldOn.setVisible(true)
-        this.rightShieldActive = true
-        setTimeout(() => {
-          this.rightShieldOn.setVisible(false)
-          this.rightShieldActive = false
-        }, 4000);
-      }
-
-
+      this.rightShieldOn.setVisible(true)
+      this.rightShieldActive = true
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false)
+        this.rightShieldActive = false
+      }, 4000);
+    }
+    // consumo de energia de las luces
     if (this.leftLigth.isDown || this.rightLigth.isDown) {
       setTimeout(() => {
         this.energy -= this.lightCost
-        this.energyT.setText(`${this.energy  }%`);
+        this.energyT.setText(`${this.energy}%`);
       }, 500);
-
     }
+    // consumo de energia de los escudos
     if (this.leftShield.isDown || this.rightShield.isDown) {
       setTimeout(() => {
         this.energy -= this.shieldCost
-        this.energyT.setText(`${this.energy  }%`);
+        this.energyT.setText(`${this.energy}%`);
       }, 500);
 
     }
-
-    this.scene.bringToTop("gameOver");
+    // game over
+    // this.scene.bringToTop("gameOver");
     if (this.dead === true && !this.leftShieldActive || this.dead === true && !this.rightShieldActive) {
       console.log("game over")
     }
@@ -199,11 +206,13 @@ export default class Game extends Phaser.Scene {
     }
   }
 
+  // movimient del alien
   moveAlien() {
     this.enemies.forEach((e) => e.move());
     events.emit("aliens-moved", this.enemies);
   }
 
+  // función de noche pasada, nivel superado
   endTimer() {
     if (!this.dead) {
       this.scene.remove("cameras")

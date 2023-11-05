@@ -11,6 +11,7 @@ export default class Alien1 {
     console.log("efectivamente")
   }
 
+  // añade al Alien en la escena
   addToScene(scene) {
     this.sprite = scene.add
       .image(this.x, this.y, this.texture)
@@ -43,22 +44,19 @@ export default class Alien1 {
         this.x = 960
         this.y = 720
         break;
-       /* default:
-        this.x = -100
-        this.y = -100
-        break;  */
+      default:
+       // this.x = -100
+       // this.y = -100
+       break;
     }
   }
 
+  // mueve al alien según un numero aleatorio dentro de las posibilidades de movimiento (momentaneamente desaprobechado)
   move() {
     const posibleRooms = movement[this.room];
     this.room = posibleRooms ? Phaser.Utils.Array.GetRandom(posibleRooms) : 3;
     console.log(this.room);
   }
 }
-
-
-// if(tiempo de moversemoverse)
+// if(tiempo de moverse moverse)
 //* se mueve* */
-
-/**/
