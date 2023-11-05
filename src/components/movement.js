@@ -5,6 +5,6 @@ const movement = [
   [4],
   [5],
   [6],
-  [0], //sala personaje 3
+  [1], //sala personaje 3
 ];
 export default movement;

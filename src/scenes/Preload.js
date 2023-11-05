@@ -21,18 +21,18 @@ export default class Preload extends Phaser.Scene {
     this.load.image("ui", "assets/background/IU.png");
 
  
-    this.load.image("doorButton", "assets/background/doorButton.png");
-    this.load.image("lightButton", "assets/background/lightButton.png");
-    this.load.image("leftDoorLight", "assets/background/leftDoorLight.png");
-    this.load.image("rightDoorLight", "assets/background/rightDoorLight.png");
-    this.load.image("shield_doorleft", "assets/background/shield_doorleft.png");
-    this.load.image("shield_doorright", "assets/background/shield_doorright.png");
+    this.load.image("doorButton", "assets/background/botonluz.png");
+    this.load.image("lightButton", "assets/background/botonpuerta.png");
 
-    this.load.image("rightDoorAlien", "assets/background/rightDoorAlien.jpg");
-    this.load.image("leftDoorAlien", "assets/background/leftDoorAlien.jpg");
-    this.load.image("shieldDoorLeft", "assets/background/shieldDoorLeft.png");
-    this.load.image("shieldDoorRight", "assets/background/shieldDoorRight.png");
+    this.load.image("leftDoorLight", "assets/background/leftdoor_light.png");
+    this.load.image("rightDoorLight", "assets/background/rightdoor_light.png");
 
+    this.load.image("shield_doorleft", "assets/background/leftdoor_shield.png");
+    this.load.image("shield_doorright", "assets/background/rightdoor_shield.png");
+
+    this.load.image("rightDoorAlien", "assets/background/rightdoor_alien1.png");
+    this.load.image("leftDoorAlien", "assets/background/leftdoor_alien1.png");
+  
     // this.load.image("openCameras", "assets/background/openCameras.jpg");
     // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
 
@@ -41,6 +41,7 @@ export default class Preload extends Phaser.Scene {
 
 
     this.load.image("Flecha", "assets/background/flecha2.png");
+    this.load.image("energy", "assets/background/energy.png");
     
     this.load.image("iEnergy", "assets/background/iEnergy.png");
     this.load.image("iFolder", "assets/background/iFolder.png");
