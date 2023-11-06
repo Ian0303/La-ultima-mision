@@ -32,19 +32,25 @@ export default class Game extends Phaser.Scene {
   create() {
     console.log("si");
     this.camerasV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-    this.add.image(320, 220, "room");
+    this.room = this.add.image(320, 220, "room").setVisible(true);
+    this.room1 = this.add.image(320, 220, "roomoff").setVisible(false);
+    
     this.add
       .image(-10, 250, "doorButton")
       .setScale(1)
+      .setDepth(2)
     this.add
       .image(610, 250, "doorButton")
       .setScale(1)
+      .setDepth(2)
     this.add
       .image(-10, 200, "lightButton")
       .setScale(1)
+      .setDepth(2)
     this.add
       .image(610, 200, "lightButton")
       .setScale(1)
+      .setDepth(2)
     this.player = new Player(this, 300, 280, "player");
     this.enemies.push(new Alien1());
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
@@ -65,7 +71,7 @@ export default class Game extends Phaser.Scene {
     this.energyT = this.add.text(450, 50, `${this.energy}%`, {
       font: 'bold 30px Console',
       color: "#008080",
-    });
+    }).setDepth(1);
     /* this.time.addEvent({
       delay: 300000,
       callback: this.pasedNight,
@@ -94,13 +100,20 @@ export default class Game extends Phaser.Scene {
     this.rightLightOn = this.add.image(322, 222, "rightDoorLight").setVisible(false)
     this.rightShieldOn = this.add.image(322, 222, "shield_doorright").setVisible(false)
     // imagenes de energia y los botones de las puertas
-    this.add.image(470, 25, "energy");
+    this.add.image(470, 25, "energy").setDepth(1);
   }
 
   update() {
     // update(time, deltaTime) (tienpo transcurrido entre la activación de un evento)
+    if (this.energy <= 0) {
+      this.energy = 0+2;
+      this.room = this.add.image(320, 220, "room").setVisible(false);
+      this.room1 = this.add.image(320, 220, "roomoff").setVisible(true);
+     this.player.setDepth(1);
+    }
 
     this.player.update();
+    
     // apertura de la escena de las cámaras
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras")
