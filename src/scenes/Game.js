@@ -226,7 +226,7 @@ export default class Game extends Phaser.Scene {
      this.leftShield.on('up', function () {
        if (this.leftShieldActive) {
          console.log('Tecla Q presionada y luego soltada');
-         this.energy -= this.lightCost
+         this.energy -= this.shieldCost
          this.energyT.setText(`${this.energy}%`);
        }
        this.leftShieldActive = false;
@@ -238,7 +238,7 @@ export default class Game extends Phaser.Scene {
     this.rightShield.on('up', function () {
       if (this.rightShieldActive) {
         console.log('Tecla Q presionada y luego soltada');
-        this.energy -= this.lightCost
+        this.energy -= this.shieldCost
         this.energyT.setText(`${this.energy}%`);
       }
       this.rightShieldActive = false;
