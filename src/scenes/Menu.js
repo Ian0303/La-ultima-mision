@@ -40,6 +40,8 @@ export default class Menu extends Phaser.Scene {
 
     // Inicia el cambio de fondo
     changeBackground();
+
+    this.button = this.sound.add("button")
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
       fontSize: "20px",
       frontFamily: "Console",
@@ -52,7 +54,10 @@ export default class Menu extends Phaser.Scene {
         color: "#FFFFFF",
       })
       .setInteractive()
-      .on("pointerdown", () => this.scene.start("controles"));
+      .on("pointerdown", () =>{
+        this.button.play();
+        this.scene.start("controles")
+      });
 
     this.Continue = this.add.text(50, 350, getPhrase(key.Menu.Continue), {
       fontSize: "20px",

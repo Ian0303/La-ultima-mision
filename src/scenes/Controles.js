@@ -22,11 +22,13 @@ export default class Controles extends Phaser.Scene {
   }
 
   create() {
+    this.button = this.sound.add("button")
     this.add.image(320, 240, "Controles")
     this.add.image(600, 440, "Flecha").setScale(0.5).setInteractive().on("pointerdown", () => {
       this.scene.launch("game"),
         this.scene.bringToTop("game"),
         this.scene.remove("controles")
+        this.button.play();
     });
 
     this.Title3 = this.add.text(190, 380, getPhrase(key.Menu.Title3), {
