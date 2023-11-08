@@ -74,7 +74,7 @@ export default class Game extends Phaser.Scene {
       loop: false,
     })
     this.time.addEvent({
-      delay: 2000,
+      delay: 8000,
       callback: this.moveAlien,
       callbackScope: this,
       loop: true,
@@ -112,6 +112,40 @@ export default class Game extends Phaser.Scene {
     this.rightShieldOn = this.add.image(322, 222, "shield_doorright").setVisible(false)
     // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy").setDepth(1);
+
+
+    this.leftShield.on('up', () => {
+      if (this.leftShieldActive) {
+        return;
+      }
+      this.leftShieldOn.setVisible(true)
+      this.leftShieldActive = true
+      this.escudo.play();
+      this.energy -= this.shieldCost
+        this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.leftShieldOn.setVisible(false)
+        this.leftShieldActive = false
+      }, 7000);
+
+    });
+
+    this.rightShield.on('up', () => {
+      if (this.rightShieldActive) {
+        return;
+      }
+      this.rightShieldOn.setVisible(true)
+      this.rightShieldActive = true
+      this.escudo.play();
+      this.energy -= this.shieldCost
+        this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false)
+        this.rightShieldActive = false
+      }, 7000);
+
+    });
+
   }
 
   update() {
@@ -130,7 +164,7 @@ export default class Game extends Phaser.Scene {
       this.scene.bringToTop("cameras")
     }
     // activación de escudos para evitar morir por el Alien
-    if (this.leftShield.isDown) {
+    /* if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
       this.leftShieldActive = true
       this.escudo.play();
@@ -146,10 +180,13 @@ export default class Game extends Phaser.Scene {
         this.rightShieldOn.setVisible(false)
         this.rightShieldActive = false
       }, 4000);
-    }
+    } */
 
-    console.log('atack', this.atack)
-    if (this.atack && (this.rightShieldActive === false || this.leftShieldActive === false) ) {
+    
+    if (this.atack && (this.rightShieldActive === false && this.leftShieldActive === false) ) {
+      console.log('atack', this.atack)
+      console.log('rightShieldActive', this.rightShieldActive)
+      console.log('leftShieldActive', this.leftShieldActive)
       this.dead = true;
       this.atack = false;
     }
@@ -164,7 +201,7 @@ export default class Game extends Phaser.Scene {
         const attack4 = setTimeout(() => {
           this.atack = true;
           console.warn("atack true")
-        }, 1000);
+        }, 5000);
         this.timeouts.push(attack4)
           }
           
@@ -187,7 +224,7 @@ export default class Game extends Phaser.Scene {
           const attack5 = setTimeout(() => {
             this.atack = true;
             console.warn("atack true")
-          }, 1000);
+          }, 5000);
           this.timeouts.push(attack5)
           }
         }
@@ -235,29 +272,29 @@ export default class Game extends Phaser.Scene {
 
     // consumo de energia de las luces y escudos
 
-       this.leftShield.on('down', function () {
-       this.leftShieldActive = true;
-     }, this);
-     this.leftShield.on('up', function () {
-       if (this.leftShieldActive) {
-         console.log('Tecla Q presionada y luego soltada');
-         this.energy -= this.shieldCost
-         this.energyT.setText(`${this.energy}%`);
-       }
-       this.leftShieldActive = false;
-     }, this); 
+    //    this.leftShield.on('down', function () {
+    //    this.leftShieldActive = true;
+    //  }, this);
+    //  this.leftShield.on('up', function () {
+    //    if (this.leftShieldActive) {
+    //      console.log('Tecla Q presionada y luego soltada');
+    //      this.energy -= this.shieldqCost
+    //      this.energyT.setText(`${this.energy}%`);
+    //    }
+    //    this.leftShieldActive = false;
+    //  }, this); 
 
-    this.rightShield.on('down', function () {
-      this.rightShieldActive = true;
-    }, this);
-    this.rightShield.on('up', function () {
-      if (this.rightShieldActive) {
-        console.log('Tecla Q presionada y luego soltada');
-        this.energy -= this.shieldCost
-        this.energyT.setText(`${this.energy}%`);
-      }
-      this.rightShieldActive = false;
-    }, this);
+    // this.rightShield.on('down', function () {
+    //   this.rightShieldActive = true;
+    // }, this);
+    // this.rightShield.on('up', function () {
+    //   if (this.rightShieldActive) {
+    //     console.log('Tecla Q presionada y luego soltada');
+    //     this.energy -= this.shieldCost
+    //     this.energyT.setText(`${this.energy}%`);
+    //   }
+    //   this.rightShieldActive = false;
+    // }, this);
 
     this.leftLigth.on('down', function () {
       this.leftLightActive = true;
@@ -315,11 +352,9 @@ export default class Game extends Phaser.Scene {
   }
 
   cleanTimeOuts(){
-    console.log('timeouts',this.timeouts)
     while (this.timeouts.length > 0) {
       const t = this.timeouts.pop();
       clearTimeout(t);
     }
-    console.log('timeouts',this.timeouts)
   }
 }
