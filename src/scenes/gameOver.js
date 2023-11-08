@@ -14,6 +14,7 @@ export default class GameOver extends Phaser.Scene {
 
     create() {
 
+        console.log("escena gameover")
         this.add.image(400, 250, "gameOverI")
         setTimeout(() => {
             this.scene.start("menu")

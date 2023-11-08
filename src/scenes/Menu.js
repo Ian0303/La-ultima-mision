@@ -32,7 +32,10 @@ export default class Menu extends Phaser.Scene {
     // Define una función para cambiar el fondo en orden
     const changeBackground = () => {
       currentIndex = (currentIndex + 1) % backgrounds.length;
-      background1.setTexture(backgrounds[currentIndex]);
+      if(currentIndex<4){
+        background1?.setTexture(backgrounds[currentIndex]);
+      }
+      
 
       // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
       this.setChangeBackground = setTimeout(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
