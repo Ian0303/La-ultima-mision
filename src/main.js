@@ -8,10 +8,11 @@ import Game from "./scenes/Game";
 import Controles from "./scenes/Controles";
 import GameOver from "./scenes/gameOver";
 import PassedNight from "./scenes/passedNight";
+import Manga from "./scenes/Manga";
 
 const config = {
   type: Phaser.AUTO,
-  width: 740,
+  width: 620,
   height: 480,
   scale: {
     mode: Phaser.Scale.FIT,
@@ -32,7 +33,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload,UI, Menu, Camaras, Game, Controles,GameOver, PassedNight],
+  scene: [Preload, UI, Menu, Camaras, Game, Controles, Manga, GameOver, PassedNight],
 };
 
 export default new Phaser.Game(config);

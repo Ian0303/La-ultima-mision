@@ -13,24 +13,26 @@ export default class Preload extends Phaser.Scene {
     this.load.image("bMenu3", "assets/background/bmenu2.jpg");
     this.load.image("bMenu4", "assets/background/bmenu2_2.jpg");
 
-    this.load.image("room", "assets/background/bhabitacion.jpg");
+    this.load.image("room", "assets/background/habitacion1.jpg");
     // .load.image("camera1", "assets/background/Camera1.jpg");
     // this.load.image("camera2", "assets/background/camara2.jpg");
     // this.load.image("camera3", "assets/background/camara3.jpg");
-    this.load.image("allCameras", "assets/background/allCameras.png");
+    this.load.image("allCameras", "assets/background/cameras1.jpg");
+    this.load.image("ui", "assets/background/IU.png");
+
  
-    this.load.image("doorButton", "assets/background/doorButton.png");
-    this.load.image("lightButton", "assets/background/lightButton.png");
-    this.load.image("leftDoorLight", "assets/background/leftDoorLight.png");
-    this.load.image("rightDoorLight", "assets/background/rightDoorLight.png");
-    this.load.image("shield_doorleft", "assets/background/shield_doorleft.png");
-    this.load.image("shield_doorright", "assets/background/shield_doorright.png");
+    this.load.image("doorButton", "assets/background/botonluz.png");
+    this.load.image("lightButton", "assets/background/botonpuerta.png");
 
-    this.load.image("rightDoorAlien", "assets/background/rightDoorAlien.jpg");
-    this.load.image("leftDoorAlien", "assets/background/leftDoorAlien.jpg");
-    this.load.image("shieldDoorLeft", "assets/background/shieldDoorLeft.png");
-    this.load.image("shieldDoorRight", "assets/background/shieldDoorRight.png");
+    this.load.image("leftDoorLight", "assets/background/leftdoor_light.png");
+    this.load.image("rightDoorLight", "assets/background/rightdoor_light.png");
 
+    this.load.image("shield_doorleft", "assets/background/leftdoor_shield.png");
+    this.load.image("shield_doorright", "assets/background/rightdoor_shield.png");
+
+    this.load.image("rightDoorAlien", "assets/background/rightdoor_alien1.png");
+    this.load.image("leftDoorAlien", "assets/background/leftdoor_alien1.png");
+  
     // this.load.image("openCameras", "assets/background/openCameras.jpg");
     // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
 
@@ -39,19 +41,28 @@ export default class Preload extends Phaser.Scene {
 
 
     this.load.image("Flecha", "assets/background/flecha2.png");
+    this.load.image("energy", "assets/background/energy.png");
     
     this.load.image("iEnergy", "assets/background/iEnergy.png");
     this.load.image("iFolder", "assets/background/iFolder.png");
     this.load.image("IUcam", "assets/background/UICamera.png");
-    this.load.image("alien1", "assets/sprites/alien1.png");
+    this.load.image("alien1", "assets/sprites/alien.png");
     this.load.image("alien2", "assets/background/alien1_2.png");
     this.load.image("alien3", "assets/background/alien1_3.png");
+    this.load.image("roomoff", "assets/background/lightlessRoom.png");
 
     this.load.image("Arg", "assets/background/Arg.jpg");
     this.load.image("Bra", "assets/background/Bra.jpg");
     this.load.image("Est", "assets/background/Est.jpg");
 
     this.load.image("Controles", "assets/background/Controles.jpg");
+    this.load.image("Manga", "assets/background/comic.jpg");
+    this.load.image("Cabeza", "assets/background/cabeza.jpg");
+
+    this.load.audio("button", "assets/sounds/Button.mp3");
+    this.load.audio("alien", "assets/sounds/Alien.mp3");
+    this.load.audio("camaras", "assets/sounds/Camaras.mp3");
+    this.load.audio("escudo", "assets/sounds/Escudo.mp3");
 
   
     

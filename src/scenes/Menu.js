@@ -32,7 +32,10 @@ export default class Menu extends Phaser.Scene {
     // Define una función para cambiar el fondo en orden
     const changeBackground = () => {
       currentIndex = (currentIndex + 1) % backgrounds.length;
-      background1.setTexture(backgrounds[currentIndex]);
+      if(currentIndex<4){
+        background1?.setTexture(backgrounds[currentIndex]);
+      }
+      
 
       // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
       this.setChangeBackground = setTimeout(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
@@ -40,6 +43,8 @@ export default class Menu extends Phaser.Scene {
 
     // Inicia el cambio de fondo
     changeBackground();
+
+    this.button = this.sound.add("button")
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
       fontSize: "20px",
       frontFamily: "Console",
@@ -52,7 +57,10 @@ export default class Menu extends Phaser.Scene {
         color: "#FFFFFF",
       })
       .setInteractive()
-      .on("pointerdown", () => this.scene.start("controles"));
+      .on("pointerdown", () =>{
+        this.button.play();
+        this.scene.start("controles")
+      });
 
     this.Continue = this.add.text(50, 350, getPhrase(key.Menu.Continue), {
       fontSize: "20px",
