@@ -24,14 +24,9 @@ export async function getTranslations(lang, callback) {
 }
 
 export function getPhrase(key) {
-  console.log("🚀 ~ file: translations.js:27 ~ getPhrase ~ key:", key);
   if (!translations) {
     const locals = localStorage.getItem("translations");
     translations = locals ? JSON.parse(locals) : null;
-    console.log(
-      "🚀 ~ file: translations.js:30 ~ getPhrase ~ translations:",
-      translations
-    );
   }
 
   let phrase = key;
@@ -49,7 +44,6 @@ function isAllowedLanguge(language_) {
 
 export function getLanguageConfig() {
   // Obtener desde la URL el idioma
-  console.log(window.location.href);
 
   /* 
       depende como lo manejemos: 
