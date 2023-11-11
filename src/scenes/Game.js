@@ -51,7 +51,7 @@ export default class Game extends Phaser.Scene {
     this.add.image(610, 200, "lightButton").setScale(1).setDepth(2);
     this.player = new Player(this, 300, 280, "player");
     this.enemies.push(new Alien1());
-
+    console.table(this.enemies);
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     // this.distance = 10
     this.keyPress = false;
@@ -279,6 +279,63 @@ export default class Game extends Phaser.Scene {
       this.dead = true;
       console.warn(this.dead);
       this.atack = false;
+
+      this.enemies.forEach((e) => {
+        if (e.room === 4) {
+          if (this.leftShieldActive === false) {
+            if (!this.leftDoorAlien) {
+              this.leftDoorAlien = this.add
+                .image(322, 222, "leftDoorAlien")
+                .setVisible(false);
+              const attack4 = setTimeout(() => {
+                this.atack = true;
+                console.warn("atack true");
+              }, 5000);
+              this.timeouts.push(attack4);
+            }
+          }
+          if (this.leftLigth.isDown) {
+            this.leftDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.leftDoorAlien.setVisible(false);
+            }, 4000);
+          } else {
+            this.leftLightOn.setVisible(true);
+            setTimeout(() => {
+              this.leftLightOn.setVisible(false);
+            }, 4000);
+          }  
+        }
+         
+  
+        if (e.room === 5) {
+          if (this.rightShieldActive === false) {
+            if (!this.rightDoorAlien) {
+              this.rightDoorAlien = this.add
+                .image(322, 222, "rightDoorAlien")
+                .setVisible(false);
+              const attack5 = setTimeout(() => {
+                this.atack = true;
+                console.warn("atack true");
+              }, 5000);
+              this.timeouts.push(attack5);
+            }
+          }
+            if (this.rightLigth) {
+            this.rightDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.rightDoorAlien.setVisible(false);
+            }, 4000);
+          } else {
+            this.rightLightOn.setVisible(true);
+            setTimeout(() => {
+              this.rightLightOn.setVisible(false);
+            }, 4000);
+          }  
+        }
+      });
       if (
         (this.dead && this.leftShieldActive === false) ||
         (this.dead && this.rightShieldActive === false)
@@ -301,76 +358,9 @@ export default class Game extends Phaser.Scene {
   moveAlien() {
     //this.atack = false;
 
-    this.enemies.forEach((e) => {
-      e.move();
-    });
-
-    setTimeout(() => {
-      events.emit("aliens-moved", this.enemies);
-      this.checkAfterMove();
-    }, 0);
+    this.enemies.forEach((e) => e.move());
+    events.emit("aliens-moved", this.enemies);
   }
-
-  checkAfterMove() {
-    // ataque del Alien, asesinato del jugador
-    this.enemies.forEach((e) => {
-      if (e.room === 4) {
-        if (this.leftShieldActive === false) {
-          if (!this.leftDoorAlien) {
-            this.leftDoorAlien = this.add
-              .image(322, 222, "leftDoorAlien")
-              .setVisible(false);
-            const attack4 = setTimeout(() => {
-              this.atack = true;
-              console.warn("atack true");
-            }, 5000);
-            this.timeouts.push(attack4);
-          }
-        }
-        if (this.leftLigth.isDown) {
-          this.leftDoorAlien.setVisible(true);
-          this.alien.play();
-          setTimeout(() => {
-            this.leftDoorAlien.setVisible(false);
-          }, 4000);
-        } else {
-          this.leftLightOn.setVisible(true);
-          setTimeout(() => {
-            this.leftLightOn.setVisible(false);
-          }, 4000);
-        }  
-      }
-       
-
-      if (e.room === 5) {
-        if (this.rightShieldActive === false) {
-          if (!this.rightDoorAlien) {
-            this.rightDoorAlien = this.add
-              .image(322, 222, "rightDoorAlien")
-              .setVisible(false);
-            const attack5 = setTimeout(() => {
-              this.atack = true;
-              console.warn("atack true");
-            }, 5000);
-            this.timeouts.push(attack5);
-          }
-        }
-          if (this.rightLigth) {
-          this.rightDoorAlien.setVisible(true);
-          this.alien.play();
-          setTimeout(() => {
-            this.rightDoorAlien.setVisible(false);
-          }, 4000);
-        } else {
-          this.rightLightOn.setVisible(true);
-          setTimeout(() => {
-            this.rightLightOn.setVisible(false);
-          }, 4000);
-        }  
-      }
-    });
-  }
-
   // función de noche pasada, nivel superado
   endTimer() {
     if (!this.dead) {
