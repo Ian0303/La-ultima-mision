@@ -1,8 +1,8 @@
- import Phaser from "phaser";
+import Phaser from "phaser";
 import { EN_US, ES_AR, PT_BR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
-import key from "../enums/key"; 
+import key from "../enums/key";
 
 export default class Controles extends Phaser.Scene {
   #textSpanish;
@@ -27,9 +27,9 @@ export default class Controles extends Phaser.Scene {
     this.button = this.sound.add("button")
     this.add.image(320, 240, "Controles")
     this.add.image(600, 440, "Flecha").setScale(0.5).setInteractive().on("pointerdown", () => {
-      this.scene.start("game");
-        this.scene.bringToTop("game");
-        this.button.play();
+      this.scene.start("passedNight");
+      this.scene.bringToTop("game");
+      this.button.play();
     });
 
     this.Title3 = this.add.text(190, 380, getPhrase(key.Menu.Title3), {

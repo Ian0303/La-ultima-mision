@@ -40,7 +40,6 @@ export default class Game extends Phaser.Scene {
     this.room1 = this.add.image(320, 220, "roomoff").setVisible(false);
     this.button = this.sound.add("button");
     this.alien = this.sound.add("alien");
-    this.camaras = this.sound.add("camaras");
     this.escudo = this.sound.add("escudo");
 
     this.leftDoorAlien = null;
@@ -57,7 +56,7 @@ export default class Game extends Phaser.Scene {
     // this.distance = 10
     this.keyPress = false;
     this.time.addEvent({
-      delay: 120000,
+      delay: 140000,
       callback: this.endTimer,
       callbackScope: this,
       loop: false,
@@ -147,12 +146,14 @@ export default class Game extends Phaser.Scene {
       if (this.leftLightActive) {
         return;
       }
+      this.leftLightOn.setVisible(true);
       this.energy -= this.lightCost;
       this.energyT.setText(`${this.energy}%`);
       this.leftLightActive = true;
       this.button.play();
       setTimeout(() => {
         this.leftLightActive = false;
+        this.leftLightOn.setVisible(false);
       }, 5000);
     });
 
@@ -160,12 +161,14 @@ export default class Game extends Phaser.Scene {
       if (this.rightLightActive) {
         return;
       }
+      this.rightLightOn.setVisible(true);
       this.energy -= this.lightCost;
       this.energyT.setText(`${this.energy}%`);
       this.rightLightActive = true;
       this.button.play();
       setTimeout(() => {
         this.rightLightActive = false;
+        this.rightLightOn.setVisible(false);
       }, 5000);
     });
   }
@@ -205,17 +208,7 @@ export default class Game extends Phaser.Scene {
       }, 4000);
     } */
 
-    if (
-      this.atack &&
-      this.rightShieldActive === false &&
-      this.leftShieldActive === false
-    ) {
-      console.log("atack", this.atack);
-      console.log("rightShieldActive", this.rightShieldActive);
-      console.log("leftShieldActive", this.leftShieldActive);
-      this.dead = true;
-      this.atack = false;
-    }
+    
 
     // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
 
@@ -278,12 +271,24 @@ export default class Game extends Phaser.Scene {
     // game over
     // this.scene.bringToTop("gameOver");
     if (
-      (this.dead && this.leftShieldActive === false) ||
-      (this.dead && this.rightShieldActive === false)
+      this.atack && this.rightShieldActive === false && this.leftShieldActive === false
     ) {
-      console.log("game over");
+      console.log("atack", this.atack);
+      console.log("rightShieldActive", this.rightShieldActive);
+      console.log("leftShieldActive", this.leftShieldActive);
+      this.dead = true;
+      console.warn(this.dead);
+      this.atack = false;
+      if (
+        (this.dead && this.leftShieldActive === false) ||
+        (this.dead && this.rightShieldActive === false)
+      ) {
+        console.log("game over");
+      }
+      
     }
     if (this.dead) {
+      console.warn(this.dead);
       this.cleanTimeOuts();
       this.enemies = [];
       this.scene.stop("cameras");
@@ -294,7 +299,7 @@ export default class Game extends Phaser.Scene {
 
   // movimient del alien
   moveAlien() {
-    this.atack = false;
+    //this.atack = false;
 
     this.enemies.forEach((e) => {
       e.move();
@@ -310,7 +315,7 @@ export default class Game extends Phaser.Scene {
     // ataque del Alien, asesinato del jugador
     this.enemies.forEach((e) => {
       if (e.room === 4) {
-        if (this.rightShieldActive === false) {
+        if (this.leftShieldActive === false) {
           if (!this.leftDoorAlien) {
             this.leftDoorAlien = this.add
               .image(322, 222, "leftDoorAlien")
@@ -333,8 +338,9 @@ export default class Game extends Phaser.Scene {
           setTimeout(() => {
             this.leftLightOn.setVisible(false);
           }, 4000);
-        }
+        }  
       }
+       
 
       if (e.room === 5) {
         if (this.rightShieldActive === false) {
@@ -349,7 +355,7 @@ export default class Game extends Phaser.Scene {
             this.timeouts.push(attack5);
           }
         }
-        if (this.rightLigth.isDown) {
+          if (this.rightLigth) {
           this.rightDoorAlien.setVisible(true);
           this.alien.play();
           setTimeout(() => {
@@ -360,7 +366,7 @@ export default class Game extends Phaser.Scene {
           setTimeout(() => {
             this.rightLightOn.setVisible(false);
           }, 4000);
-        }
+        }  
       }
     });
   }
@@ -369,7 +375,8 @@ export default class Game extends Phaser.Scene {
   endTimer() {
     if (!this.dead) {
       this.scene.remove("cameras");
-      this.scene.start("passedNight");
+      this.scene.start("passedNight", {night: 1 + this.night});
+      this.scene.launch("cameras");
     }
   }
 

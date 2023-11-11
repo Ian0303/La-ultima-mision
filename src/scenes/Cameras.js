@@ -35,6 +35,7 @@ export default class Cameras extends Phaser.Scene {
     console.log("si");
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
+    this.camerass = this.sound.add("camaras");
     this.ui = this.add.image(320, 240, "ui");
     this.ui = this.add.image(960, 240, "ui");
     this.ui = this.add.image(1600, 240, "ui");
