@@ -183,18 +183,30 @@ export default class Game extends Phaser.Scene {
     } */
 
     
-    if (this.atack && (this.rightShieldActive === false && this.leftShieldActive === false) ) {
+    /* if (this.atack &&  this.leftShieldActive === false)  {
+      console.log('atack', this.atack)
+      console.log('leftShieldActive', this.leftShieldActive)
+      console.log('rightShieldActive', this.rightShieldActive)
+      this.dead = true;
+      this.atack = false;
+    } else if (this.atack && this.rightShieldActive === false) {
       console.log('atack', this.atack)
       console.log('rightShieldActive', this.rightShieldActive)
       console.log('leftShieldActive', this.leftShieldActive)
       this.dead = true;
       this.atack = false;
+    } else {
+      this.atack = false;
+      console.log('atack', this.atack)
+      console.log('rightShieldActive', this.rightShieldActive)
+      console.log('leftShieldActive', this.leftShieldActive)
     }
-
+ */
     // ataque del Alien, asesinato del jugador
     this.enemies.forEach(e => {
       if (e.room === 4) {
-        if (this.rightShieldActive === false) {
+        if (this.leftShieldActive === false) {
+          
           if (!this.leftDoorAlien) {
             this.leftDoorAlien = this.add.image(322, 222, "leftDoorAlien")
           .setVisible(false)
@@ -204,7 +216,13 @@ export default class Game extends Phaser.Scene {
         }, 5000);
         this.timeouts.push(attack4)
           }
-          
+          if (this.atack &&  this.leftShieldActive === false)  {
+            console.log('atack', this.atack)
+            console.log('leftShieldActive', this.leftShieldActive)
+            console.log('rightShieldActive', this.rightShieldActive)
+            this.dead = true;
+            this.atack = false;
+          } 
         }
 
         if (this.leftLigth.isDown) {
