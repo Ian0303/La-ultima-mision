@@ -299,7 +299,7 @@ export default class Game extends Phaser.Scene {
 
   // movimient del alien
   moveAlien() {
-    //this.atack = false;
+    // this.atack = false;
 
     this.enemies.forEach((e) => {
       e.move();
@@ -333,12 +333,13 @@ export default class Game extends Phaser.Scene {
           setTimeout(() => {
             this.leftDoorAlien.setVisible(false);
           }, 4000);
-        } else {
+        }
+        /*  else {
           this.leftLightOn.setVisible(true);
           setTimeout(() => {
             this.leftLightOn.setVisible(false);
           }, 4000);
-        }  
+        }  */ 
       }
        
 
@@ -355,18 +356,19 @@ export default class Game extends Phaser.Scene {
             this.timeouts.push(attack5);
           }
         }
-          if (this.rightLigth) {
+          if (this.rightLigth.isDown) {
           this.rightDoorAlien.setVisible(true);
           this.alien.play();
           setTimeout(() => {
             this.rightDoorAlien.setVisible(false);
           }, 4000);
-        } else {
+        } 
+       /*  else {
           this.rightLightOn.setVisible(true);
           setTimeout(() => {
             this.rightLightOn.setVisible(false);
           }, 4000);
-        }  
+        }   */
       }
     });
   }
