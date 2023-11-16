@@ -174,7 +174,6 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
-    this.atack = false;
     // update(time, deltaTime) (tienpo transcurrido entre la activación de un evento)
     if (this.energy <= 0) {
       this.energy = 0 + 2;
@@ -207,8 +206,6 @@ export default class Game extends Phaser.Scene {
         this.rightShieldActive = false
       }, 4000);
     } */
-
-    
 
     // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
 
@@ -271,7 +268,9 @@ export default class Game extends Phaser.Scene {
     // game over
     // this.scene.bringToTop("gameOver");
     if (
-      this.atack && this.rightShieldActive === false && this.leftShieldActive === false
+      this.atack &&
+      this.rightShieldActive === false &&
+      this.leftShieldActive === false
     ) {
       console.log("atack", this.atack);
       console.log("rightShieldActive", this.rightShieldActive);
@@ -285,9 +284,10 @@ export default class Game extends Phaser.Scene {
       ) {
         console.log("game over");
       }
-      
     }
     if (this.dead) {
+      this.rightShieldActive = false;
+      this.leftShieldActive = false;
       console.warn(this.dead);
       this.cleanTimeOuts();
       this.enemies = [];
@@ -327,7 +327,7 @@ export default class Game extends Phaser.Scene {
             this.timeouts.push(attack4);
           }
         }
-        if (this.leftLigth.isDown) {
+        if (this.leftLigth) {
           this.leftDoorAlien.setVisible(true);
           this.alien.play();
           setTimeout(() => {
@@ -341,7 +341,6 @@ export default class Game extends Phaser.Scene {
           }, 4000);
         }  */ 
       }
-       
 
       if (e.room === 5) {
         if (this.rightShieldActive === false) {
@@ -376,8 +375,9 @@ export default class Game extends Phaser.Scene {
   // función de noche pasada, nivel superado
   endTimer() {
     if (!this.dead) {
+      this.enemies = [];
       this.scene.remove("cameras");
-      this.scene.start("passedNight", {night: 1 + this.night});
+      this.scene.start("passedNight", { night: 1 + this.night });
       this.scene.launch("cameras");
     }
   }
