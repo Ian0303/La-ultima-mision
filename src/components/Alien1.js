@@ -17,34 +17,40 @@ export default class Alien1 {
     this.room = 0;
     this.active = false;
     this.texture = "alien1";
+    this.scale = 2;
   }
 
   // añade al Alien en la escena
   addToScene(scene) {
     switch (this.room) {
       case 1:
-        this.x = 960;
+        this.x = 990;
         this.y = 240;
+        this.texture = "alienC1";
         break;
       case 2:
-        this.x = 320;
-        this.y = 240;
+        this.x = 350;
+        this.y = 210;
+        this.texture = "alienC2";
         break;
       case 3:
         this.x = 1600;
         this.y = 240;
-        break;
+        this.texture = "alien1";
       case 4:
-        this.x = 320;
+        this.x = 400;
         this.y = 720;
+        this.texture = "alienC4";
         break;
       case 5:
         this.x = 1600;
         this.y = 720;
+        this.texture = "alien1";
         break;
       case 6:
         this.x = 960;
         this.y = 720;
+        this.texture = "alien1";
         break;
       default:
         // this.x = -100

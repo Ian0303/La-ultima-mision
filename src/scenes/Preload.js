@@ -47,8 +47,10 @@ export default class Preload extends Phaser.Scene {
     this.load.image("iFolder", "assets/background/iFolder.png");
     this.load.image("IUcam", "assets/background/UICamera.png");
     this.load.image("alien1", "assets/sprites/alien.png");
-    this.load.image("alien2", "assets/background/alien1_2.png");
-    this.load.image("alien3", "assets/background/alien1_3.png");
+
+    this.load.image("alienC1", "assets/sprites/alien1cam1.png");
+    this.load.image("alienC4", "assets/sprites/alien1cam4.png");
+    this.load.image("alienC2", "assets/sprites/alien1cam2.png");
     this.load.image("roomoff", "assets/background/lightlessRoom.png");
 
     this.load.image("Arg", "assets/background/Arg.jpg");
