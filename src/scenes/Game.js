@@ -295,6 +295,11 @@ export default class Game extends Phaser.Scene {
       this.scene.stop("ui");
       this.scene.start("gameOver");
     }
+    if (this.atack) {
+      setTimeout(() => {
+        this.atack = false
+      }, 3000);   
+    }
   }
 
   // movimient del alien
