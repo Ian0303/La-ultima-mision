@@ -35,6 +35,7 @@ export default class Cameras extends Phaser.Scene {
     console.log("si");
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
+    this.camerass = this.sound.add("camaras");
     this.ui = this.add.image(320, 240, "ui");
     this.ui = this.add.image(960, 240, "ui");
     this.ui = this.add.image(1600, 240, "ui");
@@ -54,31 +55,25 @@ export default class Cameras extends Phaser.Scene {
     this.input.keyboard.on("keydown", (event) => {
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
-          console.log("room 1");
           this.cameras.main.centerOn(960, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:
-          console.log("room 2");
           this.cameras.main.centerOn(320, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.THREE:
-          console.log("room 3");
           this.cameras.main.centerOn(1600, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.FOUR:
-          console.log("room 4");
           this.cameras.main.centerOn(320, 720);
           break;
         case Phaser.Input.Keyboard.KeyCodes.FIVE:
-          console.log("room 5");
           this.cameras.main.centerOn(1600, 720);
           break;
         case Phaser.Input.Keyboard.KeyCodes.SIX:
-          console.log("room 6");
           this.cameras.main.centerOn(960, 720);
           break;
         case Phaser.Input.Keyboard.KeyCodes.DOWN:
-          this.scene.bringToTop("game")
+          this.scene.bringToTop("game");
           break;
         default:
           this.cameras.main.centerOn(960, 240);
@@ -94,20 +89,9 @@ export default class Cameras extends Phaser.Scene {
   }
 
   moveAlien(enemies) {
-    // borrar sprites enemigos
-    const allSprites = this.children.list.filter((x) => {
-      if (this.enemiesTexture.includes(x.texture.key)) {
-        console.log("es sprite", x.texture.key);
-        return true;
-      }
-      return false;
-    });
-    console.log("para borrar", allSprites);
-    allSprites.forEach((x) => x.destroy(true));
-
-    // mostrar los enemigos
     enemies.forEach((e) => {
-      console.log(e);
+      e.sprite?.removeFromDisplayList();
+      e.sprite?.destroy(true);
       e.addToScene(this);
     });
   }

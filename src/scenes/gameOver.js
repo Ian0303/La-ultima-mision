@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import Alien1 from "../components/Alien1";
 
 
 export default class GameOver extends Phaser.Scene {
@@ -13,6 +14,8 @@ export default class GameOver extends Phaser.Scene {
     }
 
     create() {
+
+        this.enemies
 
         console.log("escena gameover")
         this.add.image(400, 250, "gameOverI")

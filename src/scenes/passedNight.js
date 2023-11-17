@@ -19,20 +19,22 @@ export default class PassedNight extends Phaser.Scene {
     super("passedNight");
   }
 
-  init({ language }) {
+  init({ language, night }) {
     this.language = language;
+    this.night = night || 1;
   }
 
   create() {
     //texto "Datos descargados"
-    this.add.text(300, 320, "PassedNight", {
+    this.add.text(200, 220, "Night " + this.night, {
       fontSize: "40px",
       frontFamily: "Console",
       color: "#00BFFF",
     });
     setTimeout(() => {
-      this.scene.start("game")
-    }, 10000);
+      this.scene.start("game");
+      this.scene.launch("cameras");
+    }, 5000);
 
    
   }
