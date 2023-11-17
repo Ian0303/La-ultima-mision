@@ -209,7 +209,80 @@ export default class Game extends Phaser.Scene {
     } */
 
     
+    /* if (this.atack &&  this.leftShieldActive === false)  {
+      console.log('atack', this.atack)
+      console.log('leftShieldActive', this.leftShieldActive)
+      console.log('rightShieldActive', this.rightShieldActive)
+      this.dead = true;
+      this.atack = false;
+    } else if (this.atack && this.rightShieldActive === false) {
+      console.log('atack', this.atack)
+      console.log('rightShieldActive', this.rightShieldActive)
+      console.log('leftShieldActive', this.leftShieldActive)
+      this.dead = true;
+      this.atack = false;
+    } else {
+      this.atack = false;
+      console.log('atack', this.atack)
+      console.log('rightShieldActive', this.rightShieldActive)
+      console.log('leftShieldActive', this.leftShieldActive)
+    }
+ */
+    // ataque del Alien, asesinato del jugador
+    this.enemies.forEach(e => {
+      if (e.room === 4) {
+        if (this.leftShieldActive === false) {
+          
+          if (!this.leftDoorAlien) {
+            this.leftDoorAlien = this.add.image(322, 222, "leftDoorAlien")
+          .setVisible(false)
+        const attack4 = setTimeout(() => {
+          this.atack = true;
+          console.warn("atack true")
+        }, 5000);
+        this.timeouts.push(attack4)
+          }
+          if (this.atack &&  this.leftShieldActive === false)  {
+            console.log('atack', this.atack)
+            console.log('leftShieldActive', this.leftShieldActive)
+            console.log('rightShieldActive', this.rightShieldActive)
+            this.dead = true;
+            this.atack = false;
+          } 
+        }
 
+        if (this.leftLigth.isDown) {
+          this.leftDoorAlien.setVisible(true);
+          this.alien.play();
+          setTimeout(() => {
+            this.leftDoorAlien.setVisible(false)
+          }, 4000);
+        }
+      }
+
+      if (e.room === 5) {
+        if (this.rightShieldActive === false) {
+          if (!this.rightDoorAlien) {
+            this.rightDoorAlien = this.add.image(322, 222, "rightDoorAlien")
+            .setVisible(false)
+          const attack5 = setTimeout(() => {
+            this.atack = true;
+            console.warn("atack true")
+          }, 5000);
+          this.timeouts.push(attack5)
+          }
+        }
+        
+        if (this.rightLigth.isDown) {
+          this.rightDoorAlien.setVisible(true)
+          this.alien.play();
+          setTimeout(() => {
+            this.rightDoorAlien.setVisible(false)
+          }, 4000);
+        }
+      }
+    });
+    
     // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
 
     // this.enemies.forEach(e => {
