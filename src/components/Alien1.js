@@ -29,14 +29,15 @@ export default class Alien1 {
         this.texture = "alienC1";
         break;
       case 2:
-        this.x = 350;
-        this.y = 210;
+        this.x = 140;
+        this.y = 200;
         this.texture = "alienC2";
         break;
       case 3:
         this.x = 1600;
         this.y = 240;
         this.texture = "alien1";
+        break;
       case 4:
         this.x = 400;
         this.y = 720;

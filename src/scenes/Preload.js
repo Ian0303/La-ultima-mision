@@ -20,7 +20,6 @@ export default class Preload extends Phaser.Scene {
     this.load.image("allCameras", "assets/background/cameras1.jpg");
     this.load.image("ui", "assets/background/IU.png");
 
- 
     this.load.image("doorButton", "assets/background/botonluz.png");
     this.load.image("lightButton", "assets/background/botonpuerta.png");
 
@@ -28,21 +27,23 @@ export default class Preload extends Phaser.Scene {
     this.load.image("rightDoorLight", "assets/background/rightdoor_light.png");
 
     this.load.image("shield_doorleft", "assets/background/leftdoor_shield.png");
-    this.load.image("shield_doorright", "assets/background/rightdoor_shield.png");
+    this.load.image(
+      "shield_doorright",
+      "assets/background/rightdoor_shield.png"
+    );
 
     this.load.image("rightDoorAlien", "assets/background/rightdoor_alien1.png");
     this.load.image("leftDoorAlien", "assets/background/leftdoor_alien1.png");
-  
+
     // this.load.image("openCameras", "assets/background/openCameras.jpg");
     // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
 
     this.load.image("gameOverI", "assets/background/derrota.jpg");
     this.load.image("black", "assets/background/black.png");
 
-
     this.load.image("Flecha", "assets/background/flecha2.png");
     this.load.image("energy", "assets/background/energy.png");
-    
+
     this.load.image("iEnergy", "assets/background/iEnergy.png");
     this.load.image("iFolder", "assets/background/iFolder.png");
     this.load.image("IUcam", "assets/background/UICamera.png");
@@ -50,7 +51,7 @@ export default class Preload extends Phaser.Scene {
 
     this.load.image("alienC1", "assets/sprites/alien1cam1.png");
     this.load.image("alienC4", "assets/sprites/alien1cam4.png");
-    this.load.image("alienC2", "assets/sprites/alien1cam2.png");
+    this.load.image("alienC2", "assets/sprites/alien1cam1_.png");
     this.load.image("roomoff", "assets/background/lightlessRoom.png");
 
     this.load.image("Arg", "assets/background/Arg.jpg");
@@ -66,14 +67,10 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("camaras", "assets/sounds/Camaras.mp3");
     this.load.audio("escudo", "assets/sounds/Escudo.mp3");
 
-  
-    
     this.load.spritesheet("player", "assets/sprites/spritesastronaut.png", {
       frameWidth: 140,
       frameHeight: 300,
     });
-
-
   }
 
   create() {

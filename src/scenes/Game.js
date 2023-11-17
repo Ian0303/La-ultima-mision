@@ -56,7 +56,7 @@ export default class Game extends Phaser.Scene {
     // this.distance = 10
     this.keyPress = false;
     this.time.addEvent({
-      delay: 140000,
+      delay: 300000, // 140000
       callback: this.endTimer,
       callbackScope: this,
       loop: false,
@@ -291,7 +291,7 @@ export default class Game extends Phaser.Scene {
       console.warn(this.dead);
       this.cleanTimeOuts();
       this.enemies = [];
-      this.scene.stop("cameras");
+      this.scene.sleep("cameras");
       this.scene.stop("ui");
       this.scene.start("gameOver");
     }
@@ -383,8 +383,9 @@ export default class Game extends Phaser.Scene {
     if (!this.dead) {
       this.enemies = [];
       this.scene.remove("cameras");
-      this.scene.start("passedNight", { night: 1 + this.night });
-      this.scene.launch("cameras");
+      this.scene.start("menu");
+      // this.scene.start("passedNight", { night: 1 + this.night });
+      // this.scene.launch("cameras");
     }
   }
 
