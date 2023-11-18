@@ -1,21 +1,28 @@
 import Phaser from "phaser";
 
-import HelloWorldScene from "./scenes/HelloWorldScene";
 import UI from "./scenes/UI";
+import Preload from "./scenes/Preload";
+import Camaras from "./scenes/Cameras";
+import Menu from "./scenes/Menu";
+import Game from "./scenes/Game";
+import Controles from "./scenes/Controles";
+import GameOver from "./scenes/gameOver";
+import PassedNight from "./scenes/passedNight";
+import Manga from "./scenes/Manga";
 
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 620,
+  height: 480,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     min: {
-      width: 800,
-      height: 600,
+      width: 640,
+      height: 480,
     },
     max: {
-      width: 1600,
+      width: 2000,
       height: 1200,
     },
   },
@@ -26,7 +33,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [HelloWorldScene, UI],
+  scene: [Preload, UI, Menu, Camaras, Game, Controles, Manga, GameOver, PassedNight],
 };
 
 export default new Phaser.Game(config);
