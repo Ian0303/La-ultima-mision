@@ -48,7 +48,7 @@ export default class Menu extends Phaser.Scene {
       color: "#FFFFFF",
     });
     this.Play = this.add
-      .text(50, 300, getPhrase(key.Menu.Play), {
+      .text(50, 270, getPhrase(key.Menu.Play), {
         fontSize: "20px",
         frontFamily: "Console",
         color: "#FFFFFF",
@@ -59,8 +59,19 @@ export default class Menu extends Phaser.Scene {
         clearInterval(this.setChangeBackground);
         this.scene.start("controles");
       });
-
-    this.Continue = this.add.text(50, 350, getPhrase(key.Menu.Continue), {
+      this.Title16 = this.add
+      .text(50, 370, getPhrase(key.Menu.Title16), {
+        fontSize: "20px",
+        frontFamily: "Console",
+        color: "#FFFFFF",
+      })
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.button.play();
+        clearInterval(this.setChangeBackground);
+        this.scene.start("Credits");
+      });
+    this.Continue = this.add.text(50, 320, getPhrase(key.Menu.Continue), {
       fontSize: "20px",
       frontFamily: "Console",
       color: "#FFFFFF",
