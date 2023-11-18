@@ -29,6 +29,9 @@ export default class Game extends Phaser.Scene {
     this.shieldCost = 3;
     this.lightCost = 2;
     this.atack = false;
+    this.winTime = 300000
+
+   
   }
 
   create() {
@@ -52,11 +55,15 @@ export default class Game extends Phaser.Scene {
     this.player = new Player(this, 300, 280, "player");
     this.enemies.push(new Alien1());
 
+    this.minutes = Math.floor(this.winTime / 60000); // 1 minuto = 60,000 milisegundos
+    this.seconds = ((this.winTime % 60000) / 1000).toFixed(0);
+    this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
+
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     // this.distance = 10
     this.keyPress = false;
     this.time.addEvent({
-      delay: 300000, // 140000
+      delay: this.winTime, // 140000
       callback: this.endTimer,
       callbackScope: this,
       loop: false,
@@ -69,6 +76,12 @@ export default class Game extends Phaser.Scene {
     });
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
+        font: "bold 30px Console",
+        color: "#008080",
+      })
+      .setDepth(1);
+    this.timeText = this.add
+      .text(100, 50, `${this.formattedTime}`, {
         font: "bold 30px Console",
         color: "#008080",
       })
@@ -188,6 +201,11 @@ export default class Game extends Phaser.Scene {
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras");
     }
+
+    this.minutes = Math.floor(this.winTime / 60000); // 1 minuto = 60,000 milisegundos
+    this.seconds = ((this.winTime % 60000) / 1000).toFixed(0);
+    this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
+    this.timeText.setText(this.formattedTime)
     // activación de escudos para evitar morir por el Alien
     /* if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
@@ -299,7 +317,7 @@ export default class Game extends Phaser.Scene {
       setTimeout(() => {
         this.atack = false
       }, 3000);
-      
+
     }
   }
 
@@ -345,7 +363,7 @@ export default class Game extends Phaser.Scene {
           setTimeout(() => {
             this.leftLightOn.setVisible(false);
           }, 4000);
-        }  */ 
+        }  */
       }
 
       if (e.room === 5) {
@@ -361,19 +379,19 @@ export default class Game extends Phaser.Scene {
             this.timeouts.push(attack5);
           }
         }
-          if (this.rightLigth.isDown) {
+        if (this.rightLigth.isDown) {
           this.rightDoorAlien.setVisible(true);
           this.alien.play();
           setTimeout(() => {
             this.rightDoorAlien.setVisible(false);
           }, 4000);
-        } 
-       /*  else {
-          this.rightLightOn.setVisible(true);
-          setTimeout(() => {
-            this.rightLightOn.setVisible(false);
-          }, 4000);
-        }   */
+        }
+        /*  else {
+           this.rightLightOn.setVisible(true);
+           setTimeout(() => {
+             this.rightLightOn.setVisible(false);
+           }, 4000);
+         }   */
       }
     });
   }
