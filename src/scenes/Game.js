@@ -81,7 +81,7 @@ export default class Game extends Phaser.Scene {
       })
       .setDepth(1);
       this.timeText = this.add
-      .text(100, 30, `Tiempo`, {
+      .text(90, 20, `Tiempo`, {
         font: "bold 30px Console",
         color: "#008080",
       })
@@ -208,10 +208,10 @@ export default class Game extends Phaser.Scene {
       this.scene.bringToTop("cameras");
     }
 
-    this.minutes = Math.floor(this.winTime / 60);
-    this.seconds = Math.floor(this.winTime % 60);
-    this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
-    this.timeText.setText(this.formattedTime)
+    setTimeout(() => {
+      
+    }, 1000);
+    
     
     // activación de escudos para evitar morir por el Alien
     /* if (this.leftShield.isDown) {
@@ -406,6 +406,11 @@ export default class Game extends Phaser.Scene {
   // función de noche pasada, nivel superado
   oneSecond() {
     this.winTime -= 1
+    this.minutes = Math.floor(this.winTime / 60);
+    this.seconds = Math.floor(this.winTime % 60);
+    this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
+    this.timeText.setText(this.formattedTime)
+    console.log(this.formattedTime)
     if (this.winTime === 0 && !this.dead) {
       this.enemies = [];
       this.scene.remove("cameras");
