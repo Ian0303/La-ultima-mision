@@ -2,8 +2,21 @@ import Phaser from "phaser";
 import Player from "../components/Player";
 import Alien1 from "../components/Alien1";
 import events from "./EventCenter";
+// import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
+import { /* getTranslations, */ getPhrase } from "../services/translations";
+import key from "../enums/key";
 
 export default class Game extends Phaser.Scene {
+  #textSpanish;
+
+  #textGerman;
+
+  #textEnglish;
+
+  #textPortuguese;
+
+  #wasChangedLanguage = TODO;
   enemies = [];
 
   constructor() {
@@ -17,7 +30,7 @@ export default class Game extends Phaser.Scene {
     this.timeouts = [];
   }
 
-  init(data) {
+  init(data, language) {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.night = data.night || 1;
     this.dead = false;
@@ -30,8 +43,7 @@ export default class Game extends Phaser.Scene {
     this.lightCost = 2;
     this.atack = false;
     this.winTime = 300
-
-   
+    this.language = language;
   }
 
   create() {
@@ -80,17 +92,15 @@ export default class Game extends Phaser.Scene {
         color: "#008080",
       })
       .setDepth(1);
-      this.timeText = this.add
-      .text(90, 20, `Tiempo`, {
+      this.Title18 = this.add.text(90, 20, getPhrase(key.Menu.Title18), {
         font: "bold 30px Console",
         color: "#008080",
-      })
-      .setDepth(1);
+      }).setDepth(1);
     this.timeText = this.add
       .text(100, 50, `${this.formattedTime}`, {
-       
-      })
-      .setDepth(1);
+        font: "bold 30px Console",
+        color: "#008080",
+      }).setDepth(1);
     /* this.time.addEvent({
       delay: 300000,
       callback: this.pasedNight,

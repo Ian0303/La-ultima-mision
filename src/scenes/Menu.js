@@ -43,7 +43,8 @@ export default class Menu extends Phaser.Scene {
 
     this.button = this.sound.add("button");
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
-      font: "bold 20px Console",
+      fontSize: "20px",
+      frontFamily: "Console",
       color: "#FFFFFF",
     });
     this.Play = this.add

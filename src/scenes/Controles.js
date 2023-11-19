@@ -33,60 +33,74 @@ export default class Controles extends Phaser.Scene {
     });
 
     this.Title3 = this.add.text(190, 380, getPhrase(key.Menu.Title3), {
-      font: "bold 30px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
-    this.Title4 = this.add.text(390, 220, getPhrase(key.Menu.Title4), {
-      font: "bold 30px Console",
+    this.Title4 = this.add.text(300, 220, getPhrase(key.Menu.Title4), {
+      fontSize: "23px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title5 = this.add.text(415, 80, getPhrase(key.Menu.Title5), {
-      font: "bold 30px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title7 = this.add.text(100, 220, getPhrase(key.Menu.Title7), {
-      font: "bold 30px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title6 = this.add.text(120, 80, getPhrase(key.Menu.Title6), {
-      font: "bold 30px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title8 = this.add.text(220, 30, getPhrase(key.Menu.Title8), {
-      font: "bold 35px Console",
+      fontSize: "30px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title9 = this.add.text(60, 180, getPhrase(key.Menu.Title9), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title10 = this.add.text(200, 180, getPhrase(key.Menu.Title10), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title9 = this.add.text(60, 320, getPhrase(key.Menu.Title9), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title10 = this.add.text(200, 320, getPhrase(key.Menu.Title10), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title11 = this.add.text(370, 180, getPhrase(key.Menu.Title11), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title12 = this.add.text(490, 180, getPhrase(key.Menu.Title12), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title9 = this.add.text(390, 320, getPhrase(key.Menu.Title9), {
-      font: "bold 25px Console",
+      fontSize: "25px",
+      frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title10 = this.add.text(510, 320, getPhrase(key.Menu.Title10), {
-      font: "bold 25px Console",
-      color: "#00FFFF",
+       fontSize: "25px",
+        frontFamily: "Console",
+        color: "#00FFFF",
     });
   }
 }
