@@ -15,7 +15,12 @@ const Menu = {
     Title10:"Der",
     Title11:"Abrir",
     Title12:"Cerrar",
-    
+    Title13:"Diseñador de juego",
+    Title14:"Programador",
+    Title15:"Artista",
+    Title16:"Créditos",
+    Title17:"Noche",
+    Title18:"Tiempo",
 }
 
 export default {

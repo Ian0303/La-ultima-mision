@@ -9,6 +9,7 @@ import Controles from "./scenes/Controles";
 import GameOver from "./scenes/gameOver";
 import PassedNight from "./scenes/passedNight";
 import Manga from "./scenes/Manga";
+import Credits from "./scenes/Credits";
 
 const config = {
   type: Phaser.AUTO,
@@ -33,7 +34,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, UI, Menu, Camaras, Game, Controles, Manga, GameOver, PassedNight],
+  scene: [Preload, UI, Menu, Camaras, Game, Controles, Credits, Manga, GameOver, PassedNight],
 };
 
 export default new Phaser.Game(config);
