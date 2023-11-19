@@ -27,8 +27,7 @@ export default class PassedNight extends Phaser.Scene {
   create() {
     // texto "Datos descargados"
     this.add.text(200, 220, `Noche ${  this.night}`, {
-      fontSize: "40px",
-      frontFamily: "Console",
+      font: "bold 40px Console",
       color: "#00BFFF",
     });
     setTimeout(() => {

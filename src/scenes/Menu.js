@@ -43,8 +43,7 @@ export default class Menu extends Phaser.Scene {
 
     this.button = this.sound.add("button");
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
-      fontSize: "20px",
-      frontFamily: "Console",
+      font: "bold 20px Console",
       color: "#FFFFFF",
     });
     this.Play = this.add
@@ -76,7 +75,6 @@ export default class Menu extends Phaser.Scene {
       frontFamily: "Console",
       color: "#FFFFFF",
     });
-
     this.add
       .image(113, 450, "Arg")
       .setScale(0.5)
