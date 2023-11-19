@@ -88,8 +88,7 @@ export default class Game extends Phaser.Scene {
       .setDepth(1);
     this.timeText = this.add
       .text(100, 50, `${this.formattedTime}`, {
-        font: "bold 30px Console",
-        color: "#008080",
+       
       })
       .setDepth(1);
     /* this.time.addEvent({
