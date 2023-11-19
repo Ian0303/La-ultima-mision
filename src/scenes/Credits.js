@@ -16,7 +16,7 @@ export default class Credits extends Phaser.Scene {
     #wasChangedLanguage = TODO;
 
     constructor() {
-        super("Credits");
+        super("credits");
     }
 
     init({ language }) {
@@ -25,29 +25,45 @@ export default class Credits extends Phaser.Scene {
 
     create() {
         this.button = this.sound.add("button")
-        this.Title13 = this.add.text(0, 120, getPhrase(key.Menu.Title13 + ": Zacarías Bongiovanni"), {
+        this.add.image(600, 440, "Flecha").setScale(0.5).setInteractive().on("pointerdown", () => {
+            this.scene.start("menu");
+            this.button.play();
+        });
+
+        this.Title13 = this.add.text(0, 320, getPhrase(key.Menu.Title13), {
             fontSize: "25px",
             frontFamily: "Console",
             color: "#00FFFF",
         });
-        this.Title14 = this.add.text(0, 220, getPhrase(key.Menu.Title14 + ": Ian González"), {
+        this.game3Text = this.add.text(300, 320, "Zacarías Bongiovanni", {
             fontSize: "25px",
             frontFamily: "Console",
             color: "#00FFFF",
         });
-        this.Title15 = this.add.text(0, 320, getPhrase(key.Menu.Title15 + ": Mia Gaitán"), {
+        this.Title14 = this.add.text(0, 120, getPhrase(key.Menu.Title14), {
+            fontSize: "25px",
+            frontFamily: "Console",
+            color: "#00FFFF",
+        });
+        this.game1Text = this.add.text(300, 120, "Ian González", {
+            fontSize: "25px",
+            frontFamily: "Console",
+            color: "#00FFFF",
+        });
+        this.Title15 = this.add.text(0, 220, getPhrase(key.Menu.Title15), {
+            fontSize: "25px",
+            frontFamily: "Console",
+            color: "#00FFFF",
+        });
+        this.game2Text = this.add.text(300, 220, "Mia Gaitán", {
             fontSize: "25px",
             frontFamily: "Console",
             color: "#00FFFF",
         });
         this.Title16 = this.add.text(250, 30, getPhrase(key.Menu.Title16), {
-            fontSize: "35px",
+            fontSize: "30px",
             frontFamily: "Console",
             color: "#00FFFF",
-        });
-        this.add.image(570, 440, "Flecha").setScale(0.5).setInteractive().on("pointerdown", () => {
-            this.scene.start("menu");
-            this.button.play();
         });
     }
 }

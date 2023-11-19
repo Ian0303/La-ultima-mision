@@ -88,7 +88,5 @@ export default class Controles extends Phaser.Scene {
       font: "bold 25px Console",
       color: "#00FFFF",
     });
-
   }
-
 }
