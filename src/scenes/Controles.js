@@ -102,7 +102,5 @@ export default class Controles extends Phaser.Scene {
       frontFamily: "Console",
       color: "#00FFFF",
     });
-
   }
-
 }
