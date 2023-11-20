@@ -12,11 +12,14 @@ export default class Button extends Phaser.GameObjects.Sprite{
     this.texture = texture
 
     scene.add.existing(this);
-    // scene.physics.add.existing(this);
+    scene.physics.add.existing(this);
+    this.body.setAllowGravity(false);
+    this.body.setImmovable(true);
+
     this.setTexture(texture);
     this.setScale(1);
     this.setDepth(2);
-    
+    this.body.setSize(125, 125);
 
   }
   // this.leftDoorButton = this.physics.add.staticGroup()

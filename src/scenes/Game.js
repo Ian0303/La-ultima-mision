@@ -162,66 +162,7 @@ export default class Game extends Phaser.Scene {
     // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy").setDepth(1);
 
-    this.leftShield.on("up", () => {
-      if (this.leftShieldActive) {
-        return;
-      }
-      this.leftShieldOn.setVisible(true);
-      this.leftShieldActive = true;
-      this.escudo.play();
-      this.energy -= this.shieldCost;
-      this.energyT.setText(`${this.energy}%`);
-      setTimeout(() => {
-        this.leftShieldOn.setVisible(false);
-        this.leftShieldActive = false;
-      }, 7000);
-    });
-
-    this.rightShield.on("up", () => {
-      if (this.rightShieldActive) {
-        return;
-      }
-      this.rightShieldOn.setVisible(true);
-      this.rightShieldActive = true;
-      this.escudo.play();
-      this.energy -= this.shieldCost;
-      this.energyT.setText(`${this.energy}%`);
-      setTimeout(() => {
-        this.rightShieldOn.setVisible(false);
-        this.rightShieldActive = false;
-      }, 7000);
-    });
-    /// /////////////////////////////////////////////
-
-    this.leftLigth.on("up", () => {
-      if (this.leftLightActive) {
-        return;
-      }
-      this.leftLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.leftLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.leftLightActive = false;
-        this.leftLightOn.setVisible(false);
-      }, 5000);
-    });
-
-    this.rightLigth.on("up", () => {
-      if (this.rightLightActive) {
-        return;
-      }
-      this.rightLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.rightLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.rightLightActive = false;
-        this.rightLightOn.setVisible(false);
-      }, 5000);
-    });
+    
   }
 
   update() {
@@ -455,9 +396,69 @@ export default class Game extends Phaser.Scene {
       clearTimeout(t);
     }
   }
-/*
-  pressButton(player, buttons) {
-    
+
+  pressButton() {
+    // escudos
+    this.leftShield.on("up", () => {
+      if (this.leftShieldActive) {
+        return;
+      }
+      this.leftShieldOn.setVisible(true);
+      this.leftShieldActive = true;
+      this.escudo.play();
+      this.energy -= this.shieldCost;
+      this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.leftShieldOn.setVisible(false);
+        this.leftShieldActive = false;
+      }, 7000);
+    });
+
+    this.rightShield.on("up", () => {
+      if (this.rightShieldActive) {
+        return;
+      }
+      this.rightShieldOn.setVisible(true);
+      this.rightShieldActive = true;
+      this.escudo.play();
+      this.energy -= this.shieldCost;
+      this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false);
+        this.rightShieldActive = false;
+      }, 7000);
+    });
+    /// /////////////////////////////////////////////
+    // luces
+    this.leftLigth.on("up", () => {
+      if (this.leftLightActive) {
+        return;
+      }
+      this.leftLightOn.setVisible(true);
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      this.leftLightActive = true;
+      this.button.play();
+      setTimeout(() => {
+        this.leftLightActive = false;
+        this.leftLightOn.setVisible(false);
+      }, 5000);
+    });
+
+    this.rightLigth.on("up", () => {
+      if (this.rightLightActive) {
+        return;
+      }
+      this.rightLightOn.setVisible(true);
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      this.rightLightActive = true;
+      this.button.play();
+      setTimeout(() => {
+        this.rightLightActive = false;
+        this.rightLightOn.setVisible(false);
+      }, 5000);
+    });
   }
-  */
+  
 }
