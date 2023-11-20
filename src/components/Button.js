@@ -1,8 +1,10 @@
-/* //import Phaser from "phaser";
+ import Phaser from "phaser";
 // import Player from "./Player";
-//import events from "../scenes/EventCenter";
+// import events from "../scenes/EventCenter";
 
 export default class Button extends Phaser.GameObjects.Sprite{
+  body;
+  
   constructor(scene, x, y, texture) {
     super(scene, x, y, texture);
     this.x = x
@@ -10,15 +12,15 @@ export default class Button extends Phaser.GameObjects.Sprite{
     this.texture = texture
 
     scene.add.existing(this);
-    scene.physics.add.existing(this);
+    // scene.physics.add.existing(this);
     this.setTexture(texture);
     this.setScale(1);
     this.setDepth(2);
     
 
   }
-  //this.leftDoorButton = this.physics.add.staticGroup()
+  // this.leftDoorButton = this.physics.add.staticGroup()
   
 
 
-}   */
+}   

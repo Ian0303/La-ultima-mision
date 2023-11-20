@@ -6,6 +6,7 @@ import events from "./EventCenter";
 import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
 import { /* getTranslations, */ getPhrase } from "../services/translations";
 import key from "../enums/key";
+import Button from "../components/Button";
 
 export default class Game extends Phaser.Scene {
   #textSpanish;
@@ -17,7 +18,10 @@ export default class Game extends Phaser.Scene {
   #textPortuguese;
 
   #wasChangedLanguage = TODO;
+
   enemies = [];
+
+  buttons = [];
 
   constructor() {
     super("game");
@@ -60,11 +64,20 @@ export default class Game extends Phaser.Scene {
     this.leftDoorAlien = null;
     this.rightDoorAlien = null;
 
+    this.buttons.push(
+      this.leftDoorButton = new Button(this, -10, 250, "doorButton"),
+      this.rightDoorButton = new Button(this, 610, 250, "doorButton"),
+      this.leftLightButton = new Button(this, -10, 200, "lightButton"),
+      this.rightLightButton = new Button(this, 610, 200, "lightButton"),
+    );
+
+    /*
     this.add.image(-10, 250, "doorButton").setScale(1).setDepth(2);
     this.add.image(610, 250, "doorButton").setScale(1).setDepth(2);
     this.add.image(-10, 200, "lightButton").setScale(1).setDepth(2);
     this.add.image(610, 200, "lightButton").setScale(1).setDepth(2);
-    this.player = new Player(this, 300, 280, "player");
+    */
+    this.player = new Player(this, 300, 280, "player").setDepth(1);
     this.enemies.push(new Alien1());
 
     this.minutes = Math.floor(this.winTime / 60);
@@ -72,8 +85,18 @@ export default class Game extends Phaser.Scene {
     this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
 
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
-    // this.distance = 10
     this.keyPress = false;
+
+    this.physics.add.overlap(
+      this.player,
+      this.buttons,
+      this.pressButton,
+      null,
+      this
+    );
+
+    // this.distance = 10
+
     this.time.addEvent({
       delay: 1000, // 140000
       callback: this.oneSecond,
@@ -92,10 +115,10 @@ export default class Game extends Phaser.Scene {
         color: "#008080",
       })
       .setDepth(1);
-      this.Title18 = this.add.text(90, 20, getPhrase(key.Menu.Title18), {
-        font: "bold 30px Console",
-        color: "#008080",
-      }).setDepth(1);
+    this.Title18 = this.add.text(90, 20, getPhrase(key.Menu.Title18), {
+      font: "bold 30px Console",
+      color: "#008080",
+    }).setDepth(1);
     this.timeText = this.add
       .text(100, 50, `${this.formattedTime}`, {
         font: "bold 30px Console",
@@ -217,11 +240,9 @@ export default class Game extends Phaser.Scene {
       this.scene.bringToTop("cameras");
     }
 
-    setTimeout(() => {
-      
-    }, 1000);
     
-    
+
+
     // activación de escudos para evitar morir por el Alien
     /* if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
@@ -419,7 +440,6 @@ export default class Game extends Phaser.Scene {
     this.seconds = Math.floor(this.winTime % 60);
     this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
     this.timeText.setText(this.formattedTime)
-    console.log(this.formattedTime)
     if (this.winTime === 0 && !this.dead) {
       this.enemies = [];
       this.scene.remove("cameras");
@@ -435,4 +455,9 @@ export default class Game extends Phaser.Scene {
       clearTimeout(t);
     }
   }
+/*
+  pressButton(player, buttons) {
+    
+  }
+  */
 }
