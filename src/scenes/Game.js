@@ -459,6 +459,44 @@ export default class Game extends Phaser.Scene {
         this.rightLightOn.setVisible(false);
       }, 5000);
     });
-  }
   
+  
+  this.enemies.forEach((e) => {
+    if (e.room === 4) {
+     this.leftLigth.on("up", () => {
+    if (this.leftLightActive) {
+      return;
+    }
+    if (this.leftLigth) {
+        this.leftDoorAlien.setVisible(true);
+        this.alien.play();
+        setTimeout(() => {
+          this.leftDoorAlien.setVisible(false);
+        }, 4000);
+      }
+  });
+  
+    }
+
+    if (e.room === 5) {
+      this.rightLigth.on("up", () => {
+    if (this.rightLightActive) {
+      return;
+    }
+    if (this.rightLigth.isDown) {
+        this.rightDoorAlien.setVisible(true);
+        this.alien.play();
+        setTimeout(() => {
+          this.rightDoorAlien.setVisible(false);
+        }, 4000);
+      }
+  });
+    }
+  });
+  
+
+  
+
+}
+
 }
