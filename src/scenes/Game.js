@@ -162,8 +162,6 @@ export default class Game extends Phaser.Scene {
       .setVisible(false);
     // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy").setDepth(1);
-
-
   }
 
   update() {
@@ -183,9 +181,6 @@ export default class Game extends Phaser.Scene {
       this.energy -= this.camerasCost;
       this.energyT.setText(`${this.energy}%`);
     }
-
-
-
 
     // activación de escudos para evitar morir por el Alien
     /* if (this.leftShield.isDown) {
@@ -313,6 +308,11 @@ export default class Game extends Phaser.Scene {
     setTimeout(() => {
       events.emit("aliens-moved", this.enemies);
       this.checkAfterMove();
+    }, 0);
+
+    setTimeout(() => {
+      events.emit("actualizar energía", this.energy);
+      this.pressButton();
     }, 0);
   }
 
@@ -491,10 +491,7 @@ export default class Game extends Phaser.Scene {
         });
       }
     });
-
-
-
-
   }
+ 
 
 }
