@@ -65,8 +65,11 @@ export default class Preload extends Phaser.Scene {
 
     this.load.audio("button", "assets/sounds/Button.mp3");
     this.load.audio("alien", "assets/sounds/Alien.mp3");
-    this.load.audio("camaras", "assets/sounds/Camaras.mp3");
-    this.load.audio("escudo", "assets/sounds/Escudo.mp3");
+    this.load.audio("shield", "assets/sounds/Shield.mp3");
+    this.load.audio("change", "assets/sounds/Change.mp3");
+    this.load.audio("steps", "assets/sounds/Steps.mp3");
+
+    this.load.video("scare", "assets/background/jumpscareAlien1.mp4")
 
     this.load.spritesheet("player", "assets/sprites/spritesastronaut.png", {
       frameWidth: 140,

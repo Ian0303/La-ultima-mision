@@ -41,7 +41,8 @@ export default class Cameras extends Phaser.Scene {
     console.log("si");
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
-    this.camerass = this.sound.add("camaras");
+    this.change = this.sound.add("change");
+    this.steps = this.sound.add("steps")
     this.add.image(470, 25, "energy").setDepth(1);
 
     this.energyT = this.add
@@ -74,35 +75,47 @@ export default class Cameras extends Phaser.Scene {
           this.cameras.main.centerOn(960, 240);
           this.energy -= this.lightCost;
           this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:
           this.cameras.main.centerOn(320, 240);
           this.energy -= this.lightCost;
           this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.THREE:
           this.cameras.main.centerOn(1600, 240);
           this.energy -= this.lightCost;
           this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.FOUR:
           this.cameras.main.centerOn(320, 720);
           this.energy -= this.lightCost;
           this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.FIVE:
           this.cameras.main.centerOn(1600, 720);
           this.energy -= this.lightCost;
           this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.SIX:
           this.cameras.main.centerOn(960, 720);
           this.energy -= this.lightCost;
           this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.DOWN:
           this.scene.bringToTop("game");
           break;
+        case Phaser.Input.Keyboard.KeyCodes.LEFT:
+          this.steps.play();
+        break;
+        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
+          this.steps.play();
+        break;
         default:
           this.cameras.main.centerOn(960, 240);
           // console.log("otra key", event.keyCode);

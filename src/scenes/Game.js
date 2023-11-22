@@ -60,7 +60,9 @@ export default class Game extends Phaser.Scene {
     this.room1 = this.add.image(320, 220, "roomoff").setVisible(false);
     this.button = this.sound.add("button");
     this.alien = this.sound.add("alien");
-    this.escudo = this.sound.add("escudo");
+    this.shield = this.sound.add("shield");
+    this.steps = this.sound.add("steps")
+    
 
     this.leftDoorAlien = null;
     this.rightDoorAlien = null;
@@ -408,7 +410,7 @@ export default class Game extends Phaser.Scene {
       }
       this.leftShieldOn.setVisible(true);
       this.leftShieldActive = true;
-      this.escudo.play();
+      this.shield.play();
       this.energy -= this.shieldCost;
       this.energyT.setText(`${this.energy}%`);
       setTimeout(() => {
@@ -422,7 +424,7 @@ export default class Game extends Phaser.Scene {
       }
       this.rightShieldOn.setVisible(true);
       this.rightShieldActive = true;
-      this.escudo.play();
+      this.shield.play();
       this.energy -= this.shieldCost;
       this.energyT.setText(`${this.energy}%`);
       setTimeout(() => {
