@@ -9,6 +9,7 @@ export default class Cameras extends Phaser.Scene {
     super("cameras");
 
     this.enemiesTexture = ["alien1"];
+    this.lightCost = 2;
 
     // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
     // funcion
@@ -36,8 +37,14 @@ export default class Cameras extends Phaser.Scene {
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
     this.camerass = this.sound.add("camaras");
+    this.add.image(470, 25, "energy").setDepth(1);
 
-    
+    this.energyT = this.add
+      .text(450, 50, `${this.energy}%`, {
+        font: "bold 30px Console",
+        color: "#008080",
+      })
+
     this.ui = this.add.image(320, 240, "ui");
     this.ui = this.add.image(960, 240, "ui");
     this.ui = this.add.image(1600, 240, "ui");
@@ -58,6 +65,8 @@ export default class Cameras extends Phaser.Scene {
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           this.cameras.main.centerOn(960, 240);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:
           this.cameras.main.centerOn(320, 240);

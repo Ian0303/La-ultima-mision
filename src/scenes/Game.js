@@ -45,6 +45,7 @@ export default class Game extends Phaser.Scene {
     this.energy = 100;
     this.shieldCost = 3;
     this.lightCost = 2;
+    this.camerasCost = 2;
     this.atack = false;
     this.winTime = 300
     this.language = language;
@@ -131,7 +132,7 @@ export default class Game extends Phaser.Scene {
       loop: true, SEÑALES
     }); */
     // launch de cameras y UI scene
-    this.scene.launch("cameras");
+    this.scene.launch("cameras", {energy: this.energy });
     this.scene.launch("ui");
     // escucha de las teclas de escudos y luces
     this.leftLigth = this.input.keyboard.addKey(
@@ -162,7 +163,7 @@ export default class Game extends Phaser.Scene {
     // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy").setDepth(1);
 
-    
+
   }
 
   update() {
@@ -179,9 +180,11 @@ export default class Game extends Phaser.Scene {
     // apertura de la escena de las cámaras
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras");
+      this.energy -= this.camerasCost;
+      this.energyT.setText(`${this.energy}%`);
     }
 
-    
+
 
 
     // activación de escudos para evitar morir por el Alien
@@ -287,7 +290,7 @@ export default class Game extends Phaser.Scene {
       console.warn(this.dead);
       this.cleanTimeOuts();
       this.enemies = [];
-      this.scene.sleep("cameras");
+      this.scene.stop("cameras");
       this.scene.stop("ui");
       this.scene.start("gameOver");
     }
@@ -384,8 +387,8 @@ export default class Game extends Phaser.Scene {
     if (this.winTime === 0 && !this.dead) {
       this.enemies = [];
       this.scene.remove("cameras");
-      this.scene.start("menu");
-      // this.scene.start("passedNight", { night: 1 + this.night });
+      // this.scene.start("menu");
+       this.scene.start("passedNight", { night: 1 + this.night });
       // this.scene.launch("cameras");
     }
   }
@@ -413,7 +416,6 @@ export default class Game extends Phaser.Scene {
         this.leftShieldActive = false;
       }, 7000);
     });
-
     this.rightShield.on("up", () => {
       if (this.rightShieldActive) {
         return;
@@ -444,7 +446,6 @@ export default class Game extends Phaser.Scene {
         this.leftLightOn.setVisible(false);
       }, 5000);
     });
-
     this.rightLigth.on("up", () => {
       if (this.rightLightActive) {
         return;
@@ -459,44 +460,41 @@ export default class Game extends Phaser.Scene {
         this.rightLightOn.setVisible(false);
       }, 5000);
     });
-  
-  
-  this.enemies.forEach((e) => {
-    if (e.room === 4) {
-     this.leftLigth.on("up", () => {
-    if (this.leftLightActive) {
-      return;
-    }
-    if (this.leftLigth) {
-        this.leftDoorAlien.setVisible(true);
-        this.alien.play();
-        setTimeout(() => {
-          this.leftDoorAlien.setVisible(false);
-        }, 4000);
+
+    this.enemies.forEach((e) => {
+      if (e.room === 4) {
+        this.leftLigth.on("up", () => {
+          if (this.leftLightActive) {
+            return;
+          }
+          if (this.leftLigth) {
+            this.leftDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.leftDoorAlien.setVisible(false);
+            }, 4000);
+          }
+        });
       }
-  });
-  
-    }
-
-    if (e.room === 5) {
-      this.rightLigth.on("up", () => {
-    if (this.rightLightActive) {
-      return;
-    }
-    if (this.rightLigth.isDown) {
-        this.rightDoorAlien.setVisible(true);
-        this.alien.play();
-        setTimeout(() => {
-          this.rightDoorAlien.setVisible(false);
-        }, 4000);
+      if (e.room === 5) {
+        this.rightLigth.on("up", () => {
+          if (this.rightLightActive) {
+            return;
+          }
+          if (this.rightLigth.isDown) {
+            this.rightDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.rightDoorAlien.setVisible(false);
+            }, 4000);
+          }
+        });
       }
-  });
-    }
-  });
-  
+    });
 
-  
 
-}
+
+
+  }
 
 }
