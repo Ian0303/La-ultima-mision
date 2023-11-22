@@ -68,7 +68,7 @@ export default class Cameras extends Phaser.Scene {
   // Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1, 2, 3, 4, 5 Y 6
   addKeyEvents() {
     
-    this.input.keyboard.on("keydown", (event) => {
+    this.input.keyboard.on("up", (event) => {
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           this.cameras.main.centerOn(960, 240);
