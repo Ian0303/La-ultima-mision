@@ -180,6 +180,8 @@ export default class Game extends Phaser.Scene {
       this.scene.bringToTop("cameras");
       this.energy -= this.camerasCost;
       this.energyT.setText(`${this.energy}%`);
+      events.on("actualizar energía", this.updateEnergy, this);
+
     }
 
     // activación de escudos para evitar morir por el Alien
@@ -295,7 +297,11 @@ export default class Game extends Phaser.Scene {
       }, 3000);
 
     }
-  }
+
+    /* if (this.scene.getIndex("game") > this.scene.getIndex("cameras")) {
+        this.energy = energy     
+    } */
+  } 
 
   // movimient del alien
   moveAlien() {
@@ -493,5 +499,11 @@ export default class Game extends Phaser.Scene {
     });
   }
  
+  updateEnergy() {
+    if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
+    this.energy -= this.camerasCost;
+    this.energyT.setText(`${this.energy}%`);
+    }
+  }
 
 }
