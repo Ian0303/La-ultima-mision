@@ -74,7 +74,6 @@ export default class Cameras extends Phaser.Scene {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           this.cameras.main.centerOn(960, 240);
           this.energy -= this.lightCost;
-          this.energyT.setText(`${this.energy}%`);
           this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:

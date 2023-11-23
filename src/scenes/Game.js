@@ -61,7 +61,9 @@ export default class Game extends Phaser.Scene {
     this.button = this.sound.add("button");
     this.alien = this.sound.add("alien");
     this.shield = this.sound.add("shield");
-    this.steps = this.sound.add("steps")
+    this.steps = this.sound.add("steps");
+    this.background = this.sound.add("background", { loop: true });
+    this.background.play();
     
 
     this.leftDoorAlien = null;
@@ -290,6 +292,7 @@ export default class Game extends Phaser.Scene {
       this.scene.stop("cameras");
       this.scene.stop("ui");
       this.scene.start("gameOver");
+      this.background.stop();
     }
     if (this.atack) {
       setTimeout(() => {
@@ -494,6 +497,4 @@ export default class Game extends Phaser.Scene {
       }
     });
   }
- 
-
 }

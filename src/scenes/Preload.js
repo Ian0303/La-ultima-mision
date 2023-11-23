@@ -68,6 +68,7 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("shield", "assets/sounds/Shield.mp3");
     this.load.audio("change", "assets/sounds/Change.mp3");
     this.load.audio("steps", "assets/sounds/Steps.mp3");
+    this.load.audio("background", "assets/sounds/background.mp3");
 
     this.load.video("scare", "assets/background/jumpscareAlien1.mp4")
 
