@@ -88,6 +88,9 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     this.keyPress = false;
 
+    events.on("actualizar energía", this.updateEnergy, this);
+
+
     this.physics.add.overlap(
       this.player,
       this.buttons,
@@ -180,7 +183,7 @@ export default class Game extends Phaser.Scene {
       this.scene.bringToTop("cameras");
       this.energy -= this.camerasCost;
       this.energyT.setText(`${this.energy}%`);
-      events.on("actualizar energía", this.updateEnergy, this);
+      // events.on("actualizar energía", this.updateEnergy, this);
 
     }
 
@@ -315,11 +318,12 @@ export default class Game extends Phaser.Scene {
       events.emit("aliens-moved", this.enemies);
       this.checkAfterMove();
     }, 0);
-
+/*
     setTimeout(() => {
       events.emit("actualizar energía", this.energy);
       this.pressButton();
     }, 0);
+*/
   }
 
   checkAfterMove() {
@@ -499,9 +503,9 @@ export default class Game extends Phaser.Scene {
     });
   }
  
-  updateEnergy() {
+  updateEnergy(energy) {
     if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
-    this.energy -= this.camerasCost;
+    this.energy = energy
     this.energyT.setText(`${this.energy}%`);
     }
   }

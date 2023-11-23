@@ -69,7 +69,7 @@ export default class Cameras extends Phaser.Scene {
     this.addKeyEvents();
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     events.on("aliens-moved", this.moveAlien, this);
-    events.on("actualizar energía", this.updateEnergy, this);
+    // events.on("actualizar energía", this.updateEnergy, this);
     
   }
   
