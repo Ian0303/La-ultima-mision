@@ -57,7 +57,7 @@ export default class Menu extends Phaser.Scene {
       .on("pointerdown", () => {
         this.button.play();
         clearInterval(this.setChangeBackground);
-        this.scene.start("controles");
+        this.scene.start("login");
       });
     this.Title16 = this.add
       .text(50, 370, getPhrase(key.Menu.Title16), {
@@ -75,7 +75,17 @@ export default class Menu extends Phaser.Scene {
       fontSize: "20px",
       frontFamily: "Console",
       color: "#FFFFFF",
-    });
+    })
+    .setInteractive()
+      .on("pointerdown", () => {
+        this.button.play();
+        clearInterval(this.setChangeBackground);
+        
+        this.scene.start("game");
+      });
+    
+
+    
     this.add
       .image(113, 450, "Arg")
       .setScale(0.5)

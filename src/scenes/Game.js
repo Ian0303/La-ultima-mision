@@ -52,6 +52,14 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+      // agregar un texto en la esquna superior izquierda con el nombre del usuario
+      const user = this.firebase.getUser();
+      this.firebase.saveGameData(user.uid, {
+        night: this.night,
+        time: new Date(),
+      });
+       this.add.text(10, 10, user.displayName || user.uid);
+
     console.log("si");
     this.camerasV = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.UP
