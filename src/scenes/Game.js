@@ -88,9 +88,6 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     this.keyPress = false;
 
-    events.on("actualizar energía", this.updateEnergy, this);
-
-
     this.physics.add.overlap(
       this.player,
       this.buttons,
@@ -98,7 +95,6 @@ export default class Game extends Phaser.Scene {
       null,
       this
     );
-
     // this.distance = 10
 
     this.time.addEvent({
@@ -135,7 +131,7 @@ export default class Game extends Phaser.Scene {
       loop: true, SEÑALES
     }); */
     // launch de cameras y UI scene
-    this.scene.launch("cameras", {energy: this.energy });
+    this.scene.launch("cameras", { energy: this.energy });
     this.scene.launch("ui");
     // escucha de las teclas de escudos y luces
     this.leftLigth = this.input.keyboard.addKey(
@@ -181,9 +177,12 @@ export default class Game extends Phaser.Scene {
     // apertura de la escena de las cámaras
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras");
-      this.energy -= this.camerasCost;
+      if (this.scene.getIndex("game") > this.scene.getIndex("cameras")) {
+        this.energy -= this.camerasCost;
+      }
       this.energyT.setText(`${this.energy}%`);
       // events.on("actualizar energía", this.updateEnergy, this);
+      events.emit("actualizar energía",{ energy: this.energy });
 
     }
 
@@ -304,7 +303,7 @@ export default class Game extends Phaser.Scene {
     /* if (this.scene.getIndex("game") > this.scene.getIndex("cameras")) {
         this.energy = energy     
     } */
-  } 
+  }
 
   // movimient del alien
   moveAlien() {
@@ -318,12 +317,12 @@ export default class Game extends Phaser.Scene {
       events.emit("aliens-moved", this.enemies);
       this.checkAfterMove();
     }, 0);
-/*
+
     setTimeout(() => {
       events.emit("actualizar energía", this.energy);
       this.pressButton();
     }, 0);
-*/
+
   }
 
   checkAfterMove() {
@@ -398,7 +397,7 @@ export default class Game extends Phaser.Scene {
       this.enemies = [];
       this.scene.remove("cameras");
       // this.scene.start("menu");
-       this.scene.start("passedNight", { night: 1 + this.night });
+      this.scene.start("passedNight", { night: 1 + this.night });
       // this.scene.launch("cameras");
     }
   }
@@ -502,11 +501,15 @@ export default class Game extends Phaser.Scene {
       }
     });
   }
- 
-  updateEnergy(energy) {
+
+  updateEnergy() {
     if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
-    this.energy = energy
-    this.energyT.setText(`${this.energy}%`);
+      // this.energy = data.energy
+      events.emit("actualizar energía", this.energy -= this.lightCost);
+      this.energyT.setText(`${this.energy}%`);
+        // this.energy = this.energy
+        this.energyT.setText(`${this.energy}%`);
+        console.log(`la energia es de: ${this.energy} %`)
     }
   }
 

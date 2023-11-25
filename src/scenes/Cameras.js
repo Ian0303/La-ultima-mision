@@ -42,6 +42,10 @@ export default class Cameras extends Phaser.Scene {
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
     this.camerass = this.sound.add("camaras");
+    
+    events.emit("actualizar energía", this.energy);
+    // events.on("actualizar energía", this.updateEnergy, this);
+
 
     this.add.image(470, 25, "energy").setDepth(1);
     this.energyT = this.add
@@ -50,12 +54,12 @@ export default class Cameras extends Phaser.Scene {
         color: "#008080",
       })
 
-      this.time.addEvent({
-        delay: 3000,
-        callback: this.updateEnergy,
-        callbackScope: this,
-        loop: true,
-      });
+    this.time.addEvent({
+      delay: 3000,
+      callback: this.updateEnergy,
+      callbackScope: this,
+      loop: true,
+    });
 
     this.ui = this.add.image(320, 240, "ui");
     this.ui = this.add.image(960, 240, "ui");
@@ -70,29 +74,27 @@ export default class Cameras extends Phaser.Scene {
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     events.on("aliens-moved", this.moveAlien, this);
     // events.on("actualizar energía", this.updateEnergy, this);
-    
+
   }
-  
+
   updateEnergy() {
     if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      console.log(`la energia es: ${this.energy}`);
       
-        this.energy -= this.lightCost;
-        this.energyT.setText(`${this.energy}%`);
-        console.log(`la energia es: ${  this.energy}`);
-        this.events.emit("actualizar energía", this.energy);
     }
   }
-
+        
   // Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1, 2, 3, 4, 5 Y 6
   addKeyEvents() {
-
     this.input.keyboard.on("keydown", (event) => {
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           this.cameras.main.centerOn(960, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:
-          this.cameras.main.centerOn(320, 240);          
+          this.cameras.main.centerOn(320, 240);
           break;
         case Phaser.Input.Keyboard.KeyCodes.THREE:
           this.cameras.main.centerOn(1600, 240);
