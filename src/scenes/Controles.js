@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import { EN_US, ES_AR, PT_BR } from "../enums/languages";
-import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
-import { getTranslations, getPhrase } from "../services/translations";
+// import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
+import { /* getTranslations, */ getPhrase } from "../services/translations";
 import key from "../enums/key";
 
 export default class Controles extends Phaser.Scene {
@@ -33,32 +33,32 @@ export default class Controles extends Phaser.Scene {
     });
 
     this.Title3 = this.add.text(190, 380, getPhrase(key.Menu.Title3), {
-      fontSize: "30px",
+      fontSize: "25px",
       frontFamily: "Console",
       color: "#00FFFF",
     });
-    this.Title4 = this.add.text(390, 220, getPhrase(key.Menu.Title4), {
-      fontSize: "30px",
+    this.Title4 = this.add.text(300, 220, getPhrase(key.Menu.Title4), {
+      fontSize: "23px",
       frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title5 = this.add.text(415, 80, getPhrase(key.Menu.Title5), {
-      fontSize: "30px",
+      fontSize: "25px",
       frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title7 = this.add.text(100, 220, getPhrase(key.Menu.Title7), {
-      fontSize: "30px",
+      fontSize: "25px",
       frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title6 = this.add.text(120, 80, getPhrase(key.Menu.Title6), {
-      fontSize: "30px",
+      fontSize: "25px",
       frontFamily: "Console",
       color: "#00FFFF",
     });
     this.Title8 = this.add.text(220, 30, getPhrase(key.Menu.Title8), {
-      fontSize: "35px",
+      fontSize: "30px",
       frontFamily: "Console",
       color: "#00FFFF",
     });
@@ -98,11 +98,9 @@ export default class Controles extends Phaser.Scene {
       color: "#00FFFF",
     });
     this.Title10 = this.add.text(510, 320, getPhrase(key.Menu.Title10), {
-      fontSize: "25px",
-      frontFamily: "Console",
-      color: "#00FFFF",
+       fontSize: "25px",
+        frontFamily: "Console",
+        color: "#00FFFF",
     });
-
   }
-
 }

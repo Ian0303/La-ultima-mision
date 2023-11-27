@@ -2,9 +2,29 @@ import Phaser from "phaser";
 import Player from "../components/Player";
 import Alien1 from "../components/Alien1";
 import events from "./EventCenter";
+// import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
+import { /* getTranslations, */ getPhrase } from "../services/translations";
+import key from "../enums/key";
+import Button from "../components/Button";
+import Alien2 from "../components/Alien2";
+import Alien3 from "../components/Alien3";
+import Alien4 from "../components/Alien4";
 
 export default class Game extends Phaser.Scene {
+  #textSpanish;
+
+  #textGerman;
+
+  #textEnglish;
+
+  #textPortuguese;
+
+  #wasChangedLanguage = TODO;
+
   enemies = [];
+
+  buttons = [];
 
   constructor() {
     super("game");
@@ -17,7 +37,7 @@ export default class Game extends Phaser.Scene {
     this.timeouts = [];
   }
 
-  init(data) {
+  init(data, language) {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.night = data.night || 1;
     this.dead = false;
@@ -28,10 +48,21 @@ export default class Game extends Phaser.Scene {
     this.energy = 100;
     this.shieldCost = 3;
     this.lightCost = 2;
+    this.camerasCost = 2;
     this.atack = false;
+    this.winTime = 300
+    this.language = language;
   }
 
   create() {
+      // agregar un texto en la esquna superior izquierda con el nombre del usuario
+      const user = this.firebase.getUser();
+      this.firebase.saveGameData(user.uid, {
+        night: this.night,
+        time: new Date(),
+      });
+       this.add.text(10, 10, user.displayName || user.uid);
+
     console.log("si");
     this.camerasV = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.UP
@@ -40,26 +71,54 @@ export default class Game extends Phaser.Scene {
     this.room1 = this.add.image(320, 220, "roomoff").setVisible(false);
     this.button = this.sound.add("button");
     this.alien = this.sound.add("alien");
-    this.escudo = this.sound.add("escudo");
+    this.shield = this.sound.add("shield");
+    this.steps = this.sound.add("steps");
+    this.background = this.sound.add("background", { loop: true });
+    this.background.play();
+    
 
     this.leftDoorAlien = null;
     this.rightDoorAlien = null;
 
+    this.buttons.push(
+      this.leftDoorButton = new Button(this, -10, 250, "doorButton"),
+      this.rightDoorButton = new Button(this, 610, 250, "doorButton"),
+      this.leftLightButton = new Button(this, -10, 200, "lightButton"),
+      this.rightLightButton = new Button(this, 610, 200, "lightButton"),
+    );
+
+    /*
     this.add.image(-10, 250, "doorButton").setScale(1).setDepth(2);
     this.add.image(610, 250, "doorButton").setScale(1).setDepth(2);
     this.add.image(-10, 200, "lightButton").setScale(1).setDepth(2);
     this.add.image(610, 200, "lightButton").setScale(1).setDepth(2);
-    this.player = new Player(this, 300, 280, "player");
-    this.enemies.push(new Alien1());
+    */
+    this.player = new Player(this, 300, 280, "player").setDepth(1);
+    //this.enemies.push(new Alien1());
+
+
+    this.minutes = Math.floor(this.winTime / 60);
+    this.seconds = Math.floor(this.winTime % 60);
+    this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
 
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
-    // this.distance = 10
     this.keyPress = false;
+
+    this.physics.add.overlap(
+      this.player,
+      this.buttons,
+      this.pressButton,
+      null,
+      this
+    );
+
+    // this.distance = 10
+
     this.time.addEvent({
-      delay: 140000,
-      callback: this.endTimer,
+      delay: 1000, // 140000
+      callback: this.oneSecond,
       callbackScope: this,
-      loop: false,
+      loop: true,
     });
     this.time.addEvent({
       delay: 8000,
@@ -67,12 +126,40 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
+    this.time.addEvent({
+      delay: 10000,
+      callback: this.addAlien2,
+      callbackScope: this,
+      loop: false,
+    });
+    this.time.addEvent({
+      delay: 13000,
+      callback: this.addAlien3,
+      callbackScope: this,
+      loop: false,
+    });
+    this.time.addEvent({
+      delay: 16000,
+      callback: this.addAlien4,
+      callbackScope: this,
+      loop: false,
+    });
+    
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
         color: "#008080",
       })
       .setDepth(1);
+    this.Title18 = this.add.text(90, 20, getPhrase(key.Menu.Title18), {
+      font: "bold 30px Console",
+      color: "#008080",
+    }).setDepth(1);
+    this.timeText = this.add
+      .text(100, 50, `${this.formattedTime}`, {
+        font: "bold 30px Console",
+        color: "#008080",
+      }).setDepth(1);
     /* this.time.addEvent({
       delay: 300000,
       callback: this.pasedNight,
@@ -80,7 +167,7 @@ export default class Game extends Phaser.Scene {
       loop: true, SEÑALES
     }); */
     // launch de cameras y UI scene
-    this.scene.launch("cameras");
+    this.scene.launch("cameras", {energy: this.energy });
     this.scene.launch("ui");
     // escucha de las teclas de escudos y luces
     this.leftLigth = this.input.keyboard.addKey(
@@ -110,67 +197,6 @@ export default class Game extends Phaser.Scene {
       .setVisible(false);
     // imagenes de energia y los botones de las puertas
     this.add.image(470, 25, "energy").setDepth(1);
-
-    this.leftShield.on("up", () => {
-      if (this.leftShieldActive) {
-        return;
-      }
-      this.leftShieldOn.setVisible(true);
-      this.leftShieldActive = true;
-      this.escudo.play();
-      this.energy -= this.shieldCost;
-      this.energyT.setText(`${this.energy}%`);
-      setTimeout(() => {
-        this.leftShieldOn.setVisible(false);
-        this.leftShieldActive = false;
-      }, 7000);
-    });
-
-    this.rightShield.on("up", () => {
-      if (this.rightShieldActive) {
-        return;
-      }
-      this.rightShieldOn.setVisible(true);
-      this.rightShieldActive = true;
-      this.escudo.play();
-      this.energy -= this.shieldCost;
-      this.energyT.setText(`${this.energy}%`);
-      setTimeout(() => {
-        this.rightShieldOn.setVisible(false);
-        this.rightShieldActive = false;
-      }, 7000);
-    });
-    /// /////////////////////////////////////////////
-
-    this.leftLigth.on("up", () => {
-      if (this.leftLightActive) {
-        return;
-      }
-      this.leftLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.leftLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.leftLightActive = false;
-        this.leftLightOn.setVisible(false);
-      }, 5000);
-    });
-
-    this.rightLigth.on("up", () => {
-      if (this.rightLightActive) {
-        return;
-      }
-      this.rightLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.rightLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.rightLightActive = false;
-        this.rightLightOn.setVisible(false);
-      }, 5000);
-    });
   }
 
   update() {
@@ -187,7 +213,10 @@ export default class Game extends Phaser.Scene {
     // apertura de la escena de las cámaras
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras");
+      this.energy -= this.camerasCost;
+      this.energyT.setText(`${this.energy}%`);
     }
+
     // activación de escudos para evitar morir por el Alien
     /* if (this.leftShield.isDown) {
       this.leftShieldOn.setVisible(true)
@@ -294,6 +323,13 @@ export default class Game extends Phaser.Scene {
       this.scene.stop("cameras");
       this.scene.stop("ui");
       this.scene.start("gameOver");
+      this.background.stop();
+    }
+    if (this.atack) {
+      setTimeout(() => {
+        this.atack = false
+      }, 3000);
+
     }
     if (this.atack) {
       setTimeout(() => {
@@ -314,6 +350,20 @@ export default class Game extends Phaser.Scene {
       events.emit("aliens-moved", this.enemies);
       this.checkAfterMove();
     }, 0);
+
+    setTimeout(() => {
+      events.emit("actualizar energía", this.energy);
+      this.pressButton();
+    }, 0);
+  }
+  addAlien2(){
+    this.enemies.push(new Alien2());
+  }
+  addAlien3(){
+    this.enemies.push(new Alien3());
+  }
+  addAlien4(){
+    this.enemies.push(new Alien4());
   }
 
   checkAfterMove() {
@@ -344,7 +394,7 @@ export default class Game extends Phaser.Scene {
           setTimeout(() => {
             this.leftLightOn.setVisible(false);
           }, 4000);
-        }  */ 
+        }  */
       }
 
       if (e.room === 5) {
@@ -360,30 +410,36 @@ export default class Game extends Phaser.Scene {
             this.timeouts.push(attack5);
           }
         }
-          if (this.rightLigth.isDown) {
+        if (this.rightLigth.isDown) {
           this.rightDoorAlien.setVisible(true);
           this.alien.play();
           setTimeout(() => {
             this.rightDoorAlien.setVisible(false);
           }, 4000);
-        } 
-       /*  else {
-          this.rightLightOn.setVisible(true);
-          setTimeout(() => {
-            this.rightLightOn.setVisible(false);
-          }, 4000);
-        }   */
+        }
+        /*  else {
+           this.rightLightOn.setVisible(true);
+           setTimeout(() => {
+             this.rightLightOn.setVisible(false);
+           }, 4000);
+         }   */
       }
     });
   }
 
   // función de noche pasada, nivel superado
-  endTimer() {
-    if (!this.dead) {
+  oneSecond() {
+    this.winTime -= 1
+    this.minutes = Math.floor(this.winTime / 60);
+    this.seconds = Math.floor(this.winTime % 60);
+    this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
+    this.timeText.setText(this.formattedTime)
+    if (this.winTime === 0 && !this.dead) {
       this.enemies = [];
       this.scene.remove("cameras");
-      this.scene.start("passedNight", { night: 1 + this.night });
-      this.scene.launch("cameras");
+      // this.scene.start("menu");
+       this.scene.start("passedNight", { night: 1 + this.night });
+      // this.scene.launch("cameras");
     }
   }
 
@@ -393,4 +449,101 @@ export default class Game extends Phaser.Scene {
       clearTimeout(t);
     }
   }
+
+  pressButton() {
+    // escudos
+    if (this.energy>0) {
+      
+    
+    this.leftShield.on("up", () => {
+      if (this.leftShieldActive) {
+        return;
+      }
+      this.leftShieldOn.setVisible(true);
+      this.leftShieldActive = true;
+      this.shield.play();
+      this.energy -= this.shieldCost;
+      this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.leftShieldOn.setVisible(false);
+        this.leftShieldActive = false;
+      }, 7000);
+    });
+    this.rightShield.on("up", () => {
+      if (this.rightShieldActive) {
+        return;
+      }
+      this.rightShieldOn.setVisible(true);
+      this.rightShieldActive = true;
+      this.shield.play();
+      this.energy -= this.shieldCost;
+      this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false);
+        this.rightShieldActive = false;
+      }, 7000);
+    });
+    /// /////////////////////////////////////////////
+    // luces
+    this.leftLigth.on("up", () => {
+      if (this.leftLightActive) {
+        return;
+      }
+      this.leftLightOn.setVisible(true);
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      this.leftLightActive = true;
+      this.button.play();
+      setTimeout(() => {
+        this.leftLightActive = false;
+        this.leftLightOn.setVisible(false);
+      }, 5000);
+    });
+    this.rightLigth.on("up", () => {
+      if (this.rightLightActive) {
+        return;
+      }
+      this.rightLightOn.setVisible(true);
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      this.rightLightActive = true;
+      this.button.play();
+      setTimeout(() => {
+        this.rightLightActive = false;
+        this.rightLightOn.setVisible(false);
+      }, 5000);
+    });
+
+    this.enemies.forEach((e) => {
+      if (e.room === 4) {
+        this.leftLigth.on("up", () => {
+          if (this.leftLightActive) {
+            return;
+          }
+          if (this.leftLigth) {
+            this.leftDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.leftDoorAlien.setVisible(false);
+            }, 4000);
+          }
+        });
+      }
+      if (e.room === 5) {
+        this.rightLigth.on("up", () => {
+          if (this.rightLightActive) {
+            return;
+          }
+          if (this.rightLigth.isDown) {
+            this.rightDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.rightDoorAlien.setVisible(false);
+            }, 4000);
+          }
+        });
+      }
+    });
+  }
+}
 }

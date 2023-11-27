@@ -9,6 +9,8 @@ export default class Cameras extends Phaser.Scene {
     super("cameras");
 
     this.enemiesTexture = ["alien1"];
+    this.lightCost = 2;
+
 
     // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
     // funcion
@@ -31,49 +33,119 @@ export default class Cameras extends Phaser.Scene {
     */
   }
 
+  init(energy) {
+    this.energy = energy
+  }
+
   create() {
     console.log("si");
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
-    this.camerass = this.sound.add("camaras");
-    this.ui = this.add.image(320, 240, "ui");
-    this.ui = this.add.image(960, 240, "ui");
-    this.ui = this.add.image(1600, 240, "ui");
-    this.ui = this.add.image(320, 720, "ui");
-    this.ui = this.add.image(960, 720, "ui");
-    this.ui = this.add.image(1600, 720, "ui");
+    this.change = this.sound.add("change");
+    this.steps = this.sound.add("steps")
+    this.add.image(470, 25, "energy").setDepth(1);
+
+    this.energyT = this.add
+      .text(450, 50, `${this.energy}%`, {
+        font: "bold 30px Console",
+        color: "#008080",
+      })
+
+    this.ui = this.add.image(320, 240, "ui").setDepth(2);
+    this.ui = this.add.image(-320, 240, "ui").setDepth(2);
+    this.ui = this.add.image(2240, 240, "ui").setDepth(2);
+    this.ui = this.add.image(-320, 720, "ui").setDepth(2);
+    this.ui = this.add.image(2240, 720, "ui").setDepth(2);
+
+    this.ui = this.add.image(960, 240, "ui").setDepth(2);
+    this.ui = this.add.image(1600, 240, "ui").setDepth(2);
+    this.ui = this.add.image(320, 720, "ui").setDepth(2);
+    this.ui = this.add.image(960, 720, "ui").setDepth(2);
+    this.ui = this.add.image(1600, 720, "ui").setDepth(2);
     // this.cameras.main.setZoom(4);
     // this.cameras.main.centerOn(0, 0);
-
+    console.log(this.energy)
     this.addKeyEvents();
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     events.on("aliens-moved", this.moveAlien, this);
+    events.on("actualizar energía", this.addKeyEvents, this)
   }
 
   // Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1, 2, 3, 4, 5 Y 6
   addKeyEvents() {
+
     this.input.keyboard.on("keydown", (event) => {
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           this.cameras.main.centerOn(960, 240);
+          this.energy -= this.lightCost;
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.TWO:
-          this.cameras.main.centerOn(320, 240);
+          this.cameras.main.centerOn(-320, 240);
+          this.energy -= this.lightCost;
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.THREE:
-          this.cameras.main.centerOn(1600, 240);
+          this.cameras.main.centerOn(2240, 240);
+          this.energy -= this.lightCost;
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.FOUR:
-          this.cameras.main.centerOn(320, 720);
+          this.cameras.main.centerOn(-320, 720);
+          this.energy -= this.lightCost;
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.FIVE:
+          this.cameras.main.centerOn(2240, 720);
+          this.energy -= this.lightCost;
+          this.change.play();
+          break;
+
+        case Phaser.Input.Keyboard.KeyCodes.SIX:
+          this.cameras.main.centerOn(960, 720);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
+          this.change.play();
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.SEVEN:
+          this.cameras.main.centerOn(320, 240);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
+          this.change.play();
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.EIGHT:
+          this.cameras.main.centerOn(1600, 240);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
+          this.change.play();
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.NINE:
+          this.cameras.main.centerOn(320, 720);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
+          this.change.play();
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.ZERO:
           this.cameras.main.centerOn(1600, 720);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.SIX:
           this.cameras.main.centerOn(960, 720);
+          this.energy -= this.lightCost;
+          this.energyT.setText(`${this.energy}%`);
+          this.change.play();
           break;
         case Phaser.Input.Keyboard.KeyCodes.DOWN:
           this.scene.bringToTop("game");
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.LEFT:
+          this.steps.play();
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
+          this.steps.play();
           break;
         default:
           this.cameras.main.centerOn(960, 240);
@@ -96,6 +168,5 @@ export default class Cameras extends Phaser.Scene {
     });
   }
 
-  /*  update() {
-   } */
+
 }

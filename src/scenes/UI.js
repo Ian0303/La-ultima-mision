@@ -19,6 +19,7 @@ export default class UI extends Phaser.Scene {
     super("ui");
   }
 
+
  /*   create() {
     this.ui = this.add.image(960, 480, "ui");
    }

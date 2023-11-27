@@ -9,6 +9,13 @@ import Controles from "./scenes/Controles";
 import GameOver from "./scenes/gameOver";
 import PassedNight from "./scenes/passedNight";
 import Manga from "./scenes/Manga";
+import Credits from "./scenes/Credits";
+import Login from "./scenes/Login";
+
+import FirebasePlugin from "./Plugins/FirebasePlugin";
+import Scores from "./scenes/Scores";
+
+
 
 const config = {
   type: Phaser.AUTO,
@@ -30,10 +37,20 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
-      debug: false,
+      debug: true,
     },
   },
-  scene: [Preload, UI, Menu, Camaras, Game, Controles, Manga, GameOver, PassedNight],
+  scene: [Preload, UI, Menu, Camaras, Game, Login, Controles, Credits, Manga, GameOver, PassedNight, Scores],
+  plugins: {
+    global: [
+      {
+        key: "FirebasePlugin",
+        plugin: FirebasePlugin,
+        start: true,
+        mapping: "firebase",
+      },
+    ],
+  },
 };
 
 export default new Phaser.Game(config);
