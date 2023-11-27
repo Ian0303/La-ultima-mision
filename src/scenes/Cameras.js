@@ -43,10 +43,14 @@ export default class Cameras extends Phaser.Scene {
     this.camera = this.add.image(960, 480, "allCameras");
     this.change = this.sound.add("change");
     this.steps = this.sound.add("steps")
+    this.add.image(470, 25, "energy").setDepth(1);
+    this.camerass = this.sound.add("camaras");
     
     events.emit("actualizar energía", this.energy);
     // events.on("actualizar energía", this.updateEnergy, this);
-  
+
+
+    this.add.image(470, 25, "energy").setDepth(1);
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
@@ -71,13 +75,22 @@ export default class Cameras extends Phaser.Scene {
     this.ui = this.add.image(320, 720, "ui").setDepth(2);
     this.ui = this.add.image(960, 720, "ui").setDepth(2);
     this.ui = this.add.image(1600, 720, "ui").setDepth(2);
+    this.time.addEvent({
+      delay: 3000,
+      callback: this.updateEnergy,
+      callbackScope: this,
+      loop: true,
+    });
+
+    
     // this.cameras.main.setZoom(4);
     // this.cameras.main.centerOn(0, 0);
     console.log(this.energy)
     this.addKeyEvents();
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     events.on("aliens-moved", this.moveAlien, this);
-   // events.on("actualizar energía", this.addKeyEvents, this)
+    // events.on("actualizar energía", this.updateEnergy, this);
+
   }
 
   updateEnergy() {
@@ -88,7 +101,7 @@ export default class Cameras extends Phaser.Scene {
       
     }
   }
-
+        
   // Las camaras cambian al presionar los numeros de la parte superior en el teclado, 1, 2, 3, 4, 5 Y 6
   addKeyEvents() {
 
@@ -185,6 +198,4 @@ export default class Cameras extends Phaser.Scene {
       e.addToScene(this);
     });
   }
-
-
 }
