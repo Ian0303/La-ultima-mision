@@ -94,10 +94,8 @@ export default class Game extends Phaser.Scene {
     this.add.image(610, 200, "lightButton").setScale(1).setDepth(2);
     */
     this.player = new Player(this, 300, 280, "player").setDepth(1);
-    this.enemies.push(new Alien1());
-    this.enemies.push(new Alien2());
-    this.enemies.push(new Alien3());
-    this.enemies.push(new Alien4());
+    //this.enemies.push(new Alien1());
+
 
     this.minutes = Math.floor(this.winTime / 60);
     this.seconds = Math.floor(this.winTime % 60);
@@ -128,6 +126,25 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
+    this.time.addEvent({
+      delay: 10000,
+      callback: this.addAlien2,
+      callbackScope: this,
+      loop: false,
+    });
+    this.time.addEvent({
+      delay: 13000,
+      callback: this.addAlien3,
+      callbackScope: this,
+      loop: false,
+    });
+    this.time.addEvent({
+      delay: 16000,
+      callback: this.addAlien4,
+      callbackScope: this,
+      loop: false,
+    });
+    
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
@@ -333,6 +350,15 @@ export default class Game extends Phaser.Scene {
       events.emit("actualizar energía", this.energy);
       this.pressButton();
     }, 0);
+  }
+  addAlien2(){
+    this.enemies.push(new Alien2());
+  }
+  addAlien3(){
+    this.enemies.push(new Alien3());
+  }
+  addAlien4(){
+    this.enemies.push(new Alien4());
   }
 
   checkAfterMove() {

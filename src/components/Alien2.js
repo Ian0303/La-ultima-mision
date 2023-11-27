@@ -55,7 +55,7 @@ export default class Alien2 {
         this.texture = "alien2C3";
         break;
       case 4:
-        this.x = -400;
+        this.x = -320;
         this.y = 720;
         this.texture = "alienC4";
         break;
