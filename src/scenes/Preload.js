@@ -17,8 +17,8 @@ export default class Preload extends Phaser.Scene {
     // .load.image("camera1", "assets/background/Camera1.jpg");
     // this.load.image("camera2", "assets/background/camara2.jpg");
     // this.load.image("camera3", "assets/background/camara3.jpg");
-    this.load.image("allCameras", "assets/background/cameras1.jpg");
-    this.load.image("ui", "assets/background/IU.png");
+    this.load.image("allCameras", "assets/background/cameras.png");
+    this.load.image("ui", "assets/background/UI.png");
 
     this.load.image("doorButton", "assets/background/botonluz.png");
     this.load.image("lightButton", "assets/background/botonpuerta.png");
@@ -49,6 +49,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("IUcam", "assets/background/UICamera.png");
     this.load.image("alien1", "assets/sprites/alien.png");
 
+    this.load.image("alien2", "assets/sprites/alien1-1.png");
+
     this.load.image("alienC1", "assets/sprites/alien1cam1.png");
     this.load.image("alienC4", "assets/sprites/alien1cam4.png");
     this.load.image("alienC2", "assets/sprites/alien1cam1_.png");
@@ -71,6 +73,18 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("background", "assets/sounds/background.mp3");
 
     this.load.video("scare", "assets/background/jumpscareAlien1.mp4")
+
+    this.load.image("alien2C1", "assets/sprites/alien2Cam1.png");
+    this.load.image("alien2C3", "assets/sprites/alien2Cam3.png");
+    this.load.image("alien2C5", "assets/sprites/alien2Cam5.png");
+
+    this.load.image("alien3C4", "assets/sprites/alien3cam4.png");
+    this.load.image("alien3C5", "assets/sprites/alien3cam5.png");
+    this.load.image("alien3C6", "assets/sprites/alien3cam6.png");
+
+    this.load.image("alien4C1", "assets/sprites/alien4Cam1.png");
+    this.load.image("alien4C2", "assets/sprites/alien4Cam2.png");
+    this.load.image("alien4C4", "assets/sprites/alien4Cam4.png");
 
     this.load.spritesheet("player", "assets/sprites/spritesastronaut.png", {
       frameWidth: 140,

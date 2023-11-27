@@ -37,7 +37,7 @@ export default class PassedNight extends Phaser.Scene {
       color: "#00BFFF",
     });
     setTimeout(() => {
-      // this.scene.wake("cameras");
+      this.scene.launch("cameras");
       this.scene.start("game");
       
     }, 5000);
@@ -48,7 +48,7 @@ export default class PassedNight extends Phaser.Scene {
   update() {
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
-      this.Title.setText(getPhrase(key.Menu.Title));
+      this.Title17.setText(getPhrase(key.Menu.Title17));
     }
   }
 
