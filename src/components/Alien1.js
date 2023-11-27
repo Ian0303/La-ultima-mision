@@ -21,29 +21,29 @@ export default class Alien1 {
     this.room = 0;
     this.active = false;
     this.texture = "alien1";
-    this.scale = 2;
+   
   }
 
   // añade al Alien en la escena
   addToScene(scene) {
     switch (this.room) {
       case 1:
-        this.x = 990;
+        this.x = 960;
         this.y = 240;
         this.texture = "alienC1";
         break;
       case 2:
         this.x = -140;
-        this.y = 200;
+        this.y = 240;
         this.texture = "alienC2";
         break;
       case 3:
-        this.x = 22400;
+        this.x = 2240;
         this.y = 240;
         this.texture = "alien1";
         break;
       case 4:
-        this.x = -400;
+        this.x = -320;
         this.y = 720;
         this.texture = "alien3C4";
         break;
@@ -53,7 +53,7 @@ export default class Alien1 {
         this.texture = "alien3C5";
         break;
       case 6:
-        this.x = 870;
+        this.x = 960;
         this.y = 720;
         this.texture = "alien3C6";
         break;
@@ -85,7 +85,6 @@ export default class Alien1 {
 
     this.sprite = scene.add
       .image(this.x, this.y, this.texture)
-      .setScale(0.7)
       .setName(this.texture)
       .setVisible(true);
   }

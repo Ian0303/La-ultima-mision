@@ -3,11 +3,15 @@
 const movementAlien2 = [
   null, // sala inicial 0
   [2],
-  [1,6],
+  [1,7],
   [],
-  [6],
+  [9],
   [],
-  [2, 4], // sala personaje 6
+  [],
+  [2,9],
+  [],
+  [4,9],
+  [], // sala personaje 10
 
 
 
@@ -19,17 +23,6 @@ const movementAlien2 = [
   [1, 3, 6],
   [2, 3, 6], // sala personaje 6 
 
-  1-> 2-3
-2-> 1-7
-3-> 1-8
-4-> 9
-5-> 10
-6-> 1-9-10
-7-> 2-9
-8-> 3-10
-9-> 4-7
-10-> 5-8
-  
   */
 ];
 
@@ -47,19 +40,19 @@ export default class Alien2 {
   addToScene(scene) {
     switch (this.room) {
       case 1:
-        this.x = 990;
+        this.x = 960;
         this.y = 240;
         this.texture = "alienC1";
         break;
       case 2:
-        this.x = -140;
-        this.y = 200;
+        this.x = -320;
+        this.y = 240;
         this.texture = "alienC2";
         break;
       case 3:
-        this.x = 22400;
+        this.x = 2240;
         this.y = 240;
-        this.texture = "alien1";
+        this.texture = "alien2C3";
         break;
       case 4:
         this.x = -400;
@@ -69,7 +62,7 @@ export default class Alien2 {
       case 5:
         this.x = 2240;
         this.y = 720;
-        this.texture = "alien1";
+        this.texture = "alien2C5";
         break;
       case 6:
         this.x = 960;
@@ -104,7 +97,6 @@ export default class Alien2 {
 
     this.sprite = scene.add
       .image(this.x, this.y, this.texture)
-      .setScale(0.7)
       .setName(this.texture)
       .setVisible(true);
   }

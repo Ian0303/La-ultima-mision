@@ -51,17 +51,17 @@ export default class Cameras extends Phaser.Scene {
         color: "#008080",
       })
 
-    this.ui = this.add.image(320, 240, "ui");
-    this.ui = this.add.image(-320, 240, "ui");
-    this.ui = this.add.image(2240, 240, "ui");
-    this.ui = this.add.image(-320, 720, "ui");
-    this.ui = this.add.image(2240, 720, "ui");
+    this.ui = this.add.image(320, 240, "ui").setDepth(2);
+    this.ui = this.add.image(-320, 240, "ui").setDepth(2);
+    this.ui = this.add.image(2240, 240, "ui").setDepth(2);
+    this.ui = this.add.image(-320, 720, "ui").setDepth(2);
+    this.ui = this.add.image(2240, 720, "ui").setDepth(2);
 
-    this.ui = this.add.image(960, 240, "ui");
-    this.ui = this.add.image(1600, 240, "ui");
-    this.ui = this.add.image(320, 720, "ui");
-    this.ui = this.add.image(960, 720, "ui");
-    this.ui = this.add.image(1600, 720, "ui");
+    this.ui = this.add.image(960, 240, "ui").setDepth(2);
+    this.ui = this.add.image(1600, 240, "ui").setDepth(2);
+    this.ui = this.add.image(320, 720, "ui").setDepth(2);
+    this.ui = this.add.image(960, 720, "ui").setDepth(2);
+    this.ui = this.add.image(1600, 720, "ui").setDepth(2);
     // this.cameras.main.setZoom(4);
     // this.cameras.main.centerOn(0, 0);
     console.log(this.energy)

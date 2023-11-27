@@ -8,6 +8,8 @@ import { /* getTranslations, */ getPhrase } from "../services/translations";
 import key from "../enums/key";
 import Button from "../components/Button";
 import Alien2 from "../components/Alien2";
+import Alien3 from "../components/Alien3";
+import Alien4 from "../components/Alien4";
 
 export default class Game extends Phaser.Scene {
   #textSpanish;
@@ -93,8 +95,9 @@ export default class Game extends Phaser.Scene {
     */
     this.player = new Player(this, 300, 280, "player").setDepth(1);
     this.enemies.push(new Alien1());
-    
     this.enemies.push(new Alien2());
+    this.enemies.push(new Alien3());
+    this.enemies.push(new Alien4());
 
     this.minutes = Math.floor(this.winTime / 60);
     this.seconds = Math.floor(this.winTime % 60);
