@@ -96,8 +96,8 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     this.keyPress = false;
 
-    this.physics.add.overlap(this.player, this.buttons, this.pressButton, null, this);
-    
+    // this.physics.add.overlap(this.player, this.buttons, this.pressButton, null, this);
+
     // this.distance = 10
 
     this.time.addEvent({
@@ -227,6 +227,108 @@ export default class Game extends Phaser.Scene {
     /* if (this.scene.getIndex("game") > this.scene.getIndex("cameras")) {
         this.energy = energy     
     } */
+    // escudos
+  if(this.player.x <= 90 && this.player.x >= -110) {
+
+    this.leftShield.on("up", () => {
+      if (this.leftShieldActive) {
+        return;
+      }
+      this.leftShieldOn.setVisible(true);
+      this.leftShieldActive = true;
+      this.escudo.play();
+      this.energy -= this.shieldCost;
+      this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.leftShieldOn.setVisible(false);
+        this.leftShieldActive = false;
+      }, 7000);
+    });
+  }
+  if (this.player.x <= 710 && this.player.x >= 510) {
+    this.rightShield.on("up", () => {
+      if (this.rightShieldActive) {
+        return;
+      }
+      this.rightShieldOn.setVisible(true);
+      this.rightShieldActive = true;
+      this.escudo.play();
+      this.energy -= this.shieldCost;
+      this.energyT.setText(`${this.energy}%`);
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false);
+        this.rightShieldActive = false;
+  
+      }, 7000);
+    });
+  }
+  /// /////////////////////////////////////////////
+  // luces
+  if (this.player.x <= 90 && this.player.x >= -110) {
+    this.leftLigth.on("up", () => {
+      if (this.leftLightActive) {
+        return;
+      }
+      this.leftLightOn.setVisible(true);
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      this.leftLightActive = true;
+      this.button.play();
+      setTimeout(() => {
+        this.leftLightActive = false;
+        this.leftLightOn.setVisible(false);
+  
+      }, 5000);
+    });
+  }
+  if (this.player.x <= 710 && this.player.x >= 510) {
+    this.rightLigth.on("up", () => {
+      if (this.rightLightActive) {
+        return;
+      }
+      this.rightLightOn.setVisible(true);
+      this.energy -= this.lightCost;
+      this.energyT.setText(`${this.energy}%`);
+      this.rightLightActive = true;
+      this.button.play();
+      setTimeout(() => {
+        this.rightLightActive = false;
+        this.rightLightOn.setVisible(false);
+  
+      }, 5000);
+    });
+  }
+  
+  this.enemies.forEach((e) => {
+    if (e.room === 4) {
+      this.leftLigth.on("up", () => {
+        if (this.leftLightActive) {
+          return;
+        }
+        if (this.leftLigth) {
+          this.leftDoorAlien.setVisible(true);
+          this.alien.play();
+          setTimeout(() => {
+            this.leftDoorAlien.setVisible(false);
+          }, 4000);
+        }
+      });
+    }
+    if (e.room === 5) {
+      this.rightLigth.on("up", () => {
+        if (this.rightLightActive) {
+          return;
+        }
+        if (this.rightLigth.isDown) {
+          this.rightDoorAlien.setVisible(true);
+          this.alien.play();
+          setTimeout(() => {
+            this.rightDoorAlien.setVisible(false);
+          }, 4000);
+        }
+      });
+    }
+  });
   }
 
   // movimient del alien
@@ -244,6 +346,7 @@ export default class Game extends Phaser.Scene {
 
     setTimeout(() => {
       events.emit("actualizar energía", this.energy);
+      //      this.pressButton();
     }, 0);
 
   }
@@ -331,205 +434,105 @@ export default class Game extends Phaser.Scene {
       clearTimeout(t);
     }
   }
+  // if ((this.physics.overlap(this.player, this.leftDoorButton)) && this.deactivate === true) {
 
-  pressButton() {
-    this.deactivate = true
-    // escudos
-if ((this.physics.overlap(this.player, this.leftDoorButton)) && this.deactivate === true) {
+  // pressButton() {
+
   
-    this.leftShield.on("up", () => {
-      if (this.leftShieldActive) {
-        return;
-      }
-      this.leftShieldOn.setVisible(true);
-      this.leftShieldActive = true;
-      this.escudo.play();
-      this.energy -= this.shieldCost;
-      this.energyT.setText(`${this.energy}%`);
-      setTimeout(() => {
-        this.leftShieldOn.setVisible(false);
-        this.leftShieldActive = false;
-      }, 7000);
-    });
-    }
-    if ((this.physics.overlap(this.player, this.rightDoorButton)) && this.deactivate === true) {
-    this.rightShield.on("up", () => {
-      if (this.rightShieldActive) {
-        return;
-      }
-      this.rightShieldOn.setVisible(true);
-      this.rightShieldActive = true;
-      this.escudo.play();
-      this.energy -= this.shieldCost;
-      this.energyT.setText(`${this.energy}%`);
-      setTimeout(() => {
-        this.rightShieldOn.setVisible(false);
-        this.rightShieldActive = false;
-        this.deactivate = false;
-      }, 7000);
-    });
-  }
-    /// /////////////////////////////////////////////
-    // luces
-    if ((this.physics.overlap(this.player, this.leftLightButton)) && this.deactivate === true) {
-    this.leftLigth.on("up", () => {
-      if (this.leftLightActive) {
-        return;
-      }
-      this.leftLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.leftLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.leftLightActive = false;
-        this.leftLightOn.setVisible(false);
-        this.deactivate = false;
-      }, 5000);
-    });
-  }
-  if ((this.physics.overlap(this.player, this.rightLightButton)) && this.deactivate === true) {
-    this.rightLigth.on("up", () => {
-      if (this.rightLightActive) {
-        return;
-      }
-      this.rightLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.rightLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.rightLightActive = false;
-        this.rightLightOn.setVisible(false);
-        this.deactivate = false;
-      }, 5000);
-    });
-  }
+
   
-    this.enemies.forEach((e) => {
-      if (e.room === 4) {
-        this.leftLigth.on("up", () => {
-          if (this.leftLightActive) {
-            return;
-          }
-          if (this.leftLigth) {
-            this.leftDoorAlien.setVisible(true);
-            this.alien.play();
-            setTimeout(() => {
-              this.leftDoorAlien.setVisible(false);
-            }, 4000);
-          }
-        });
-      }
-      if (e.room === 5) {
-        this.rightLigth.on("up", () => {
-          if (this.rightLightActive) {
-            return;
-          }
-          if (this.rightLigth.isDown) {
-            this.rightDoorAlien.setVisible(true);
-            this.alien.play();
-            setTimeout(() => {
-              this.rightDoorAlien.setVisible(false);
-            }, 4000);
-          }
-        });
-      }
-    });
 
+updateEnergy() {
+  if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
+    // this.energy = data.energy
+    events.emit("actualizar energía", this.energy -= this.lightCost);
+    this.energyT.setText(`${this.energy}%`);
+    // this.energy = this.energy
+    console.log(`la energia es de: ${this.energy} %`)
   }
-
-  updateEnergy() {
-    if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
-      // this.energy = data.energy
-      events.emit("actualizar energía", this.energy -= this.lightCost);
-      this.energyT.setText(`${this.energy}%`);
-      // this.energy = this.energy
-      console.log(`la energia es de: ${this.energy} %`)
-    }
-  }
-
-
-
+}
 
 }
 
-    // activación de escudos para evitar morir por el Alien
-    /* if (this.leftShield.isDown) {
-      this.leftShieldOn.setVisible(true)
-      this.leftShieldActive = true
-      this.escudo.play();
-      setTimeout(() => {
-        this.leftShieldOn.setVisible(false)
-        this.leftShieldActive = false
-      }, 7000);
-    } else if (this.rightShield.isDown) {
-      this.rightShieldOn.setVisible(true)
-      this.rightShieldActive = true
-      this.escudo.play();
-      setTimeout(() => {
-        this.rightShieldOn.setVisible(false)
-        this.rightShieldActive = false
-      }, 4000);
-    } */
 
-    // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
+// }
 
-    // this.enemies.forEach(e => {
-    //   if (e.room === 5 && this.rightLigth.isDown) {
-    //     this.rightDoorAlien.setVisible(true)
-    //     this.alien.play();
-    //     setTimeout(() => {
-    //       this.rightDoorAlien.setVisible(false)
-    //     }, 4000);
-    //   } else if (e.room !== 5 && this.rightLigth.isDown) {
-    //     this.rightLightOn.setVisible(true)
-    //     setTimeout(() => {
-    //       this.rightLightOn.setVisible(false)
-    //     }, 4000);
-    //   }
-    // });
+// activación de escudos para evitar morir por el Alien
+/* if (this.leftShield.isDown) {
+  this.leftShieldOn.setVisible(true)
+  this.leftShieldActive = true
+  this.escudo.play();
+  setTimeout(() => {
+    this.leftShieldOn.setVisible(false)
+    this.leftShieldActive = false
+  }, 7000);
+} else if (this.rightShield.isDown) {
+  this.rightShieldOn.setVisible(true)
+  this.rightShieldActive = true
+  this.escudo.play();
+  setTimeout(() => {
+    this.rightShieldOn.setVisible(false)
+    this.rightShieldActive = false
+  }, 4000);
+} */
 
-    /*  this.leftShield.on('down', function () {
-      this.leftShieldActive = true;
-    }, this);
-    this.leftShield.on('up', function () {
-      if (this.leftShieldActive) {
-        this.leftShieldOn.setVisible(true)
-        this.leftShieldActive = true
-        setTimeout(() => {
-          this.leftShieldOn.setVisible(false)
-          this.leftShieldActive = false
-        }, 7000);
-      }
-    }, this);  */
+// luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
 
-    // consumo de energia de las luces y escudos
+// this.enemies.forEach(e => {
+//   if (e.room === 5 && this.rightLigth.isDown) {
+//     this.rightDoorAlien.setVisible(true)
+//     this.alien.play();
+//     setTimeout(() => {
+//       this.rightDoorAlien.setVisible(false)
+//     }, 4000);
+//   } else if (e.room !== 5 && this.rightLigth.isDown) {
+//     this.rightLightOn.setVisible(true)
+//     setTimeout(() => {
+//       this.rightLightOn.setVisible(false)
+//     }, 4000);
+//   }
+// });
 
-    //    this.leftShield.on('down', function () {
-    //    this.leftShieldActive = true;
-    //  }, this);
-    //  this.leftShield.on('up', function () {
-    //    if (this.leftShieldActive) {
-    //      console.log('Tecla Q presionada y luego soltada');
-    //      this.energy -= this.shieldqCost
-    //      this.energyT.setText(`${this.energy}%`);
-    //    }
-    //    this.leftShieldActive = false;
-    //  }, this);
+/*  this.leftShield.on('down', function () {
+  this.leftShieldActive = true;
+}, this);
+this.leftShield.on('up', function () {
+  if (this.leftShieldActive) {
+    this.leftShieldOn.setVisible(true)
+    this.leftShieldActive = true
+    setTimeout(() => {
+      this.leftShieldOn.setVisible(false)
+      this.leftShieldActive = false
+    }, 7000);
+  }
+}, this);  */
 
-    // this.rightShield.on('down', function () {
-    //   this.rightShieldActive = true;
-    // }, this);
-    // this.rightShield.on('up', function () {
-    //   if (this.rightShieldActive) {
-    //     console.log('Tecla Q presionada y luego soltada');
-    //     this.energy -= this.shieldCost
-    //     this.energyT.setText(`${this.energy}%`);
-    //   }
-    //   this.rightShieldActive = false;
-    // }, this);
+// consumo de energia de las luces y escudos
 
-    // consumo de energia de los escudos
-    // game over
-    // this.scene.bringToTop("gameOver");
+//    this.leftShield.on('down', function () {
+//    this.leftShieldActive = true;
+//  }, this);
+//  this.leftShield.on('up', function () {
+//    if (this.leftShieldActive) {
+//      console.log('Tecla Q presionada y luego soltada');
+//      this.energy -= this.shieldqCost
+//      this.energyT.setText(`${this.energy}%`);
+//    }
+//    this.leftShieldActive = false;
+//  }, this);
+
+// this.rightShield.on('down', function () {
+//   this.rightShieldActive = true;
+// }, this);
+// this.rightShield.on('up', function () {
+//   if (this.rightShieldActive) {
+//     console.log('Tecla Q presionada y luego soltada');
+//     this.energy -= this.shieldCost
+//     this.energyT.setText(`${this.energy}%`);
+//   }
+//   this.rightShieldActive = false;
+// }, this);
+
+// consumo de energia de los escudos
+// game over
+// this.scene.bringToTop("gameOver");
