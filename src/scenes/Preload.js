@@ -52,8 +52,11 @@ export default class Preload extends Phaser.Scene {
     this.load.image("alien2", "assets/sprites/alien1-1.png");
 
     this.load.image("alienC1", "assets/sprites/alien1cam1.png");
-    this.load.image("alienC4", "assets/sprites/alien1cam4.png");
     this.load.image("alienC2", "assets/sprites/alien1cam2.png");
+    this.load.image("alienC4", "assets/sprites/alien1cam4.png");
+    this.load.image("alienC7", "assets/sprites/alien1Cam7.png");
+    this.load.image("alienC9", "assets/sprites/alien1Cam9.png");
+
     this.load.image("roomoff", "assets/background/lightlessRoom.png");
 
     this.load.image("Arg", "assets/background/Arg.jpg");
@@ -77,14 +80,20 @@ export default class Preload extends Phaser.Scene {
     this.load.image("alien2C1", "assets/sprites/alien2Cam1.png");
     this.load.image("alien2C3", "assets/sprites/alien2Cam3.png");
     this.load.image("alien2C5", "assets/sprites/alien2Cam5.png");
+    this.load.image("alien2C8", "assets/sprites/alien3Cam8.png");
+    this.load.image("alien2C10", "assets/sprites/alien3Cam10.png");
 
+    this.load.image("alien3C1", "assets/sprites/alien3cam1.png");
     this.load.image("alien3C4", "assets/sprites/alien3cam4.png");
     this.load.image("alien3C5", "assets/sprites/alien3cam5.png");
     this.load.image("alien3C6", "assets/sprites/alien3cam6.png");
+    this.load.image("alien3C9", "assets/sprites/alien3Cam9.png");
+    this.load.image("alien3C10", "assets/sprites/alien3Cam10.png");
 
     this.load.image("alien4C1", "assets/sprites/alien4Cam1.png");
     this.load.image("alien4C2", "assets/sprites/alien4Cam2.png");
     this.load.image("alien4C4", "assets/sprites/alien4Cam4.png");
+    
 
     this.load.spritesheet("player", "assets/sprites/spritesastronaut.png", {
       frameWidth: 140,

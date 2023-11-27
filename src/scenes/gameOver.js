@@ -16,6 +16,7 @@ export default class GameOver extends Phaser.Scene {
     create() {
 
         // this.enemies
+        
         this.scare = this.add.video(400, 250, "scare")
         this.alien = this.sound.add("alien");
 

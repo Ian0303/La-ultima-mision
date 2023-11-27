@@ -30,7 +30,7 @@ export default class Alien1 {
       case 1:
         this.x = 960;
         this.y = 240;
-        this.texture = "alienC1";
+        this.texture = "alien3C1";
         break;
       case 2:
         this.x = -320;
@@ -70,12 +70,12 @@ export default class Alien1 {
       case 9:
         this.x = 320;
         this.y = 720;
-        this.texture = "alien1";
+        this.texture = "alien3C9";
         break;
       case 10:
         this.x = 1600;
         this.y = 720;
-        this.texture = "alien1";
+        this.texture = "alien3C10";
         break;
       default:
         // this.x = -100

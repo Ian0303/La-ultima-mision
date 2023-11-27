@@ -43,14 +43,10 @@ export default class Cameras extends Phaser.Scene {
     this.camera = this.add.image(960, 480, "allCameras");
     this.change = this.sound.add("change");
     this.steps = this.sound.add("steps")
-    this.add.image(470, 25, "energy").setDepth(1);
-    this.camerass = this.sound.add("camaras");
+    //this.cameras = this.sound.add("camaras");
     
     events.emit("actualizar energía", this.energy);
     // events.on("actualizar energía", this.updateEnergy, this);
-
-
-    this.add.image(470, 25, "energy").setDepth(1);
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
@@ -69,8 +65,6 @@ export default class Cameras extends Phaser.Scene {
     this.ui = this.add.image(2240, 240, "ui").setDepth(2);
     this.ui = this.add.image(-320, 720, "ui").setDepth(2);
     this.ui = this.add.image(2240, 720, "ui").setDepth(2);
-
-    
     this.ui = this.add.image(1600, 240, "ui").setDepth(2);
     this.ui = this.add.image(320, 720, "ui").setDepth(2);
     this.ui = this.add.image(960, 720, "ui").setDepth(2);

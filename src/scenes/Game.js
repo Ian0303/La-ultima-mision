@@ -54,13 +54,13 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-      // agregar un texto en la esquna superior izquierda con el nombre del usuario
-      const user = this.firebase.getUser();
-      this.firebase.saveGameData(user.uid, {
-        night: this.night,
-        time: new Date(),
-      });
-       this.add.text(10, 10, user.displayName || user.uid);
+    // agregar un texto en la esquna superior izquierda con el nombre del usuario
+    const user = this.firebase.getUser();
+    this.firebase.saveGameData(user.uid, {
+      night: this.night,
+      time: new Date(),
+    });
+    this.add.text(10, 10, user.displayName || user.uid);
 
     console.log("si");
     this.camerasV = this.input.keyboard.addKey(
@@ -74,7 +74,7 @@ export default class Game extends Phaser.Scene {
     this.steps = this.sound.add("steps");
     this.background = this.sound.add("background", { loop: true });
     this.background.play();
-    
+
 
     this.leftDoorAlien = null;
     this.rightDoorAlien = null;
@@ -97,9 +97,8 @@ export default class Game extends Phaser.Scene {
     this.add.image(-10, 200, "lightButton").setScale(1).setDepth(2);
     this.add.image(610, 200, "lightButton").setScale(1).setDepth(2);
     */
-    this.player = new Player(this, 300, 280, "player").setDepth(1);
+    this.player = new Player(this, 300, 280, "player").setDepth(2);
     this.enemies.push(new Alien1());
-
 
     this.minutes = Math.floor(this.winTime / 60);
     this.seconds = Math.floor(this.winTime % 60);
@@ -142,7 +141,7 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: false,
     });
-    
+
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
@@ -254,9 +253,9 @@ export default class Game extends Phaser.Scene {
       }, 3000);
 
     }
-    if(this.player.x <= 90 && this.player.x >= -110) {
-
-      this.leftShield.on("up", () => {
+    if (this.player.x <= 90 && this.player.x >= -110) {
+      if (this.leftShield.isDown) {
+        //this.leftShield.on("up", () => {
         if (this.leftShieldActive) {
           return;
         }
@@ -269,10 +268,12 @@ export default class Game extends Phaser.Scene {
           this.leftShieldOn.setVisible(false);
           this.leftShieldActive = false;
         }, 7000);
-      });
+        //});
+      }
     }
     if (this.player.x <= 710 && this.player.x >= 510) {
-      this.rightShield.on("up", () => {
+      //this.rightShield.on("up", () => {
+      if (this.rightShield.isDown) {
         if (this.rightShieldActive) {
           return;
         }
@@ -284,77 +285,86 @@ export default class Game extends Phaser.Scene {
         setTimeout(() => {
           this.rightShieldOn.setVisible(false);
           this.rightShieldActive = false;
-    
+
         }, 7000);
-      });
+        // });
+      }
     }
     /// /////////////////////////////////////////////
     // luces
-  if (this.player.x <= 90 && this.player.x >= -110) {
-    this.leftLigth.on("up", () => {
-      if (this.leftLightActive) {
-        return;
-      }
-      this.leftLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.leftLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.leftLightActive = false;
-        this.leftLightOn.setVisible(false);
-  
-      }, 5000);
-    });
-  }
-  if (this.player.x <= 710 && this.player.x >= 510) {
-    this.rightLigth.on("up", () => {
-      if (this.rightLightActive) {
-        return;
-      }
-      this.rightLightOn.setVisible(true);
-      this.energy -= this.lightCost;
-      this.energyT.setText(`${this.energy}%`);
-      this.rightLightActive = true;
-      this.button.play();
-      setTimeout(() => {
-        this.rightLightActive = false;
-        this.rightLightOn.setVisible(false);
-  
-      }, 5000);
-    });
-  }
-  
-  this.enemies.forEach((e) => {
-    if (e.room === 4) {
-      this.leftLigth.on("up", () => {
+    if (this.player.x <= 90 && this.player.x >= -110) {
+      //this.leftLigth.on("up", () => {
+      if (this.leftLigth.isDown) {
+
+
         if (this.leftLightActive) {
           return;
         }
-        if (this.leftLigth) {
-          this.leftDoorAlien.setVisible(true);
-          this.alien.play();
-          setTimeout(() => {
-            this.leftDoorAlien.setVisible(false);
-          }, 4000);
-        }
-      });
+        this.leftLightOn.setVisible(true);
+        this.energy -= this.lightCost;
+        this.energyT.setText(`${this.energy}%`);
+        this.leftLightActive = true;
+        this.button.play();
+        setTimeout(() => {
+          this.leftLightActive = false;
+          this.leftLightOn.setVisible(false);
+
+        }, 5000);
+        // });
+      }
     }
-    if (e.room === 5) {
-      this.rightLigth.on("up", () => {
+    if (this.player.x <= 710 && this.player.x >= 510) {
+      //this.rightLigth.on("up", () => {
+      if (this.rightLigth.isDown) {
+
+
         if (this.rightLightActive) {
           return;
         }
-        if (this.rightLigth.isDown) {
-          this.rightDoorAlien.setVisible(true);
-          this.alien.play();
-          setTimeout(() => {
-            this.rightDoorAlien.setVisible(false);
-          }, 4000);
-        }
-      });
+        this.rightLightOn.setVisible(true);
+        this.energy -= this.lightCost;
+        this.energyT.setText(`${this.energy}%`);
+        this.rightLightActive = true;
+        this.button.play();
+        setTimeout(() => {
+          this.rightLightActive = false;
+          this.rightLightOn.setVisible(false);
+
+        }, 5000);
+        //});
+      }
     }
-  });
+
+    this.enemies.forEach((e) => {
+      if (e.room === 4) {
+        this.leftLigth.on("up", () => {
+          if (this.leftLightActive) {
+            return;
+          }
+          if (this.leftLigth.isDown) {
+            this.leftDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.leftDoorAlien.setVisible(false);
+            }, 4000);
+          }
+        });
+      }
+      if (e.room === 5) {
+        this.rightLigth.on("up", () => {
+          if (this.rightLightActive) {
+            return;
+          }
+          if (this.rightLigth.isDown) {
+            this.rightDoorAlien.setVisible(true);
+            this.alien.play();
+            setTimeout(() => {
+              this.rightDoorAlien.setVisible(false);
+            }, 4000);
+          }
+        });
+      }
+    });
   }
 
   // movimient del alien
@@ -376,15 +386,15 @@ export default class Game extends Phaser.Scene {
 
   }
 
-  addAlien2(){
+  addAlien2() {
     this.enemies.push(new Alien2());
   }
 
-  addAlien3(){
+  addAlien3() {
     this.enemies.push(new Alien3());
   }
 
-  addAlien4(){
+  addAlien4() {
     this.enemies.push(new Alien4());
   }
 
@@ -475,15 +485,15 @@ export default class Game extends Phaser.Scene {
 
   // pressButton() {
 
-updateEnergy() {
-  if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
-    // this.energy = data.energy
-    events.emit("actualizar energía", this.energy -= this.lightCost);
-    this.energyT.setText(`${this.energy}%`);
-    // this.energy = this.energy
-    console.log(`la energia es de: ${this.energy} %`)
+  updateEnergy() {
+    if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
+      // this.energy = data.energy
+      events.emit("actualizar energía", this.energy -= this.lightCost);
+      this.energyT.setText(`${this.energy}%`);
+      // this.energy = this.energy
+      console.log(`la energia es de: ${this.energy} %`)
+    }
   }
-}
 }
 
 // }
