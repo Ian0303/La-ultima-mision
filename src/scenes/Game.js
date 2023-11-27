@@ -6,7 +6,7 @@ import events from "./EventCenter";
 import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
 import { /* getTranslations, */ getPhrase } from "../services/translations";
 import key from "../enums/key";
-import Button from "../components/Button";
+// import Button from "../components/Button";
 
 export default class Game extends Phaser.Scene {
   #textSpanish;
@@ -21,7 +21,7 @@ export default class Game extends Phaser.Scene {
 
   enemies = [];
 
-  buttons = [];
+  // buttons = [];
 
   constructor() {
     super("game");
@@ -49,6 +49,7 @@ export default class Game extends Phaser.Scene {
     this.atack = false;
     this.winTime = 300
     this.language = language;
+    this.deactivate = false;
   }
 
   create() {
@@ -64,13 +65,20 @@ export default class Game extends Phaser.Scene {
 
     this.leftDoorAlien = null;
     this.rightDoorAlien = null;
-
+    /*
     this.buttons.push(
       this.leftDoorButton = new Button(this, -10, 250, "doorButton"),
       this.rightDoorButton = new Button(this, 610, 250, "doorButton"),
       this.leftLightButton = new Button(this, -10, 200, "lightButton"),
       this.rightLightButton = new Button(this, 610, 200, "lightButton"),
     );
+*/
+
+    this.buttons = this.physics.add.staticGroup();
+    this.leftDoorButton = this.buttons.create(-10, 250, "doorButton").setScale(1).setDepth(2).setSize(125, 125);
+    this.rightDoorButton = this.buttons.create(610, 250, "doorButton").setScale(1).setDepth(2).setSize(125, 125);
+    this.leftLightButton = this.buttons.create(-10, 200, "lightButton").setScale(1).setDepth(2).setSize(125, 125);
+    this.rightLightButton = this.buttons.create(610, 200, "lightButton").setScale(1).setDepth(2).setSize(125, 125);
 
     /*
     this.add.image(-10, 250, "doorButton").setScale(1).setDepth(2);
@@ -88,13 +96,8 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     this.keyPress = false;
 
-    this.physics.add.overlap(
-      this.player,
-      this.buttons,
-      this.pressButton,
-      null,
-      this
-    );
+    this.physics.add.overlap(this.player, this.buttons, this.pressButton, null, this);
+    
     // this.distance = 10
 
     this.time.addEvent({
@@ -182,89 +185,10 @@ export default class Game extends Phaser.Scene {
       }
       this.energyT.setText(`${this.energy}%`);
       // events.on("actualizar energía", this.updateEnergy, this);
-      events.emit("actualizar energía",{ energy: this.energy });
+      events.emit("actualizar energía", { energy: this.energy });
 
     }
 
-    // activación de escudos para evitar morir por el Alien
-    /* if (this.leftShield.isDown) {
-      this.leftShieldOn.setVisible(true)
-      this.leftShieldActive = true
-      this.escudo.play();
-      setTimeout(() => {
-        this.leftShieldOn.setVisible(false)
-        this.leftShieldActive = false
-      }, 7000);
-    } else if (this.rightShield.isDown) {
-      this.rightShieldOn.setVisible(true)
-      this.rightShieldActive = true
-      this.escudo.play();
-      setTimeout(() => {
-        this.rightShieldOn.setVisible(false)
-        this.rightShieldActive = false
-      }, 4000);
-    } */
-
-    // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
-
-    // this.enemies.forEach(e => {
-    //   if (e.room === 5 && this.rightLigth.isDown) {
-    //     this.rightDoorAlien.setVisible(true)
-    //     this.alien.play();
-    //     setTimeout(() => {
-    //       this.rightDoorAlien.setVisible(false)
-    //     }, 4000);
-    //   } else if (e.room !== 5 && this.rightLigth.isDown) {
-    //     this.rightLightOn.setVisible(true)
-    //     setTimeout(() => {
-    //       this.rightLightOn.setVisible(false)
-    //     }, 4000);
-    //   }
-    // });
-
-    /*  this.leftShield.on('down', function () {
-      this.leftShieldActive = true;
-    }, this);
-    this.leftShield.on('up', function () {
-      if (this.leftShieldActive) {
-        this.leftShieldOn.setVisible(true)
-        this.leftShieldActive = true
-        setTimeout(() => {
-          this.leftShieldOn.setVisible(false)
-          this.leftShieldActive = false
-        }, 7000);
-      }
-    }, this);  */
-
-    // consumo de energia de las luces y escudos
-
-    //    this.leftShield.on('down', function () {
-    //    this.leftShieldActive = true;
-    //  }, this);
-    //  this.leftShield.on('up', function () {
-    //    if (this.leftShieldActive) {
-    //      console.log('Tecla Q presionada y luego soltada');
-    //      this.energy -= this.shieldqCost
-    //      this.energyT.setText(`${this.energy}%`);
-    //    }
-    //    this.leftShieldActive = false;
-    //  }, this);
-
-    // this.rightShield.on('down', function () {
-    //   this.rightShieldActive = true;
-    // }, this);
-    // this.rightShield.on('up', function () {
-    //   if (this.rightShieldActive) {
-    //     console.log('Tecla Q presionada y luego soltada');
-    //     this.energy -= this.shieldCost
-    //     this.energyT.setText(`${this.energy}%`);
-    //   }
-    //   this.rightShieldActive = false;
-    // }, this);
-
-    // consumo de energia de los escudos
-    // game over
-    // this.scene.bringToTop("gameOver");
     if (
       this.atack &&
       this.rightShieldActive === false &&
@@ -320,7 +244,6 @@ export default class Game extends Phaser.Scene {
 
     setTimeout(() => {
       events.emit("actualizar energía", this.energy);
-      this.pressButton();
     }, 0);
 
   }
@@ -410,7 +333,10 @@ export default class Game extends Phaser.Scene {
   }
 
   pressButton() {
+    this.deactivate = true
     // escudos
+if ((this.physics.overlap(this.player, this.leftDoorButton)) && this.deactivate === true) {
+  
     this.leftShield.on("up", () => {
       if (this.leftShieldActive) {
         return;
@@ -425,6 +351,8 @@ export default class Game extends Phaser.Scene {
         this.leftShieldActive = false;
       }, 7000);
     });
+    }
+    if ((this.physics.overlap(this.player, this.rightDoorButton)) && this.deactivate === true) {
     this.rightShield.on("up", () => {
       if (this.rightShieldActive) {
         return;
@@ -437,10 +365,13 @@ export default class Game extends Phaser.Scene {
       setTimeout(() => {
         this.rightShieldOn.setVisible(false);
         this.rightShieldActive = false;
+        this.deactivate = false;
       }, 7000);
     });
+  }
     /// /////////////////////////////////////////////
     // luces
+    if ((this.physics.overlap(this.player, this.leftLightButton)) && this.deactivate === true) {
     this.leftLigth.on("up", () => {
       if (this.leftLightActive) {
         return;
@@ -453,8 +384,11 @@ export default class Game extends Phaser.Scene {
       setTimeout(() => {
         this.leftLightActive = false;
         this.leftLightOn.setVisible(false);
+        this.deactivate = false;
       }, 5000);
     });
+  }
+  if ((this.physics.overlap(this.player, this.rightLightButton)) && this.deactivate === true) {
     this.rightLigth.on("up", () => {
       if (this.rightLightActive) {
         return;
@@ -467,9 +401,11 @@ export default class Game extends Phaser.Scene {
       setTimeout(() => {
         this.rightLightActive = false;
         this.rightLightOn.setVisible(false);
+        this.deactivate = false;
       }, 5000);
     });
-
+  }
+  
     this.enemies.forEach((e) => {
       if (e.room === 4) {
         this.leftLigth.on("up", () => {
@@ -500,6 +436,7 @@ export default class Game extends Phaser.Scene {
         });
       }
     });
+
   }
 
   updateEnergy() {
@@ -507,10 +444,92 @@ export default class Game extends Phaser.Scene {
       // this.energy = data.energy
       events.emit("actualizar energía", this.energy -= this.lightCost);
       this.energyT.setText(`${this.energy}%`);
-        // this.energy = this.energy
-        this.energyT.setText(`${this.energy}%`);
-        console.log(`la energia es de: ${this.energy} %`)
+      // this.energy = this.energy
+      console.log(`la energia es de: ${this.energy} %`)
     }
   }
 
+
+
+
 }
+
+    // activación de escudos para evitar morir por el Alien
+    /* if (this.leftShield.isDown) {
+      this.leftShieldOn.setVisible(true)
+      this.leftShieldActive = true
+      this.escudo.play();
+      setTimeout(() => {
+        this.leftShieldOn.setVisible(false)
+        this.leftShieldActive = false
+      }, 7000);
+    } else if (this.rightShield.isDown) {
+      this.rightShieldOn.setVisible(true)
+      this.rightShieldActive = true
+      this.escudo.play();
+      setTimeout(() => {
+        this.rightShieldOn.setVisible(false)
+        this.rightShieldActive = false
+      }, 4000);
+    } */
+
+    // luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
+
+    // this.enemies.forEach(e => {
+    //   if (e.room === 5 && this.rightLigth.isDown) {
+    //     this.rightDoorAlien.setVisible(true)
+    //     this.alien.play();
+    //     setTimeout(() => {
+    //       this.rightDoorAlien.setVisible(false)
+    //     }, 4000);
+    //   } else if (e.room !== 5 && this.rightLigth.isDown) {
+    //     this.rightLightOn.setVisible(true)
+    //     setTimeout(() => {
+    //       this.rightLightOn.setVisible(false)
+    //     }, 4000);
+    //   }
+    // });
+
+    /*  this.leftShield.on('down', function () {
+      this.leftShieldActive = true;
+    }, this);
+    this.leftShield.on('up', function () {
+      if (this.leftShieldActive) {
+        this.leftShieldOn.setVisible(true)
+        this.leftShieldActive = true
+        setTimeout(() => {
+          this.leftShieldOn.setVisible(false)
+          this.leftShieldActive = false
+        }, 7000);
+      }
+    }, this);  */
+
+    // consumo de energia de las luces y escudos
+
+    //    this.leftShield.on('down', function () {
+    //    this.leftShieldActive = true;
+    //  }, this);
+    //  this.leftShield.on('up', function () {
+    //    if (this.leftShieldActive) {
+    //      console.log('Tecla Q presionada y luego soltada');
+    //      this.energy -= this.shieldqCost
+    //      this.energyT.setText(`${this.energy}%`);
+    //    }
+    //    this.leftShieldActive = false;
+    //  }, this);
+
+    // this.rightShield.on('down', function () {
+    //   this.rightShieldActive = true;
+    // }, this);
+    // this.rightShield.on('up', function () {
+    //   if (this.rightShieldActive) {
+    //     console.log('Tecla Q presionada y luego soltada');
+    //     this.energy -= this.shieldCost
+    //     this.energyT.setText(`${this.energy}%`);
+    //   }
+    //   this.rightShieldActive = false;
+    // }, this);
+
+    // consumo de energia de los escudos
+    // game over
+    // this.scene.bringToTop("gameOver");
