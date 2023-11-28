@@ -1,14 +1,19 @@
 import Phaser from "phaser";
-
 import UI from "./scenes/UI";
 import Preload from "./scenes/Preload";
 import Camaras from "./scenes/Cameras";
 import Menu from "./scenes/Menu";
 import Game from "./scenes/Game";
-import Controles from "./scenes/Controles";
+import Controls from "./scenes/Controls";
 import GameOver from "./scenes/gameOver";
 import PassedNight from "./scenes/passedNight";
 import Manga from "./scenes/Manga";
+import Credits from "./scenes/Credits";
+import Login from "./scenes/Login";
+import FirebasePlugin from "./Plugins/FirebasePlugin";
+import Scores from "./scenes/Scores";
+
+
 
 const config = {
   type: Phaser.AUTO,
@@ -33,7 +38,17 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, UI, Menu, Camaras, Game, Controles, Manga, GameOver, PassedNight],
+  scene: [Preload, UI, Menu, Camaras, Game, Login, Controls, Credits, Manga, GameOver, PassedNight, Scores],
+  plugins: {
+    global: [
+      {
+        key: "FirebasePlugin",
+        plugin: FirebasePlugin,
+        start: true,
+        mapping: "firebase",
+      },
+    ],
+  },
 };
 
 export default new Phaser.Game(config);
