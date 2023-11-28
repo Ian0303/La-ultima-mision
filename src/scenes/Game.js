@@ -44,9 +44,9 @@ export default class Game extends Phaser.Scene {
     this.leftLightActive = false;
     this.rightLightActive = false;
     this.energy = 100;
-    this.shieldCost = 3;
-    this.lightCost = 2;
-    this.camerasCost = 2;
+    this.shieldCost = 1;
+    this.lightCost = 1;
+    this.camerasCost = 1;
     this.atack = false;
     this.winTime = 480
     this.language = language;
@@ -112,7 +112,7 @@ export default class Game extends Phaser.Scene {
     // this.distance = 10
 
     this.time.addEvent({
-      delay: 1000, // 140000
+      delay: 80, // 140000
       callback: this.oneSecond,
       callbackScope: this,
       loop: true,
@@ -246,16 +246,16 @@ export default class Game extends Phaser.Scene {
       this.enemies = [];
       this.scene.stop("cameras");
       this.scene.stop("ui");
-      this.scene.start("gameOver", {enemies: this.enemies});
+      this.scene.start("gameOver", { enemies: this.enemies });
       this.background.stop();
     }
-    if (this.atack) {
+     if (this.atack) {
       setTimeout(() => {
         this.atack = false
-      }, 3000);
+      }, 3000); 
 
     }
-    if (this.player.x <= 90 && this.player.x >= -110) {
+    if (this.player.x <= 90 && this.player.x >= -110 && this.energy > 0) {
       if (this.leftShield.isDown) {
         //this.leftShield.on("up", () => {
         if (this.leftShieldActive) {
@@ -273,7 +273,7 @@ export default class Game extends Phaser.Scene {
         //});
       }
     }
-    if (this.player.x <= 710 && this.player.x >= 510) {
+    if (this.player.x <= 710 && this.player.x >= 510 && this.energy > 0) {
       //this.rightShield.on("up", () => {
       if (this.rightShield.isDown) {
         if (this.rightShieldActive) {
@@ -294,7 +294,7 @@ export default class Game extends Phaser.Scene {
     }
     /// /////////////////////////////////////////////
     // luces
-    if (this.player.x <= 90 && this.player.x >= -110) {
+    if (this.player.x <= 90 && this.player.x >= -110 && this.energy > 0) {
       //this.leftLigth.on("up", () => {
       if (this.leftLigth.isDown) {
 
@@ -315,7 +315,7 @@ export default class Game extends Phaser.Scene {
         // });
       }
     }
-    if (this.player.x <= 710 && this.player.x >= 510) {
+    if (this.player.x <= 710 && this.player.x >= 510 && this.energy > 0) {
       //this.rightLigth.on("up", () => {
       if (this.rightLigth.isDown) {
 
@@ -341,9 +341,9 @@ export default class Game extends Phaser.Scene {
       if (e.room === 4) {
         //this.leftLigth.on("up", () => {
         if (this.leftLigth.isDown) {
-         /*  if (this.leftLightActive) {
-            return;
-          } */
+          /*  if (this.leftLightActive) {
+             return;
+           } */
           this.leftLightActive = true
           if (this.leftLigth) {
             this.leftDoorAlien.setVisible(true);
@@ -383,10 +383,10 @@ export default class Game extends Phaser.Scene {
       e.move();
     });
 
-    setTimeout(() => {
-      events.emit("aliens-moved", this.enemies);
-      this.checkAfterMove();
-    }, 0);
+
+    events.emit("aliens-moved", this.enemies);
+    this.checkAfterMove();
+
 
     setTimeout(() => {
       events.emit("actualizar energía", this.energy);
@@ -413,14 +413,14 @@ export default class Game extends Phaser.Scene {
         if (this.leftShieldActive === false) {
           if (!this.leftDoorAlien) {
             this.leftDoorAlien = this.add
-              .image(322, 222, "leftDoorAlien")
+              .image(344, 207, "leftDoorAlien")
               .setVisible(false);
-            const attack4 = setTimeout(() => {
-              this.atack = true;
-              console.warn("atack true");
-            }, 5000);
-            this.timeouts.push(attack4);
           }
+          const attack4 = setTimeout(() => {
+            this.atack = true;
+            console.warn("atack true");
+          }, 5000);
+          this.timeouts.push(attack4);
         }
         if (this.leftLigth.isDown) {
           this.leftDoorAlien.setVisible(true);
@@ -441,14 +441,14 @@ export default class Game extends Phaser.Scene {
         if (this.rightShieldActive === false) {
           if (!this.rightDoorAlien) {
             this.rightDoorAlien = this.add
-              .image(322, 222, "rightDoorAlien")
+              .image(300, 207, "rightDoorAlien")
               .setVisible(false);
-            const attack5 = setTimeout(() => {
-              this.atack = true;
-              console.warn("atack true");
-            }, 5000);
-            this.timeouts.push(attack5);
           }
+          const attack5 = setTimeout(() => {
+            this.atack = true;
+            console.warn("atack true");
+          }, 5000);
+          this.timeouts.push(attack5);
         }
         if (this.rightLigth.isDown) {
           this.rightDoorAlien.setVisible(true);

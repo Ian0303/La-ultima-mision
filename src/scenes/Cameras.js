@@ -41,6 +41,7 @@ export default class Cameras extends Phaser.Scene {
     console.log("si");
     // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
+    this.black = this.add.image(960, 480, "black").setDepth(3).setVisible(false);
     this.change = this.sound.add("change");
     this.steps = this.sound.add("steps")
     //this.cameras = this.sound.add("camaras");
@@ -72,7 +73,7 @@ export default class Cameras extends Phaser.Scene {
     this.ui = this.add.image(960, 720, "ui").setDepth(2);
     this.ui = this.add.image(1600, 720, "ui").setDepth(2);
     this.time.addEvent({
-      delay: 3000,
+      delay: 4500,
       callback: this.updateEnergy,
       callbackScope: this,
       loop: true,
@@ -87,6 +88,12 @@ export default class Cameras extends Phaser.Scene {
     events.on("aliens-moved", this.moveAlien, this);
     // events.on("actualizar energía", this.updateEnergy, this);
 
+  }
+  update(){
+    if (this.energy <= 0) {
+      this.black.setVisible(true);
+      this.energy = 0;
+    }
   }
 
   updateEnergy() {

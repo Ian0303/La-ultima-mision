@@ -8,6 +8,7 @@ export default class Manga extends Phaser.Scene {
   }
 
   create() {
+    this.win = this.sound.add("Win");
     if (this.night === 2) {
       this.manga2 = this.add.video(320, 220, "Manga2").setVisible(true);
       this.manga2.play(true);
@@ -15,6 +16,7 @@ export default class Manga extends Phaser.Scene {
       this.cameras.main.startFollow(this.head);
       this.head.setCollideWorldBounds(true);
       this.cursors = this.input.keyboard.createCursorKeys();
+      this.win.play();
       setTimeout(() => {
         this.scene.start("menu")
       }, 12000);

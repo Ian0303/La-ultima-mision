@@ -21,6 +21,10 @@ const Menu = {
     Title16:"Créditos",
     Title17:"Noche",
     Title18:"Tiempo",
+    Title19:"Registarse",
+    Title20:"Registarse de forma anónima",
+    Title21:"Registarse con Google",
+    Title22:"Registarse con Git Hub",
 }
 
 export default {

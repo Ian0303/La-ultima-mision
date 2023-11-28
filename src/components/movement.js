@@ -1,4 +1,4 @@
-const movement = [
+/* const movement = [
   null, // sala inicial 0
   [2, 3],
   [1, 3, 4],
@@ -8,3 +8,4 @@ const movement = [
   [2, 3, 6], // sala personaje 6
 ];
 export default movement;
+ */

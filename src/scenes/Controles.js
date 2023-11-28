@@ -37,7 +37,7 @@ export default class Controles extends Phaser.Scene {
       frontFamily: "Console",
       color: "#00FFFF",
     });
-    this.Title4 = this.add.text(300, 220, getPhrase(key.Menu.Title4), {
+    this.Title4 = this.add.text(400, 220, getPhrase(key.Menu.Title4), {
       fontSize: "23px",
       frontFamily: "Console",
       color: "#00FFFF",
