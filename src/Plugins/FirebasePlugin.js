@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+/* import Phaser from "phaser";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -126,4 +126,4 @@ const firebaseConfig = {
   
       return scores;
     }
-  }
+  } */
