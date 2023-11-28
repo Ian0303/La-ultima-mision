@@ -4,7 +4,7 @@ import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
 import { /* getTranslations, */ getPhrase } from "../services/translations";
 import key from "../enums/key";
 
-export default class Controles extends Phaser.Scene {
+export default class Controls extends Phaser.Scene {
   #textSpanish;
 
   #textGerman;
@@ -16,7 +16,7 @@ export default class Controles extends Phaser.Scene {
   #wasChangedLanguage = TODO;
 
   constructor() {
-    super("controles");
+    super("controls");
   }
 
   init({ language }) {
@@ -25,10 +25,9 @@ export default class Controles extends Phaser.Scene {
 
   create() {
     this.button = this.sound.add("button")
-    this.add.image(320, 240, "Controles")
+    this.add.image(320, 240, "Controls")
     this.add.image(600, 390, "Flecha").setScale(0.5).setInteractive().on("pointerdown", () => {
       this.scene.start("passedNight");
-      //this.scene.bringToTop("game");
       this.button.play();
     });
 

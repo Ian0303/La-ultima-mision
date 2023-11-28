@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 export default class Manga extends Phaser.Scene {
   constructor() {
     super("manga");
@@ -23,7 +25,7 @@ export default class Manga extends Phaser.Scene {
     } else {
       this.button = this.sound.add("button")
       this.arrow = this.add.image(550, 620, "Flecha").setScale(1).setInteractive().on("pointerdown", () => {
-        this.scene.start("controles");
+        this.scene.start("controls");
         this.button.play();
       });
       this.manga = this.add.image(320, 220, "Manga").setScale(0.5).setVisible(true);
@@ -41,17 +43,14 @@ export default class Manga extends Phaser.Scene {
       }, 10000);
     }
     }
-    
 
   update() {
     if (this.cursors.up.isDown) {
       this.head.setVelocityY(-250);
-    } else {
-      if (this.cursors.down.isDown) {
+    } else if (this.cursors.down.isDown) {
         this.head.setVelocityY(250);
       } else {
         this.head.setVelocityY(0);
       }
-    }
   }
 }

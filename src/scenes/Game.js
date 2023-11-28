@@ -6,7 +6,6 @@ import events from "./EventCenter";
 import { /* FETCHED, FETCHING, READY, */ TODO } from "../enums/status";
 import { /* getTranslations, */ getPhrase } from "../services/translations";
 import key from "../enums/key";
-// import Button from "../components/Button";
 import Alien2 from "../components/Alien2";
 import Alien3 from "../components/Alien3";
 import Alien4 from "../components/Alien4";
@@ -74,42 +73,20 @@ export default class Game extends Phaser.Scene {
     this.steps = this.sound.add("steps");
     this.background = this.sound.add("background", { loop: true });
     this.background.play();
-
-
     this.leftDoorAlien = null;
     this.rightDoorAlien = null;
-
-    /* this.buttons.push(
-      this.leftDoorButton = new Button(this, -10, 250, "doorButton"),
-      this.rightDoorButton = new Button(this, 610, 250, "doorButton"),
-      this.leftLightButton = new Button(this, -10, 200, "lightButton"),
-      this.rightLightButton = new Button(this, 610, 200, "lightButton"),
-    ); */
     this.buttons = this.physics.add.staticGroup();
     this.leftDoorButton = this.buttons.create(-10, 250, "doorButton").setScale(1).setDepth(2).setSize(125, 125);
     this.rightDoorButton = this.buttons.create(610, 250, "doorButton").setScale(1).setDepth(2).setSize(125, 125);
     this.leftLightButton = this.buttons.create(-10, 200, "lightButton").setScale(1).setDepth(2).setSize(125, 125);
     this.rightLightButton = this.buttons.create(610, 200, "lightButton").setScale(1).setDepth(2).setSize(125, 125);
-
-    /*
-    this.add.image(-10, 250, "doorButton").setScale(1).setDepth(2);
-    this.add.image(610, 250, "doorButton").setScale(1).setDepth(2);
-    this.add.image(-10, 200, "lightButton").setScale(1).setDepth(2);
-    this.add.image(610, 200, "lightButton").setScale(1).setDepth(2);
-    */
     this.player = new Player(this, 300, 280, "player").setDepth(2);
     this.enemies.push(new Alien1());
-
     this.minutes = Math.floor(this.winTime / 60);
     this.seconds = Math.floor(this.winTime % 60);
     this.formattedTime = `${this.minutes}:${this.seconds < 10 ? '0' : ''}${this.seconds}`;
-
     this.cameras.main.startFollow(this.player).setFollowOffset(0, 100);
     this.keyPress = false;
-
-    // this.physics.add.overlap(this.player, this.buttons, this.pressButton, null, this);
-
-    // this.distance = 10
 
     this.time.addEvent({
       delay: 80, // 140000
@@ -143,7 +120,6 @@ export default class Game extends Phaser.Scene {
       loop: false,
     });
 
-
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
@@ -159,12 +135,7 @@ export default class Game extends Phaser.Scene {
         font: "bold 30px Console",
         color: "#008080",
       }).setDepth(1);
-    /* this.time.addEvent({
-      delay: 300000,
-      callback: this.pasedNight,
-      callbackScope: this,
-      loop: true, SEÑALES
-    }); */
+    // SEÑALES
     // launch de cameras y UI scene
     this.scene.launch("cameras", { energy: this.energy });
     this.scene.launch("ui");
@@ -206,9 +177,7 @@ export default class Game extends Phaser.Scene {
       this.room1 = this.add.image(320, 220, "roomoff").setVisible(true);
       this.player.setDepth(1);
     }
-
     this.player.update();
-
     // apertura de la escena de las cámaras
     if (this.camerasV.isDown) {
       this.scene.bringToTop("cameras");
@@ -216,9 +185,7 @@ export default class Game extends Phaser.Scene {
         this.energy -= this.camerasCost;
       }
       this.energyT.setText(`${this.energy}%`);
-      // events.on("actualizar energía", this.updateEnergy, this);
       events.emit("actualizar energía", { energy: this.energy });
-
     }
     if (
       this.atack &&
@@ -257,7 +224,6 @@ export default class Game extends Phaser.Scene {
     }
     if (this.player.x <= 90 && this.player.x >= -110 && this.energy > 0) {
       if (this.leftShield.isDown) {
-        //this.leftShield.on("up", () => {
         if (this.leftShieldActive) {
           return;
         }
@@ -270,11 +236,9 @@ export default class Game extends Phaser.Scene {
           this.leftShieldOn.setVisible(false);
           this.leftShieldActive = false;
         }, 7000);
-        //});
       }
     }
     if (this.player.x <= 710 && this.player.x >= 510 && this.energy > 0) {
-      //this.rightShield.on("up", () => {
       if (this.rightShield.isDown) {
         if (this.rightShieldActive) {
           return;
@@ -287,18 +251,13 @@ export default class Game extends Phaser.Scene {
         setTimeout(() => {
           this.rightShieldOn.setVisible(false);
           this.rightShieldActive = false;
-
         }, 7000);
-        // });
       }
     }
     /// /////////////////////////////////////////////
     // luces
     if (this.player.x <= 90 && this.player.x >= -110 && this.energy > 0) {
-      //this.leftLigth.on("up", () => {
       if (this.leftLigth.isDown) {
-
-
         if (this.leftLightActive) {
           return;
         }
@@ -310,16 +269,11 @@ export default class Game extends Phaser.Scene {
         setTimeout(() => {
           this.leftLightActive = false;
           this.leftLightOn.setVisible(false);
-
         }, 5000);
-        // });
       }
     }
     if (this.player.x <= 710 && this.player.x >= 510 && this.energy > 0) {
-      //this.rightLigth.on("up", () => {
       if (this.rightLigth.isDown) {
-
-
         if (this.rightLightActive) {
           return;
         }
@@ -331,19 +285,12 @@ export default class Game extends Phaser.Scene {
         setTimeout(() => {
           this.rightLightActive = false;
           this.rightLightOn.setVisible(false);
-
         }, 5000);
-        //});
       }
     }
-
     this.enemies.forEach((e) => {
       if (e.room === 4) {
-        //this.leftLigth.on("up", () => {
         if (this.leftLigth.isDown) {
-          /*  if (this.leftLightActive) {
-             return;
-           } */
           this.leftLightActive = true
           if (this.leftLigth) {
             this.leftDoorAlien.setVisible(true);
@@ -352,15 +299,10 @@ export default class Game extends Phaser.Scene {
               this.leftDoorAlien.setVisible(false);
             }, 4000);
           }
-          //});
         }
       }
       if (e.room === 5) {
-        //this.rightLigth.on("up", () => {
         if (this.rightLigth.isDown) {
-          /* if (this.rightLightActive) {
-            return;
-          } */
           this.rightLightActive = true
           if (this.rightLigth) {
             this.rightDoorAlien.setVisible(true);
@@ -369,7 +311,6 @@ export default class Game extends Phaser.Scene {
               this.rightDoorAlien.setVisible(false);
             }, 4000);
           }
-          //});
         }
       }
     });
@@ -377,21 +318,14 @@ export default class Game extends Phaser.Scene {
 
   // movimient del alien
   moveAlien() {
-    // this.atack = false;
-
     this.enemies.forEach((e) => {
       e.move();
     });
-
-
     events.emit("aliens-moved", this.enemies);
     this.checkAfterMove();
-
-
     setTimeout(() => {
       events.emit("actualizar energía", this.energy);
     }, 0);
-
   }
 
   addAlien2() {
@@ -429,12 +363,6 @@ export default class Game extends Phaser.Scene {
             this.leftDoorAlien.setVisible(false);
           }, 4000);
         }
-        /*  else {
-          this.leftLightOn.setVisible(true);
-          setTimeout(() => {
-            this.leftLightOn.setVisible(false);
-          }, 4000);
-        }  */
       }
 
       if (e.room === 5) {
@@ -457,12 +385,6 @@ export default class Game extends Phaser.Scene {
             this.rightDoorAlien.setVisible(false);
           }, 4000);
         }
-        /*  else {
-           this.rightLightOn.setVisible(true);
-           setTimeout(() => {
-             this.rightLightOn.setVisible(false);
-           }, 4000);
-         }   */
       }
     });
   }
@@ -477,9 +399,7 @@ export default class Game extends Phaser.Scene {
     if (this.winTime === 0 && !this.dead) {
       this.enemies = [];
       this.scene.remove("cameras");
-      // this.scene.start("menu");
       this.scene.start("manga", { night: 1 + this.night });
-      // this.scene.launch("cameras");
     }
   }
 
@@ -489,99 +409,12 @@ export default class Game extends Phaser.Scene {
       clearTimeout(t);
     }
   }
-  // if ((this.physics.overlap(this.player, this.leftDoorButton)) && this.deactivate === true) {
-
-  // pressButton() {
 
   updateEnergy() {
     if (this.scene.getIndex("game") < this.scene.getIndex("cameras")) {
-      // this.energy = data.energy
       events.emit("actualizar energía", this.energy -= this.lightCost);
       this.energyT.setText(`${this.energy}%`);
-      // this.energy = this.energy
       console.log(`la energia es de: ${this.energy} %`)
     }
   }
 }
-
-// }
-
-// activación de escudos para evitar morir por el Alien
-/* if (this.leftShield.isDown) {
-  this.leftShieldOn.setVisible(true)
-  this.leftShieldActive = true
-  this.escudo.play();
-  setTimeout(() => {
-    this.leftShieldOn.setVisible(false)
-    this.leftShieldActive = false
-  }, 7000);
-} else if (this.rightShield.isDown) {
-  this.rightShieldOn.setVisible(true)
-  this.rightShieldActive = true
-  this.escudo.play();
-  setTimeout(() => {
-    this.rightShieldOn.setVisible(false)
-    this.rightShieldActive = false
-  }, 4000);
-} */
-
-// luces de las puertas, hacen visible al alien si se encuentra en la habitación conectada a la puerta
-
-// this.enemies.forEach(e => {
-//   if (e.room === 5 && this.rightLigth.isDown) {
-//     this.rightDoorAlien.setVisible(true)
-//     this.alien.play();
-//     setTimeout(() => {
-//       this.rightDoorAlien.setVisible(false)
-//     }, 4000);
-//   } else if (e.room !== 5 && this.rightLigth.isDown) {
-//     this.rightLightOn.setVisible(true)
-//     setTimeout(() => {
-//       this.rightLightOn.setVisible(false)
-//     }, 4000);
-//   }
-// });
-
-/*  this.leftShield.on('down', function () {
-  this.leftShieldActive = true;
-}, this);
-this.leftShield.on('up', function () {
-  if (this.leftShieldActive) {
-    this.leftShieldOn.setVisible(true)
-    this.leftShieldActive = true
-    setTimeout(() => {
-      this.leftShieldOn.setVisible(false)
-      this.leftShieldActive = false
-    }, 7000);
-  }
-}, this);  */
-
-// consumo de energia de las luces y escudos
-
-//    this.leftShield.on('down', function () {
-//    this.leftShieldActive = true;
-//  }, this);
-//  this.leftShield.on('up', function () {
-//    if (this.leftShieldActive) {
-//      console.log('Tecla Q presionada y luego soltada');
-//      this.energy -= this.shieldqCost
-//      this.energyT.setText(`${this.energy}%`);
-//    }
-//    this.leftShieldActive = false;
-//  }, this);
-
-// this.rightShield.on('down', function () {
-//   this.rightShieldActive = true;
-// }, this);
-// this.rightShield.on('up', function () {
-//   if (this.rightShieldActive) {
-//     console.log('Tecla Q presionada y luego soltada');
-//     this.energy -= this.shieldCost
-//     this.energyT.setText(`${this.energy}%`);
-//   }
-//   this.rightShieldActive = false;
-// }, this);
-
-// consumo de energia de los escudos
-// game over
-// this.scene.bringToTop("gameOver");

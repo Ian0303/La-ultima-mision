@@ -37,7 +37,7 @@ export default class Menu extends Phaser.Scene {
 
       // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
     };
-    
+
     this.user = this.firebase.getUser();
 
     // Inicia el cambio de fondo
@@ -79,7 +79,7 @@ export default class Menu extends Phaser.Scene {
       frontFamily: "Console",
       color: "#FFFFFF",
     })
-    .setInteractive()
+      .setInteractive()
       .on("pointerdown", () => {
         this.firebase.loadGameData(this.user.uid).then((data) => {
           this.scene.start("game", {
@@ -90,9 +90,6 @@ export default class Menu extends Phaser.Scene {
         this.button.play();
         clearInterval(this.setChangeBackground);
       });
-  
-
-
 
     this.add
       .image(113, 450, "Arg")
@@ -118,23 +115,7 @@ export default class Menu extends Phaser.Scene {
         this.getTranslations(EN_US);
       });
 
-    /* this.timer = 10
-          this.time.addEvent({
-            delay: 5,
-            callback: this.oneSecond,
-            callbackScope: this,
-            loop: true,
-          });  */
-
-    /* setTimeout(() => {//coltdown
-           this.load = true;
-           }, 100);
-          */
-
-    /* crear una variable con imagen de fondo y usando la funcion setTimeout 
-           le asigne otra imagen, debe estar en el update
-           */
-
+    /* crear una variable con imagen de fondo y usando la funcion setTimeout   le asigne otra imagen, debe estar en el update */
     // Configura el fondo inicial
     this.scene.bringToTop(this);
   }

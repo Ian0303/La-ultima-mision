@@ -1,8 +1,5 @@
 import Phaser from "phaser";
-// import Alien1 from "../components/Alien1";
 import events from "./EventCenter";
-// import movement from "../components/movement";
-// import Alien1 from "../components/Alien1";
 
 export default class Cameras extends Phaser.Scene {
   constructor() {
@@ -11,26 +8,6 @@ export default class Cameras extends Phaser.Scene {
     this.enemiesTexture = ["alien1"];
     this.lightCost = 1;
 
-
-    // 3 arrays, maps lee la primera el primero si no lo encuentra lee el segundo, sino el tercero.
-    // funcion
-    // camara 1 todos los personajes
-    // cunado sepa en que array este muestre el sprite
-    // animación
-
-    /* cuando se abra la escena cameras el jugador usará los numeros para la seleccion de
-    las distintas camaras
-    el cambio de camras  se podria hacer un swich para los diferente casos.
-
-    rooms
-      1 = puerta de entrada
-      2 = un lugar
-      3 = otro lugar
-      4 = pasillo izquierdo
-      5 = pasillo derecho
-      6 = laboratorios centrales
-
-    */
   }
 
   init(data) {
@@ -39,17 +16,12 @@ export default class Cameras extends Phaser.Scene {
 
   create() {
     console.log("si");
-    // this.cameras.main.setBounds(0, 0, 1920, 960);
     this.camera = this.add.image(960, 480, "allCameras");
     this.black = this.add.image(960, 480, "black").setDepth(3).setVisible(false);
     this.change = this.sound.add("change");
     this.steps = this.sound.add("steps")
-    //this.cameras = this.sound.add("camaras");
-    //this.stepL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-    //this.stepR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-    
+  
     events.emit("actualizar energía", this.energy);
-    // events.on("actualizar energía", this.updateEnergy, this);
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
         font: "bold 30px Console",
@@ -79,16 +51,13 @@ export default class Cameras extends Phaser.Scene {
       loop: true,
     });
 
-    
-    // this.cameras.main.setZoom(4);
-    // this.cameras.main.centerOn(0, 0);
     console.log(this.energy)
     this.addKeyEvents();
     this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     events.on("aliens-moved", this.moveAlien, this);
-    // events.on("actualizar energía", this.updateEnergy, this);
 
   }
+
   update(){
     if (this.energy <= 0) {
       this.black.setVisible(true);
@@ -184,11 +153,6 @@ export default class Cameras extends Phaser.Scene {
           this.energyT.y = 37
           break;
       }
-      // console.log([
-      //   "to move",
-      //   "x: " + this.cameras.main.scrollX,
-      //   "y: " + this.cameras.main.scrollY,
-      // ]);
     });
   }
 

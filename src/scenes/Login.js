@@ -14,9 +14,11 @@ export default class Login extends Phaser.Scene {
   #textPortuguese;
 
   #wasChangedLanguage = TODO;
+
   constructor() {
     super("login");
   }
+
   init({ language }) {
     this.language = language;
   }
@@ -64,23 +66,5 @@ export default class Login extends Phaser.Scene {
             console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
           });
       });
-
-   /*  // agregar un texto "Ingresar con GitHub" que al hacer clic me levante un popup js para ingresar los datos
-    this.tilte22 = this.add
-      .text(325, 400, getPhrase(key.Menu.Title22), {
-        fontSize: 24,
-      })
-      .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.firebase
-          .signInWithGithub()
-          .then(() => {
-            this.scene.start("manga");
-          })
-          .catch((error) => {
-            console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
-          });
-      });*/
   } 
 }

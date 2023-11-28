@@ -12,29 +12,6 @@ const movementAlien4 = [
   [],
   [],
   [], // sala personaje 10
-
-
-
-  /* null, // sala inicial 0
-  [2, 3],
-  [1, 3, 4],
-  [1, 3, 5],
-  [1, 2, 4, 5],
-  [1, 3, 6],
-  [2, 3, 6], // sala personaje 6 
-
-  1-> 2-3
-2-> 1-7
-3-> 1-8
-4-> 9
-5-> 10
-6-> 1-9-10
-7-> 2-9
-8-> 3-10
-9-> 4-7
-10-> 5-8
-  
-  */
 ];
 
 export default class Alien4 {

@@ -14,9 +14,6 @@ export default class Preload extends Phaser.Scene {
     this.load.image("bMenu4", "assets/background/bmenu2_2.jpg");
 
     this.load.image("room", "assets/background/habitacion1.jpg");
-    // .load.image("camera1", "assets/background/Camera1.jpg");
-    // this.load.image("camera2", "assets/background/camara2.jpg");
-    // this.load.image("camera3", "assets/background/camara3.jpg");
     this.load.image("allCameras", "assets/background/cameras.png");
     this.load.image("ui", "assets/background/UI.png");
 
@@ -35,9 +32,6 @@ export default class Preload extends Phaser.Scene {
     this.load.image("rightDoorAlien", "assets/background/rightdoor_alien.png");
     this.load.image("leftDoorAlien", "assets/background/leftdoor_alien.png");
 
-    // this.load.image("openCameras", "assets/background/openCameras.jpg");
-    // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
-
     this.load.image("gameOverI", "assets/background/derrota.jpg");
     this.load.image("black", "assets/background/blackcameras.jpg");
 
@@ -45,7 +39,6 @@ export default class Preload extends Phaser.Scene {
     this.load.image("energy", "assets/background/energy.png");
 
     this.load.image("iEnergy", "assets/background/iEnergy.png");
-    this.load.image("iFolder", "assets/background/iFolder.png");
     this.load.image("IUcam", "assets/background/UICamera.png");
     this.load.image("alien1", "assets/sprites/alien.png");
 
@@ -63,7 +56,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("Bra", "assets/background/Bra.jpg");
     this.load.image("Est", "assets/background/Est.jpg");
 
-    this.load.image("Controles", "assets/background/controls.jpg");
+    this.load.image("Controls", "assets/background/controls.jpg");
     this.load.image("Manga", "assets/background/manga1.png");
     this.load.image("Manga1", "assets/background/manga2.png");
     this.load.image("Cabeza", "assets/background/cabeza.png");
@@ -75,12 +68,9 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("steps", "assets/sounds/Steps.mp3");
     this.load.audio("background", "assets/sounds/background.mp3");
     this.load.audio("BackgroundSound", "assets/sounds/BackgroundSound.mp3");
-    this.load.audio("Bell", "assets/sounds/Bell.mp3");
     this.load.audio("Win", "assets/sounds/Win.mp3");
 
     this.load.video("scare", "assets/background/jumpscareAlien1.mp4");
-    this.load.video("scare2", "assets/background/alien2_Jumpscare.mp4");
-    this.load.video("scare4", "assets/background/alien4_Jumpscare.mp4");
      this.load.video("Manga2", "assets/background/mangafinal.mp4");
 
     this.load.image("alien2C1", "assets/sprites/alien2Cam1.png");
@@ -99,7 +89,6 @@ export default class Preload extends Phaser.Scene {
     this.load.image("alien4C1", "assets/sprites/alien4Cam1.png");
     this.load.image("alien4C2", "assets/sprites/alien4Cam2.png");
     this.load.image("alien4C4", "assets/sprites/alien4Cam4.png");
-    
 
     this.load.spritesheet("player", "assets/sprites/spritesastronaut.png", {
       frameWidth: 140,
@@ -128,7 +117,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-
     this.scene.start("menu");
   }
 }
