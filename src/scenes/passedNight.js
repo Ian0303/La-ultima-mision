@@ -26,24 +26,25 @@ export default class PassedNight extends Phaser.Scene {
 
   create() {
     // texto "Datos descargados"
-    this.add.text(200, 220, `Noche ${  this.night}`, {
+    this.Title17 = this.add.text(200, 220, getPhrase(key.Menu.Title17), {
+      fontSize: "40px",
+      frontFamily: "Console",
+      color: "#00BFFF",
+  });
+    this.add.text(310, 220, ` ${  this.night}`, {
       fontSize: "40px",
       frontFamily: "Console",
       color: "#00BFFF",
     });
     setTimeout(() => {
-      // this.scene.wake("cameras");
       this.scene.start("game");
-      
     }, 5000);
-
-   
-  }
+}
 
   update() {
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
-      this.Title.setText(getPhrase(key.Menu.Title));
+      this.Title17.setText(getPhrase(key.Menu.Title17));
     }
   }
 
@@ -57,7 +58,4 @@ export default class PassedNight extends Phaser.Scene {
 
     await getTranslations(language, this.updateWasChangedLanguage);
   }
-
-
-
 } 

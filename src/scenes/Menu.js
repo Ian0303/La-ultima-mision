@@ -38,6 +38,8 @@ export default class Menu extends Phaser.Scene {
       // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
     };
 
+    this.user = this.firebase.getUser();
+
     // Inicia el cambio de fondo
     this.setChangeBackground = setInterval(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
 
@@ -48,7 +50,7 @@ export default class Menu extends Phaser.Scene {
       color: "#FFFFFF",
     });
     this.Play = this.add
-      .text(50, 300, getPhrase(key.Menu.Play), {
+      .text(50, 270, getPhrase(key.Menu.Play), {
         fontSize: "20px",
         frontFamily: "Console",
         color: "#FFFFFF",
@@ -57,14 +59,37 @@ export default class Menu extends Phaser.Scene {
       .on("pointerdown", () => {
         this.button.play();
         clearInterval(this.setChangeBackground);
-        this.scene.start("controles");
+        this.scene.start("login");
       });
+    this.Title16 = this.add
+      .text(50, 370, getPhrase(key.Menu.Title16), {
+        fontSize: "20px",
+        frontFamily: "Console",
+        color: "#FFFFFF",
+      })
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.button.play();
+        clearInterval(this.setChangeBackground);
+        this.scene.start("credits");
+      });
+    this.Continue = this.add.text(50, 320, getPhrase(key.Menu.Continue), {
 
-    this.Continue = this.add.text(50, 350, getPhrase(key.Menu.Continue), {
       fontSize: "20px",
       frontFamily: "Console",
       color: "#FFFFFF",
-    });
+    })
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.firebase.loadGameData(this.user.uid).then((data) => {
+          this.scene.start("game", {
+            night: data.night,
+            timeStamp: new Date(),
+          });
+        })
+        this.button.play();
+        clearInterval(this.setChangeBackground);
+      });
 
     this.add
       .image(113, 450, "Arg")
@@ -90,23 +115,7 @@ export default class Menu extends Phaser.Scene {
         this.getTranslations(EN_US);
       });
 
-    /* this.timer = 10
-          this.time.addEvent({
-            delay: 5,
-            callback: this.oneSecond,
-            callbackScope: this,
-            loop: true,
-          });  */
-
-    /* setTimeout(() => {//coltdown
-           this.load = true;
-           }, 100);
-          */
-
-    /* crear una variable con imagen de fondo y usando la funcion setTimeout 
-           le asigne otra imagen, debe estar en el update
-           */
-
+    /* crear una variable con imagen de fondo y usando la funcion setTimeout   le asigne otra imagen, debe estar en el update */
     // Configura el fondo inicial
     this.scene.bringToTop(this);
   }
@@ -116,6 +125,10 @@ export default class Menu extends Phaser.Scene {
       this.#wasChangedLanguage = READY;
       this.Title.setText(getPhrase(key.Menu.Title));
       this.Play.setText(getPhrase(key.Menu.Play));
+      this.Title16.setText(getPhrase(key.Menu.Title13));
+      this.Title16.setText(getPhrase(key.Menu.Title14));
+      this.Title16.setText(getPhrase(key.Menu.Title15));
+      this.Title16.setText(getPhrase(key.Menu.Title16));
       this.Continue.setText(getPhrase(key.Menu.Continue));
     }
   }

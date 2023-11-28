@@ -1,27 +1,27 @@
-import Phaser from "phaser";
+ import Phaser from "phaser";
 
-const movementAlien1 = [
+const movementAlien2 = [
   null, // sala inicial 0
-  [6],
-  [],
+  [2],
+  [1,7],
   [],
   [9],
-  [10],
-  [9, 10], // sala personaje 6
   [],
   [],
-  [4,6],
-  [5,6],
+  [2,9],
+  [],
+  [4,9],
+  [], // sala personaje 10
 ];
 
-export default class Alien1 {
+export default class Alien2 {
   constructor(x = 960, y = 240) {
     this.x = x;
     this.y = y;
     this.room = 0;
     this.active = false;
-    this.texture = "alien1";
-   
+    this.texture = "alien2";
+    this.scale = 2;
   }
 
   // añade al Alien en la escena
@@ -30,7 +30,7 @@ export default class Alien1 {
       case 1:
         this.x = 960;
         this.y = 240;
-        this.texture = "alien3C1";
+        this.texture = "alienC1";
         break;
       case 2:
         this.x = -320;
@@ -40,27 +40,27 @@ export default class Alien1 {
       case 3:
         this.x = 2240;
         this.y = 240;
-        this.texture = "alien1";
+        this.texture = "alien2C3";
         break;
       case 4:
         this.x = -320;
         this.y = 720;
-        this.texture = "alien3C4";
+        this.texture = "alienC4";
         break;
       case 5:
         this.x = 2240;
         this.y = 720;
-        this.texture = "alien3C5";
+        this.texture = "alien2C5";
         break;
       case 6:
         this.x = 960;
         this.y = 720;
-        this.texture = "alien3C6";
+        this.texture = "alien1";
         break;
       case 7:
         this.x = 320;
         this.y = 240;
-        this.texture = "alien1";
+        this.texture = "alienC7";
         break;
       case 8:
         this.x = 1600;
@@ -70,12 +70,12 @@ export default class Alien1 {
       case 9:
         this.x = 320;
         this.y = 720;
-        this.texture = "alien3C9";
+        this.texture = "alienC9";
         break;
       case 10:
         this.x = 1600;
         this.y = 720;
-        this.texture = "alien3C10";
+        this.texture = "alien1";
         break;
       default:
         // this.x = -100
@@ -92,10 +92,10 @@ export default class Alien1 {
   // mueve al alien según un numero aleatorio dentro de las posibilidades de movimiento (momentaneamente desaprobechado)
   move() {
     const from = this.room;
-    const posibleRooms = movementAlien1[this.room];
+    const posibleRooms = movementAlien2[this.room];
     this.room = posibleRooms ? Phaser.Utils.Array.GetRandom(posibleRooms) : 1;
     console.log("move to ", this.room, " from ", from);
   }
-}
+} 
 // if(tiempo de moverse moverse)
 //* se mueve* */

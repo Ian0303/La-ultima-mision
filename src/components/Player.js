@@ -17,10 +17,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.setTexture(texture);
     this.velocity = 250;
+    // this.body.setSize(300, 280),
 
     this.cursors = scene.input.keyboard.createCursorKeys();
   }
-
   update() {
     if (this.cursors.left.isDown) {
       this.body.setVelocityX(-this.velocity);
