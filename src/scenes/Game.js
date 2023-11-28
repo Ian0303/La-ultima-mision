@@ -48,7 +48,7 @@ export default class Game extends Phaser.Scene {
     this.lightCost = 2;
     this.camerasCost = 2;
     this.atack = false;
-    this.winTime = 300
+    this.winTime = 480
     this.language = language;
     this.deactivate = false;
   }
@@ -112,7 +112,7 @@ export default class Game extends Phaser.Scene {
     // this.distance = 10
 
     this.time.addEvent({
-      delay: 80, // 140000
+      delay: 1000, // 140000
       callback: this.oneSecond,
       callbackScope: this,
       loop: true,
@@ -123,20 +123,21 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
+
     this.time.addEvent({
-      delay: 10000,
+      delay: 120000,
       callback: this.addAlien2,
       callbackScope: this,
       loop: false,
     });
     this.time.addEvent({
-      delay: 13000,
+      delay: 240000,
       callback: this.addAlien3,
       callbackScope: this,
       loop: false,
     });
     this.time.addEvent({
-      delay: 16000,
+      delay: 360000,
       callback: this.addAlien4,
       callbackScope: this,
       loop: false,
