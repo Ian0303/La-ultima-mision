@@ -89,7 +89,7 @@ export default class Game extends Phaser.Scene {
     this.keyPress = false;
 
     this.time.addEvent({
-      delay: 80, // 140000
+      delay: 1000, // 140000
       callback: this.oneSecond,
       callbackScope: this,
       loop: true,
