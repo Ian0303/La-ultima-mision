@@ -39,14 +39,14 @@ export default class Login extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => {
-        this.firebase
-          .signInAnonymously()
-          .then(() => {
+        //this.firebase
+          //.signInAnonymously()
+          //.then(() => {
             this.scene.start("manga");
-          })
-          .catch((error) => {
-            console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
-          });
+          //})
+          //.catch((error) => {
+           // console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
+          //});
       });
 
     // agregar un texto centrado "Ingresar con Google" que al hacer clic me levante un popup js para ingresar los datos
@@ -57,14 +57,14 @@ export default class Login extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => {
-        this.firebase
-          .signInWithGoogle()
-          .then(() => {
+        //this.firebase
+          //.signInWithGoogle()
+          //.then(() => {
             this.scene.start("manga");
-          })
-          .catch((error) => {
-            console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
-          });
+         // })
+         // .catch((error) => {
+            //console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
+         // });
       });
   } 
 }

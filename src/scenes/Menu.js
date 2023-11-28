@@ -38,7 +38,7 @@ export default class Menu extends Phaser.Scene {
       // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
     };
 
-    this.user = this.firebase.getUser();
+    //this.user = this.firebase.getUser();
 
     // Inicia el cambio de fondo
     this.setChangeBackground = setInterval(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
@@ -81,11 +81,11 @@ export default class Menu extends Phaser.Scene {
     })
       .setInteractive()
       .on("pointerdown", () => {
-        this.firebase.loadGameData(this.user.uid).then((data) => {
+        //this.firebase.loadGameData(this.user.uid).then((data) => {
           this.scene.start("game", {
-            night: data.night,
-            timeStamp: new Date(),
-          });
+         //   night: data.night,
+          ///  timeStamp: new Date(),
+         // });
         })
         this.button.play();
         clearInterval(this.setChangeBackground);
