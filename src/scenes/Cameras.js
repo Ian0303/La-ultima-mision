@@ -44,6 +44,8 @@ export default class Cameras extends Phaser.Scene {
     this.change = this.sound.add("change");
     this.steps = this.sound.add("steps")
     //this.cameras = this.sound.add("camaras");
+    //this.stepL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    //this.stepR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     
     events.emit("actualizar energía", this.energy);
     // events.on("actualizar energía", this.updateEnergy, this);
@@ -100,6 +102,7 @@ export default class Cameras extends Phaser.Scene {
   addKeyEvents() {
 
     this.input.keyboard.on("keydown", (event) => {
+
       switch (event.keyCode) {
         case Phaser.Input.Keyboard.KeyCodes.ONE:
           this.cameras.main.centerOn(960, 240);
@@ -164,11 +167,8 @@ export default class Cameras extends Phaser.Scene {
         case Phaser.Input.Keyboard.KeyCodes.DOWN:
           this.scene.bringToTop("game");
           break;
-        case Phaser.Input.Keyboard.KeyCodes.LEFT:
-          this.steps.play();
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-          this.steps.play();
+        case Phaser.Input.Keyboard.KeyCodes.LEFT || Phaser.Input.Keyboard.KeyCodes.RIGHT:
+            this.steps.play();
           break;
         default:
           this.cameras.main.centerOn(960, 240);

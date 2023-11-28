@@ -112,7 +112,7 @@ export default class Game extends Phaser.Scene {
     // this.distance = 10
 
     this.time.addEvent({
-      delay: 1000, // 140000
+      delay: 80, // 140000
       callback: this.oneSecond,
       callbackScope: this,
       loop: true,
@@ -141,6 +141,7 @@ export default class Game extends Phaser.Scene {
       callbackScope: this,
       loop: false,
     });
+
 
     this.energyT = this.add
       .text(450, 50, `${this.energy}%`, {
@@ -244,7 +245,7 @@ export default class Game extends Phaser.Scene {
       this.enemies = [];
       this.scene.stop("cameras");
       this.scene.stop("ui");
-      this.scene.start("gameOver");
+      this.scene.start("gameOver", {enemies: this.enemies});
       this.background.stop();
     }
     if (this.atack) {
@@ -259,7 +260,7 @@ export default class Game extends Phaser.Scene {
         if (this.leftShieldActive) {
           return;
         }
-        this.leftShieldOn.setVisible(true);
+        this.leftShieldOn.setVisible(true).setDepth(2);
         this.leftShieldActive = true;
         this.shield.play();
         this.energy -= this.shieldCost;
@@ -277,7 +278,7 @@ export default class Game extends Phaser.Scene {
         if (this.rightShieldActive) {
           return;
         }
-        this.rightShieldOn.setVisible(true);
+        this.rightShieldOn.setVisible(true).setDepth(2);
         this.rightShieldActive = true;
         this.shield.play();
         this.energy -= this.shieldCost;
@@ -337,32 +338,38 @@ export default class Game extends Phaser.Scene {
 
     this.enemies.forEach((e) => {
       if (e.room === 4) {
-        this.leftLigth.on("up", () => {
-          if (this.leftLightActive) {
+        //this.leftLigth.on("up", () => {
+        if (this.leftLigth.isDown) {
+         /*  if (this.leftLightActive) {
             return;
-          }
-          if (this.leftLigth.isDown) {
+          } */
+          this.leftLightActive = true
+          if (this.leftLigth) {
             this.leftDoorAlien.setVisible(true);
             this.alien.play();
             setTimeout(() => {
               this.leftDoorAlien.setVisible(false);
             }, 4000);
           }
-        });
+          //});
+        }
       }
       if (e.room === 5) {
-        this.rightLigth.on("up", () => {
-          if (this.rightLightActive) {
+        //this.rightLigth.on("up", () => {
+        if (this.rightLigth.isDown) {
+          /* if (this.rightLightActive) {
             return;
-          }
-          if (this.rightLigth.isDown) {
+          } */
+          this.rightLightActive = true
+          if (this.rightLigth) {
             this.rightDoorAlien.setVisible(true);
             this.alien.play();
             setTimeout(() => {
               this.rightDoorAlien.setVisible(false);
             }, 4000);
           }
-        });
+          //});
+        }
       }
     });
   }
@@ -414,7 +421,7 @@ export default class Game extends Phaser.Scene {
             this.timeouts.push(attack4);
           }
         }
-        if (this.leftLigth) {
+        if (this.leftLigth.isDown) {
           this.leftDoorAlien.setVisible(true);
           this.alien.play();
           setTimeout(() => {
@@ -470,7 +477,7 @@ export default class Game extends Phaser.Scene {
       this.enemies = [];
       this.scene.remove("cameras");
       // this.scene.start("menu");
-      this.scene.start("passedNight", { night: 1 + this.night });
+      this.scene.start("manga", { night: 1 + this.night });
       // this.scene.launch("cameras");
     }
   }

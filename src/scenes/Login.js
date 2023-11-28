@@ -24,7 +24,7 @@ export default class Login extends Phaser.Scene {
           this.firebase
             .signInAnonymously()
             .then(() => {
-              this.scene.start("game");
+              this.scene.start("manga");
             })
             .catch((error) => {
               console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
@@ -42,7 +42,7 @@ export default class Login extends Phaser.Scene {
           this.firebase
             .signInWithGoogle()
             .then(() => {
-              this.scene.start("game");
+              this.scene.start("manga");
             })
             .catch((error) => {
               console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);
@@ -60,7 +60,7 @@ export default class Login extends Phaser.Scene {
           this.firebase
             .signInWithGithub()
             .then(() => {
-              this.scene.start("game");
+              this.scene.start("manga");
             })
             .catch((error) => {
               console.log("🚀 ~ file: Login.js:74 ~ .catch ~ error", error);

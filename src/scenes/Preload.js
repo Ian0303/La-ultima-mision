@@ -32,8 +32,8 @@ export default class Preload extends Phaser.Scene {
       "assets/background/rightdoor_shield.png"
     );
 
-    this.load.image("rightDoorAlien", "assets/background/rightdoor_alien1.png");
-    this.load.image("leftDoorAlien", "assets/background/leftdoor_alien1.png");
+    this.load.image("rightDoorAlien", "assets/background/rightdoor_alien.png");
+    this.load.image("leftDoorAlien", "assets/background/leftdoor_alien.png");
 
     // this.load.image("openCameras", "assets/background/openCameras.jpg");
     // this.load.image("closeCameras", "assets/background/closeCameras.jpg");
@@ -63,7 +63,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("Bra", "assets/background/Bra.jpg");
     this.load.image("Est", "assets/background/Est.jpg");
 
-    this.load.image("Controles", "assets/background/Controles.jpg");
+    this.load.image("Controles", "assets/background/controls.jpg");
     this.load.image("Manga", "assets/background/manga1.png");
     this.load.image("Manga1", "assets/background/manga2.png");
     this.load.image("Cabeza", "assets/background/cabeza.png");
@@ -74,13 +74,19 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("change", "assets/sounds/Change.mp3");
     this.load.audio("steps", "assets/sounds/Steps.mp3");
     this.load.audio("background", "assets/sounds/background.mp3");
+    this.load.audio("BackgroundSound", "assets/sounds/BackgroundSound.mp3");
+    this.load.audio("Bell", "assets/sounds/Bell.mp3");
+    this.load.audio("Win", "assets/sounds/Win.mp3");
 
-    this.load.video("scare", "assets/background/jumpscareAlien1.mp4")
+    this.load.video("scare", "assets/background/jumpscareAlien1.mp4");
+    this.load.video("scare2", "assets/background/alien2_Jumpscare.mp4");
+    this.load.video("scare4", "assets/background/alien4_Jumpscare.mp4");
+     this.load.video("Manga2", "assets/background/mangafinal.mp4");
 
     this.load.image("alien2C1", "assets/sprites/alien2Cam1.png");
     this.load.image("alien2C3", "assets/sprites/alien2Cam3.png");
     this.load.image("alien2C5", "assets/sprites/alien2Cam5.png");
-    this.load.image("alien2C8", "assets/sprites/alien3Cam8.png");
+    this.load.image("alien2C8", "assets/sprites/alien2Cam8.png");
     this.load.image("alien2C10", "assets/sprites/alien3Cam10.png");
 
     this.load.image("alien3C1", "assets/sprites/alien3cam1.png");

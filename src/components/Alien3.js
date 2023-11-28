@@ -42,7 +42,7 @@ export default class Alien3 {
     this.y = y;
     this.room = 0;
     this.active = false;
-    this.texture = "alien2";
+    this.texture = "alien2C1";
     this.scale = 2;
   }
 
