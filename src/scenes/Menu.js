@@ -24,24 +24,24 @@ export default class Menu extends Phaser.Scene {
   }
 
   create() {
-    const backgrounds = ["bMenu1", "bMenu2", "bMenu3", "bMenu4"];
-    let currentIndex = 0;
+      const backgrounds = ["bMenu1", "bMenu2", "bMenu3", "bMenu4"];
+      let currentIndex = 0;
 
-    const background1 = this.add.image(300, 240, backgrounds[currentIndex]);
+      const background1 = this.add.image(300, 240, backgrounds[currentIndex]);
 
-    // Define una función para cambiar el fondo en orden
-    const changeBackground = () => {
-      currentIndex = (currentIndex + 1) % backgrounds.length;
+      // Define una función para cambiar el fondo en orden
+      const changeBackground = () => {
+        currentIndex = (currentIndex + 1) % backgrounds.length;
 
-      background1.setTexture(backgrounds[currentIndex]);
+        background1.setTexture(backgrounds[currentIndex]);
+      };
+        // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
+        this.setChangeBackground = setInterval(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
 
-      // Llama a la función de nuevo después de un período de tiempo (por ejemplo, 5 segundos)
-    };
-
-    //this.user = this.firebase.getUser();
+        //this.user = this.firebase.getUser();
 
     // Inicia el cambio de fondo
-    this.setChangeBackground = setInterval(changeBackground, 250); // Cambia cada 5 segundos (5000 milisegundos)
+   
 
     this.button = this.sound.add("button");
     this.Title = this.add.text(50, 100, getPhrase(key.Menu.Title), {
@@ -82,10 +82,10 @@ export default class Menu extends Phaser.Scene {
       .setInteractive()
       .on("pointerdown", () => {
         //this.firebase.loadGameData(this.user.uid).then((data) => {
-          this.scene.start("game", {
-         //   night: data.night,
+        this.scene.start("game", {
+          //   night: data.night,
           ///  timeStamp: new Date(),
-         // });
+          // });
         })
         this.button.play();
         clearInterval(this.setChangeBackground);
@@ -117,7 +117,7 @@ export default class Menu extends Phaser.Scene {
 
     /* crear una variable con imagen de fondo y usando la funcion setTimeout   le asigne otra imagen, debe estar en el update */
     // Configura el fondo inicial
-    this.scene.bringToTop(this);
+    this.scene.bringToTop(this); 
   }
 
   update() {

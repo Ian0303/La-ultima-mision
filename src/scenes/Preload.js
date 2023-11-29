@@ -71,7 +71,9 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("Win", "assets/sounds/Win.mp3");
 
     this.load.video("scare", "assets/background/jumpscareAlien1.mp4");
-     this.load.video("Manga2", "assets/background/mangafinal.mp4");
+    this.load.video("Manga2", "assets/background/mangafinal.mp4");
+    this.load.image("unraf", "assets/background/UNRAF.png");
+    this.load.video("Unraf", "assets/background/UNraf.mp4");
 
     this.load.image("alien2C1", "assets/sprites/alien2Cam1.png");
     this.load.image("alien2C3", "assets/sprites/alien2Cam3.png");
@@ -97,6 +99,8 @@ export default class Preload extends Phaser.Scene {
   }
 
   create() {
+
+    
     this.anims.create({
       key: "turn",
       frames: this.anims.generateFrameNumbers("player", { start: 2, end: 3 }),
@@ -117,6 +121,13 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("menu");
+    
+    this.logo = this.add.image(310, 240, "unraf").setScale(1)
+    setTimeout(() => {
+      this.scene.start("menu");
+    }, 3000);
+    
+
   }
 }
+
