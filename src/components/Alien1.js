@@ -10,8 +10,8 @@ const movementAlien1 = [
   [9, 10], // sala personaje 6
   [],
   [],
-  [4,6],
-  [5,6],
+  [4, 6],
+  [5, 6],
 ];
 
 export default class Alien1 {
@@ -21,7 +21,7 @@ export default class Alien1 {
     this.room = 0;
     this.active = false;
     this.texture = "alien1";
-   
+
   }
 
   // añade al Alien en la escena
@@ -86,7 +86,9 @@ export default class Alien1 {
     this.sprite = scene.add
       .image(this.x, this.y, this.texture)
       .setName(this.texture)
-      .setVisible(true);
+      .setVisible(true)
+      .setDepth(2);
+
   }
 
   // mueve al alien según un numero aleatorio dentro de las posibilidades de movimiento (momentaneamente desaprobechado)

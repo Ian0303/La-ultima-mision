@@ -34,16 +34,16 @@ export default class Cameras extends Phaser.Scene {
       loop: true,
     });
 
-    this.ui = this.add.image(960, 240, "ui").setDepth(2);
-    this.ui = this.add.image(320, 240, "ui").setDepth(2);
-    this.ui = this.add.image(-320, 240, "ui").setDepth(2);
-    this.ui = this.add.image(2240, 240, "ui").setDepth(2);
-    this.ui = this.add.image(-320, 720, "ui").setDepth(2);
-    this.ui = this.add.image(2240, 720, "ui").setDepth(2);
-    this.ui = this.add.image(1600, 240, "ui").setDepth(2);
-    this.ui = this.add.image(320, 720, "ui").setDepth(2);
-    this.ui = this.add.image(960, 720, "ui").setDepth(2);
-    this.ui = this.add.image(1600, 720, "ui").setDepth(2);
+    this.ui = this.add.image(960, 240, "ui").setDepth(3);
+    this.ui = this.add.image(320, 240, "ui").setDepth(3);
+    this.ui = this.add.image(-320, 240, "ui").setDepth(3);
+    this.ui = this.add.image(2240, 240, "ui").setDepth(3);
+    this.ui = this.add.image(-320, 720, "ui").setDepth(3);
+    this.ui = this.add.image(2240, 720, "ui").setDepth(3);
+    this.ui = this.add.image(1600, 240, "ui").setDepth(3);
+    this.ui = this.add.image(320, 720, "ui").setDepth(3);
+    this.ui = this.add.image(960, 720, "ui").setDepth(3);
+    this.ui = this.add.image(1600, 720, "ui").setDepth(3);
     this.time.addEvent({
       delay: 4500,
       callback: this.updateEnergy,
