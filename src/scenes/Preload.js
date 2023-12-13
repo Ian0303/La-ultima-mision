@@ -79,7 +79,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("alien2C3", "assets/sprites/alien2Cam3.png");
     this.load.image("alien2C5", "assets/sprites/alien2Cam5.png");
     this.load.image("alien2C8", "assets/sprites/alien2Cam8.png");
-    this.load.image("alien2C10", "assets/sprites/alien3Cam10.png");
+    this.load.image("alien2C10", "assets/sprites/alien2Cam10.png");
 
     this.load.image("alien3C1", "assets/sprites/alien3cam1.png");
     this.load.image("alien3C4", "assets/sprites/alien3cam4.png");
@@ -99,8 +99,6 @@ export default class Preload extends Phaser.Scene {
   }
 
   create() {
-
-    
     this.anims.create({
       key: "turn",
       frames: this.anims.generateFrameNumbers("player", { start: 2, end: 3 }),
